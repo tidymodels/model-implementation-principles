@@ -24,7 +24,7 @@
 
 
 
-<meta name="date" content="2018-08-17">
+<meta name="date" content="2018-08-18">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -138,9 +138,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.2" data-path="model-predictions.html"><a href="model-predictions.html#return-values"><i class="fa fa-check"></i><b>5.2</b> Return Values</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html"><i class="fa fa-check"></i><b>6</b> Standardized Argument Names</a><ul>
-<li class="chapter" data-level="6.1" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#statistical-and-tuning-parameters"><i class="fa fa-check"></i><b>6.1</b> Statistical and Tuning Parameters</a></li>
-<li class="chapter" data-level="6.2" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#data-arguments"><i class="fa fa-check"></i><b>6.2</b> Data Arguments</a></li>
-<li class="chapter" data-level="6.3" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#numerical-arguments"><i class="fa fa-check"></i><b>6.3</b> Numerical Arguments</a></li>
+<li class="chapter" data-level="6.1" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#data-arguments"><i class="fa fa-check"></i><b>6.1</b> Data Arguments</a></li>
+<li class="chapter" data-level="6.2" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#numerical-arguments"><i class="fa fa-check"></i><b>6.2</b> Numerical Arguments</a></li>
+<li class="chapter" data-level="6.3" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#statistical-quantities"><i class="fa fa-check"></i><b>6.3</b> Statistical Quantities</a></li>
+<li class="chapter" data-level="6.4" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#tuning-parameters"><i class="fa fa-check"></i><b>6.4</b> Tuning Parameters</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="notes.html"><a href="notes.html"><i class="fa fa-check"></i><b>7</b> Notes</a></li>
 </ul>
@@ -260,15 +261,15 @@ fitg &lt;-<span class="st"> </span><span class="kw">flexsurvreg</span>(<span cla
 preds</code></pre>
 <pre><code>## age=72.3315 
 ##   time       est        lcl       ucl
-## 1  100 0.7988680 0.47174907 0.9656529
-## 2  200 0.4849180 0.12351454 0.7913514
-## 3  300 0.2784226 0.01015872 0.6418956
+## 1  100 0.7988680 0.50899420 0.9606902
+## 2  200 0.4849180 0.13228528 0.7942801
+## 3  300 0.2784226 0.01109966 0.6332602
 ## 
 ## age=74.4932 
 ##   time       est          lcl       ucl
-## 1  100 0.7278338 0.3558990811 0.9435343
-## 2  200 0.3856737 0.0458476743 0.7417648
-## 3  300 0.1964611 0.0003631246 0.6023775</code></pre>
+## 1  100 0.7278338 0.3354312262 0.9488976
+## 2  200 0.3856737 0.0405128278 0.7690047
+## 3  300 0.1964611 0.0002534073 0.5889647</code></pre>
 <p>A list of data frames is not very helpful. Better would be a data frame with a list column, were every element is a data frame with the predictions in the tidy format:</p>
 <pre class="sourceCode r"><code class="sourceCode r">tidy_preds</code></pre>
 <pre><code>## # A tibble: 2 x 1
@@ -281,20 +282,20 @@ tidy_preds<span class="op">$</span>.pred[[<span class="dv">1</span>]]</code></pr
 <pre><code>## # A tibble: 3 x 4
 ##   .time .pred .pred_lower .pred_upper
 ##   &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-## 1   100 0.799      0.472        0.966
-## 2   200 0.485      0.124        0.791
-## 3   300 0.278      0.0102       0.642</code></pre>
+## 1   100 0.799      0.509        0.961
+## 2   200 0.485      0.132        0.794
+## 3   300 0.278      0.0111       0.633</code></pre>
 <p>If a single data frame is needed, it is easy to make the conversion:</p>
 <pre class="sourceCode r"><code class="sourceCode r">tidyr<span class="op">::</span><span class="kw">unnest</span>(tidy_preds)</code></pre>
 <pre><code>## # A tibble: 6 x 4
 ##   .time .pred .pred_lower .pred_upper
 ##   &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-## 1   100 0.799    0.472          0.966
-## 2   200 0.485    0.124          0.791
-## 3   300 0.278    0.0102         0.642
-## 4   100 0.728    0.356          0.944
-## 5   200 0.386    0.0458         0.742
-## 6   300 0.196    0.000363       0.602</code></pre>
+## 1   100 0.799    0.509          0.961
+## 2   200 0.485    0.132          0.794
+## 3   300 0.278    0.0111         0.633
+## 4   100 0.728    0.335          0.949
+## 5   200 0.386    0.0405         0.769
+## 6   300 0.196    0.000253       0.589</code></pre>
 <p><strong>percentile predictions</strong></p>
 <p>When using a quantile regression, one might make the median the default that is predicted. If multiple percentiles are requested, then <code>.pred</code> would be a tibble with a column for the predictions and another for the percentile.</p>
 <p><a href="model-predictions.html#list-cols-back">↩️</a></p>

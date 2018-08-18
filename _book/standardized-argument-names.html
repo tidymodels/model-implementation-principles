@@ -24,7 +24,7 @@
 
 
 
-<meta name="date" content="2018-08-17">
+<meta name="date" content="2018-08-18">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -138,9 +138,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.2" data-path="model-predictions.html"><a href="model-predictions.html#return-values"><i class="fa fa-check"></i><b>5.2</b> Return Values</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html"><i class="fa fa-check"></i><b>6</b> Standardized Argument Names</a><ul>
-<li class="chapter" data-level="6.1" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#statistical-and-tuning-parameters"><i class="fa fa-check"></i><b>6.1</b> Statistical and Tuning Parameters</a></li>
-<li class="chapter" data-level="6.2" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#data-arguments"><i class="fa fa-check"></i><b>6.2</b> Data Arguments</a></li>
-<li class="chapter" data-level="6.3" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#numerical-arguments"><i class="fa fa-check"></i><b>6.3</b> Numerical Arguments</a></li>
+<li class="chapter" data-level="6.1" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#data-arguments"><i class="fa fa-check"></i><b>6.1</b> Data Arguments</a></li>
+<li class="chapter" data-level="6.2" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#numerical-arguments"><i class="fa fa-check"></i><b>6.2</b> Numerical Arguments</a></li>
+<li class="chapter" data-level="6.3" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#statistical-quantities"><i class="fa fa-check"></i><b>6.3</b> Statistical Quantities</a></li>
+<li class="chapter" data-level="6.4" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#tuning-parameters"><i class="fa fa-check"></i><b>6.4</b> Tuning Parameters</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="notes.html"><a href="notes.html"><i class="fa fa-check"></i><b>7</b> Notes</a></li>
 </ul>
@@ -163,15 +164,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="standardized-argument-names" class="section level1">
 <h1><span class="header-section-number">Chapter 6</span> Standardized Argument Names</h1>
 <p><strong>Dot usage</strong>: If there is a possability of arugment name conflicts between the function and any arguments passed down through <code>...</code>, it is strongly suggested that the argument names be prefixed with a dot (e.g. <code>.data</code>, <code>.x</code>, etc.)</p>
-<div id="statistical-and-tuning-parameters" class="section level2">
-<h2><span class="header-section-number">6.1</span> Statistical and Tuning Parameters</h2>
-<ul>
-<li><p><code>direction</code> for the type of hypothesis test alternative.</p></li>
-<li><p><code>level</code> for interval levels (e.g., confidence, credible, prediction, and so on).</p></li>
-</ul>
-</div>
 <div id="data-arguments" class="section level2">
-<h2><span class="header-section-number">6.2</span> Data Arguments</h2>
+<h2><span class="header-section-number">6.1</span> Data Arguments</h2>
 <ul>
 <li><p><code>x</code> for predictors or generic data objects.</p></li>
 <li><p><code>y</code> for outcomes.</p></li>
@@ -181,9 +175,60 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 </div>
 <div id="numerical-arguments" class="section level2">
-<h2><span class="header-section-number">6.3</span> Numerical Arguments</h2>
+<h2><span class="header-section-number">6.2</span> Numerical Arguments</h2>
 <ul>
 <li><code>times</code> for the number of bootstraps, simulations,</li>
+</ul>
+</div>
+<div id="statistical-quantities" class="section level2">
+<h2><span class="header-section-number">6.3</span> Statistical Quantities</h2>
+<ul>
+<li><p><code>direction</code> for the type of hypothesis test alternative.</p></li>
+<li><p><code>level</code> for interval levels (e.g., confidence, credible, prediction, and so on).</p></li>
+</ul>
+</div>
+<div id="tuning-parameters" class="section level2">
+<h2><span class="header-section-number">6.4</span> Tuning Parameters</h2>
+<ul>
+<li><p><code>mtry</code>: The number of predictors that will be randomly
+sampled at each split when creating the tree models.</p></li>
+<li><p><code>trees</code>: The number of trees contained in a random forest or boosted
+ensemble. In the latter case, this is equal to the number of boosting
+iterations.</p></li>
+<li><p><code>min_n</code>: The minimum number of data points in a node that are required
+for the node to be split further.</p></li>
+<li><code>sample_size</code>: the size of the data set used for modeling within an
+iteration of the modeling algorithm, such as stochastic gradient boosting.</li>
+<li><p><code>learn_rate</code>: the rate at which the boosting algorithm adapts from
+iteration-to-iteration.</p></li>
+<li><p><code>loss_reduction</code>: The reduction in the loss function required to split
+further.</p></li>
+<li><p><code>tree_depth</code>: The maximum depth of the tree (i.e. number of splits).</p></li>
+<li><p><code>prune</code>: a logical for whether a tree or set of rules should be pruned.</p></li>
+<li><p><code>Cp</code>: The cost-complexity parameter in classical CART models.</p></li>
+<li><p><code>regularization</code>: The amount of regularization used. In cases where different
+types require to be differentiated, the names <code>L1</code> and <code>L2</code> work.</p></li>
+<li><p><code>mixture</code>: the proportion of L1 regularization in the model.</p></li>
+<li><p><code>dropout</code>: the parameter dropout rate.</p></li>
+<li><p><code>epochs</code>: the number of iterations of training.</p></li>
+<li><p><code>activation</code>: the type of activation function between network layers.</p></li>
+<li><p><code>hidden_units</code>: the number of hidden units in a network layer.</p></li>
+<li><p><code>rbf_sigma</code>: the sigma parameters of a radial basis function.</p></li>
+<li><p><code>cost</code>: a cost value for SVM models.</p></li>
+<li><p><code>degree</code>: the polynomial degree.</p></li>
+<li><p><code>prod_degree</code>: the number of terms to combine into interactions. A value of
+1 implies an additive model. Useful for MARS models.</p></li>
+<li><p><code>num_terms</code>: a nonspecific parameter for the number of terms in a model.</p>
+<p>This can be used with models that include feature selection, such as MARS.</p></li>
+<li><p><code>num_comp</code>: the number of components in a model (e.g. PCA or PLS components).</p></li>
+<li><p><code>deg_free</code>: a parameter for the degrees of freedom.</p></li>
+<li><p><code>weight_func</code>: The type of kernel function that weights the distances
+between samples (e.g. in a K-near neighbors model).</p></li>
+<li><p><code>surv_dist</code>: the statistical distribution of the data in a survival
+analysis model.</p></li>
+<li><p><code>Laplace</code>: the Laplace correction used to smooth low-frequency counts.</p></li>
+<li><p><code>neighbors</code>: a parameter for the number of neighbors used in a prototype
+model.</p></li>
 </ul>
 
 </div>

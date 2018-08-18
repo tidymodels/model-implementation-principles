@@ -3,12 +3,6 @@
 
 **Dot usage**: If there is a possability of arugment name conflicts between the function and any arguments passed down through `...`, it is strongly suggested that the argument names be prefixed with a dot (e.g. `.data`, `.x`, etc.)
 
-## Statistical and Tuning Parameters
-
- * `direction` for the type of hypothesis test alternative. 
- 
- * `level` for interval levels (e.g., confidence, credible, prediction, and so on).
- 
 
 ## Data Arguments
 
@@ -27,4 +21,80 @@
 
  * `times` for the number of bootstraps, simulations, 
  
+## Statistical Quantities 
+
+ * `direction` for the type of hypothesis test alternative. 
+ 
+ * `level` for interval levels (e.g., confidence, credible, prediction, and so on).
+ 
+
+## Tuning Parameters
+
+ * `mtry`: The number of predictors that will be randomly 
+   sampled at each split when creating the tree models. 
+   
+ * `trees`: The number of trees contained in a random forest or boosted 
+   ensemble. In the latter case, this is equal to the number of boosting 
+   iterations. 
+   
+ * `min_n`: The minimum number of data points in a node that are required 
+   for the node to be split further. 
+   
+ * `sample_size`: the size of the data set used for modeling within an 
+   iteration of the modeling algorithm, such as stochastic gradient boosting.
+ * `learn_rate`: the rate at which the boosting algorithm adapts from 
+   iteration-to-iteration. 
+   
+ * `loss_reduction`:  The reduction in the loss function required to split 
+   further. 
+   
+ * `tree_depth`: The maximum depth of the tree (i.e. number of splits).
+ 
+ * `prune`: a logical for whether a tree or set of rules should be pruned. 
+ 
+ * `Cp`: The cost-complexity parameter in classical CART models. 
+
+
+ * `regularization`: The amount of regularization used. In cases where different
+   types require to be differentiated, the names `L1` and `L2` work.
+   
+ * `mixture`: the proportion of L1 regularization in the model. 
+ 
+ * `dropout`: the parameter dropout rate. 
+ 
+ * `epochs`: the number of iterations of training. 
+ 
+ * `activation`: the type of activation function between network layers. 
+ 
+ * `hidden_units`: the number of hidden units in a network layer. 
+ 
+ * `rbf_sigma`: the sigma parameters of a radial basis function. 
+ 
+ * `cost`: a cost value for SVM models. 
+ 
+ * `degree`: the polynomial degree. 
+ 
+ * `prod_degree`: the number of terms to combine into interactions. A value of
+    1 implies an additive model. Useful for MARS models. 
+    
+ * `num_terms`: a nonspecific parameter for the number of terms in a model. 
+ 
+   This can be used with models that include feature selection, such as MARS. 
+   
+ * `num_comp`: the number of components in a model (e.g. PCA or PLS components).
+ 
+ * `deg_free`: a parameter for the degrees of freedom. 
+
+ * `weight_func`: The type of kernel function that weights the distances
+    between samples (e.g. in a K-near neighbors model). 
+    
+ * `surv_dist`: the statistical distribution of the data in a survival 
+   analysis model.
+   
+ * `Laplace`: the Laplace correction used to smooth low-frequency counts. 
+ 
+ * `neighbors`: a parameter for the number of neighbors used in a prototype 
+   model. 
+
+
  
