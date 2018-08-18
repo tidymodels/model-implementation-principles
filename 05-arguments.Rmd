@@ -6,16 +6,16 @@
 
 ## Data Arguments
 
+ * `na_rm` for missing data handling. 
+
+ * `newdata` for data to be predicted.
+
+ * `weights` for case weights.
+
  * `x` for predictors or generic data objects. 
  
  * `y` for outcomes.
  
- * `weights` for case weights.
- 
- * `newdata` for data to be predicted.
- 
- * `na_rm` for missing data handling. 
-
 
 ## Numerical Arguments
 
@@ -30,71 +30,58 @@
 
 ## Tuning Parameters
 
- * `mtry`: The number of predictors that will be randomly 
-   sampled at each split when creating the tree models. 
-   
- * `trees`: The number of trees contained in a random forest or boosted 
-   ensemble. In the latter case, this is equal to the number of boosting 
-   iterations. 
-   
- * `min_n`: The minimum number of data points in a node that are required 
-   for the node to be split further. 
-   
- * `sample_size`: the size of the data set used for modeling within an 
-   iteration of the modeling algorithm, such as stochastic gradient boosting.
- * `learn_rate`: the rate at which the boosting algorithm adapts from 
-   iteration-to-iteration. 
-   
- * `loss_reduction`:  The reduction in the loss function required to split 
-   further. 
-   
- * `tree_depth`: The maximum depth of the tree (i.e. number of splits).
- 
- * `prune`: a logical for whether a tree or set of rules should be pruned. 
- 
- * `Cp`: The cost-complexity parameter in classical CART models. 
+* `activation`: the type of activation function between network layers. 
 
+* `cost`: a cost value for SVM models. 
+  
+* `Cp`: The cost-complexity parameter in classical CART models. 
 
- * `regularization`: The amount of regularization used. In cases where different
-   types require to be differentiated, the names `L1` and `L2` work.
+* `deg_free`: a parameter for the degrees of freedom. 
+
+* `degree`: the polynomial degree. 
+ 
+* `dropout`: the parameter dropout rate. 
+ 
+* `epochs`: the number of iterations of training. 
+ 
+* `hidden_units`: the number of hidden units in a network layer. 
+
+* `Laplace`: the Laplace correction used to smooth low-frequency counts. 
+
+* `learn_rate`: the rate at which the boosting algorithm adapts from iteration-to-iteration. 
    
- * `mixture`: the proportion of L1 regularization in the model. 
+* `loss_reduction`:  The reduction in the loss function required to split further. 
+
+* `min_n`: The minimum number of data points in a node that are required for the node to be split further. 
  
- * `dropout`: the parameter dropout rate. 
+* `mixture`: the proportion of L1 regularization in the model. 
  
- * `epochs`: the number of iterations of training. 
+* `mtry`: The number of predictors that will be randomly sampled at each split when creating the tree models.
+
+* `neighbors`: a parameter for the number of neighbors used in a prototype model. 
+
+* `num_comp`: the number of components in a model (e.g. PCA or PLS components).
  
- * `activation`: the type of activation function between network layers. 
- 
- * `hidden_units`: the number of hidden units in a network layer. 
- 
- * `rbf_sigma`: the sigma parameters of a radial basis function. 
- 
- * `cost`: a cost value for SVM models. 
- 
- * `degree`: the polynomial degree. 
- 
- * `prod_degree`: the number of terms to combine into interactions. A value of
-    1 implies an additive model. Useful for MARS models. 
+* `num_terms`: a nonspecific parameter for the number of terms in a model. This can be used with models that include feature selection, such as MARS. 
+  
+* `prod_degree`: the number of terms to combine into interactions. A value of 1 implies an additive model. Useful for MARS models and some linear models.
     
- * `num_terms`: a nonspecific parameter for the number of terms in a model. 
- 
-   This can be used with models that include feature selection, such as MARS. 
-   
- * `num_comp`: the number of components in a model (e.g. PCA or PLS components).
- 
- * `deg_free`: a parameter for the degrees of freedom. 
+* `prune`: a logical for whether a tree or set of rules should be pruned. 
 
- * `weight_func`: The type of kernel function that weights the distances
-    between samples (e.g. in a K-near neighbors model). 
-    
- * `surv_dist`: the statistical distribution of the data in a survival 
-   analysis model.
-   
- * `Laplace`: the Laplace correction used to smooth low-frequency counts. 
- 
- * `neighbors`: a parameter for the number of neighbors used in a prototype 
-   model. 
+* `rbf_sigma`: the sigma parameters of a radial basis function. 
 
+* `regularization`: The amount of regularization used. In cases where different types require to be differentiated, the names `L1` and `L2` work.
+   
+* `sample_size`: the size of the data set used for modeling within an iteration of the modeling algorithm, such as stochastic gradient boosting.
+
+* `surv_dist`: the statistical distribution of the data in a survival analysis model.
+  
+* `tree_depth`: The maximum depth of the tree (i.e. number of splits).
+   
+* `trees`: The number of trees contained in a random forest or boosted  ensemble. In the latter case, this is equal to the number of boosting iterations.  
+  
+* `weight_func`: The type of kernel function that weights the distances between samples (e.g. in a K-near neighbors model).   
+ 
+ 
 
  
