@@ -26,6 +26,8 @@ When creating model objects, the computational code that fits the model should b
 
 * If your model passes `...` to another modeling function, consider the names of your top-level function arguments to avoid conflicts with the argument names of the underlying function. [{note}](#common-param)
 
+* If possible, check to see if the arguments passed to `...` are real arguments to the function(s) receiving the `...`.  
+
 <div id="standardized-back"></div>
 
 * Common arguments should use standardized names. [{note}](#standardized)
