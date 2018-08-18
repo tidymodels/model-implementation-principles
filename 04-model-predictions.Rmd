@@ -1,0 +1,60 @@
+# Model Predictions
+
+<div id="discuss-back"></div> 
+
+* The function to produce predictions should be a class-specific `predict` method with arguments `object` `newdata`, and possibly `type`. Other arguments, such as `level`, should be standardized. [{note}](#discuss)
+
+* The main predict method can internally defer to separate, unexported functions (`predict_class`, etc). 
+
+* `type` should also come from a set of pre-defined values such as
+
+| type         	| application                                 	|
+|--------------	|---------------------------------------------	|
+| `response`   	| numeric predictions                         	|
+| `class`      	| hard class predictions                      	|
+| `prob`       	| class probabilities, survivor probabilities 	|
+| `link`       	| `glm` linear predictor                      	|
+| `conf_int`   	| confidence intervals                        	|
+| `pred_int`   	| prediction intervals                        	|
+| `raw`        	| direct access to prediction function        	|
+| `param_pred` 	| predictions across tuning parameters        	|
+
+
+Other values should be assigned with consensus. 
+
+## Input Data
+
+* If `newdata` is not supplied, an error should be thrown. 
+
+* The model outcome should never be required to be in `newdata`. 
+
+* `newdata` should be tolerant of extra columns. For example, if all variables are in some data frame `dataset`, `predict(object, dataset)` should immediately know which variables are required for prediction, check for their presence, and select only those from `dataset` before proceeding. 
+
+* The prediction code should work whether `newdata` has multiple rows or a single row. 
+
+
+## Return Values
+
+* By default, `newdata` should not be returned by the prediction function. 
+
+ <div id="dplyr-like-back"></div>
+
+ * The return value is a tibble with the **same number of rows as the data being predicted**. This implies that `na.action` should not affect the dimensions of the outcome object. The class of the tibble can be overloaded to accommodate specialized methods as long as back data frame functionality is maintained.  [{note}](#dplyr-like)
+ 
+ * The return tibble can contain extra attributes for values relevant to the prediction (e.g. `level` for intervals) but care should be taken to make sure that these attributes are not destroyed when standard operations are applied to the tibble (e.g. `arrange`, `filter`, etc.). Columns of constant values (e.g. adding `level` as a column) should be avoided. 
+ 
+Specific cases:
+ 
+   * For univariate, numeric point estimates, the column should be named `.pred`. For multivariate numeric predictions (excluding probabilities), the columns should be named `.pred_{outcome name}`.
+      
+   * Class predictions should be factors with the same levels as the original outcome and named `.pred_class`. 
+   
+   * For class probability predictions, the columns should be named the same as the factor levels, e.g., `.pred_{level}`. 
+ 
+   * If interval estimates are produced (e.g. prediction/confidence/credible), the column names should be `.pred_lower` and `.pred_upper`. If a standard error is produced, it should be named `.std_error`. 
+ 
+ <div id="list-cols-back"></div>
+ 
+   * For predictions that are not simple scalars, such as distributions or non-rectangular structures, the `.pred` column should be a list-column [{note}](#list-cols) 
+   
+   

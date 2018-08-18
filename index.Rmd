@@ -1,0 +1,44 @@
+--- 
+title: "Conventions for R Modeling Packages"
+date: "`r Sys.Date()`"
+output: bookdown::gitbook
+documentclass: book
+---
+
+```{r req-pacakges, include = FALSE}
+library(emojifont)
+library(flexsurv)
+library(tidyr)
+library(tibble)
+```
+
+# Introduction 
+
+The S language has had unofficial conventions for modeling function, such as:
+
+ * using formulas to specify model terms, variable roles, and some statistical calculations
+
+ * basic infrastructure for creating design matrices (`model.matrix`), computing statistical probabilities (`logLik`), and commom analyses (`anova`, `p.adjust`, etc.)
+
+ * existing OOP classes like `predict`, `update`, etc. 
+
+Despite a [note](https://developer.r-project.org/model-fitting-functions.html) written by an R core member in 2003, these conventions have never been formally required for packages and this has led to a a significant amount of between- and within-package heterogeneity. For example, the table below shows myriad methods for obtaining class probability estimates for a set of modeling functions:
+
+|Function      |Package      |Code                                       |
+|:-------------|:------------|:------------------------------------------|
+|`lda`         |`MASS`       |`predict(obj)`                             |
+|`glm`         |`stats`      |`predict(obj, type = "response")`          |
+|`gbm`         |`gbm`        |`predict(obj, type = "response", n.trees)` |
+|`mda`         |`mda`        |`predict(obj, type = "posterior")`         |
+|`rpart`       |`rpart`      |`predict(obj, type = "prob")`              |
+|`Weka`        |`RWeka`      |`predict(obj, type = "probability")`       |
+|`logitboost`  |`LogitBoost` |`predict(obj, type = "raw", nIter)`        |
+|`pamr.train`  |`pamr`       |`pamr.predict(obj, type = "posterior")`    |
+
+
+Note that many use different values of `type` to obtain the same output and one does not use the standard S3 `predict` method for the function. Also notice that two models require an extra parameter to make predictions and despite these parameters signifying the same idea (the ensemble size), different parameter names are used. There are myriad examples of inconsistencies in function design, return values, and other aspects of modeling functions. 
+
+The goal of this document is to define a specification for creating functions and packages for _new modeling packages_. These are opinionated specifications but are meant to reflect reasonable positions for standards based on prior experience. A number of these guidelines are specific to the tidyverse (e.g. "Function names should use snake_case instead of camelCase."). However, the majority are driven by common sense and good design principles (e.g. "All functions must be reproducible from run-to-run."). 
+
+The chapters in this document contain recommendations for different aspects of modeling functions. The items within are meant to be succinct and concise. In many cases, further details can be found in links to the Notes chapter. Examples and implementation details can be found there. 
+

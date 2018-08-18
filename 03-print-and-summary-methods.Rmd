@@ -1,0 +1,11 @@
+# Print and Summary Methods
+
+* Every class should have a `print` methods that gives a concise description of the object. 
+
+    * The `print` method should invisibly return the original object. 
+    
+    * The number of significant digits should be an option and should use the global default. 
+    
+    * Printing the call is optional. 
+
+* `summary` methods are helpful but required. These should create more verbose descriptions of the object. the `print` method for the `summary` object should follow the bullet-pointed remarks above for printing. 

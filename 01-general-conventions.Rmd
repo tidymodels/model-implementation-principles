@@ -1,0 +1,16 @@
+# General Conventions
+
+* Function names should use snake_case instead of camelCase.
+
+* All functions must be reproducible from run-to-run.
+
+<div id="messages-back"></div>
+
+* If there is a strong need for producing output during execution, there should be a `verbose` option that defaults to no output. [{notes}](#messages)
+
+* When parallelism is used: 
+
+    * Provide an argument to specify the amount (e.g. number of cores if appropriate) and default the function to run sequentially. 
+
+    * Computations should be easily reproducible, even when run in parallel. Parallelism should not be an excuse for irreproducibility.  
+
