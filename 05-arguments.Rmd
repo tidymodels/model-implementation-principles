@@ -6,26 +6,28 @@
 
 ## Data Arguments
 
- * `na_rm` for missing data handling. 
+ * `na_rm`: missing data handling. 
 
- * `newdata` for data to be predicted.
+ * `newdata`: data to be predicted.
 
- * `weights` for case weights.
+ * `weights`: case weights.
 
- * `x` for predictors or generic data objects. 
+ * `x`: predictors or generic data objects. 
  
- * `y` for outcomes.
+ * `y`: outcome data.
  
 
 ## Numerical Arguments
 
- * `times` for the number of bootstraps, simulations, 
+ * `times`: the number of bootstraps, simulations, or other replications
  
 ## Statistical Quantities 
 
- * `direction` for the type of hypothesis test alternative. 
+ * `direction`: the type of hypothesis test alternative. 
  
- * `level` for interval levels (e.g., confidence, credible, prediction, and so on).
+ * `level`: interval levels (e.g., confidence, credible, prediction, and so on).
+
+ * `link`: link functions for generalized linear models. 
  
 
 ## Tuning Parameters
