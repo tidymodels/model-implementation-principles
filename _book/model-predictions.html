@@ -24,7 +24,7 @@
 
 
 
-<meta name="date" content="2018-08-18">
+<meta name="date" content="2018-09-03">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -218,6 +218,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">5.1</span> Input Data</h2>
 <ul>
 <li><p>If <code>newdata</code> is not supplied, an error should be thrown.</p></li>
+<li><p>The data requirements for <code>newdata</code> should be the same as those for the orginal model fit function.</p></li>
 <li><p>The model outcome should never be required to be in <code>newdata</code>.</p></li>
 <li><p><code>newdata</code> should be tolerant of extra columns. For example, if all variables are in some data frame <code>dataset</code>, <code>predict(object, dataset)</code> should immediately know which variables are required for prediction, check for their presence, and select only those from <code>dataset</code> before proceeding.</p></li>
 <li><p>The prediction code should work whether <code>newdata</code> has multiple rows or a single row.</p></li>
@@ -232,7 +233,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </div>
 <ul>
-<li><p>The return value is a tibble with the <strong>same number of rows as the data being predicted</strong>. This implies that <code>na.action</code> should not affect the dimensions of the outcome object. The class of the tibble can be overloaded to accommodate specialized methods as long as back data frame functionality is maintained. <a href="notes.html#dplyr-like">{note}</a></p></li>
+<li><p>The return value is a tibble with the <strong>same number of rows as the data being predicted</strong> and in the same order. This implies that <code>na.action</code> should not affect the dimensions of the outcome object. The class of the tibble can be overloaded to accommodate specialized methods as long as basic data frame functionality is maintained. <a href="notes.html#dplyr-like">{note}</a></p></li>
 <li><p>The return tibble can contain extra attributes for values relevant to the prediction (e.g. <code>level</code> for intervals) but care should be taken to make sure that these attributes are not destroyed when standard operations are applied to the tibble (e.g. <code>arrange</code>, <code>filter</code>, etc.). Columns of constant values (e.g. adding <code>level</code> as a column) should be avoided.</p></li>
 </ul>
 <p>Specific cases:</p>

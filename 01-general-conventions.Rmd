@@ -2,7 +2,7 @@
 
 * Function names should use snake_case instead of camelCase.
 
-* All functions must be reproducible from run-to-run.
+* All results must be reproducible from run-to-run.
 
 <div id="messages-back"></div>
 

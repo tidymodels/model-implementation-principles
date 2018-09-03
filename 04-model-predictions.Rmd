@@ -26,6 +26,8 @@ Other values should be assigned with consensus.
 
 * If `newdata` is not supplied, an error should be thrown. 
 
+* The data requirements for `newdata` should be the same as those for the orginal model fit function. 
+
 * The model outcome should never be required to be in `newdata`. 
 
 * `newdata` should be tolerant of extra columns. For example, if all variables are in some data frame `dataset`, `predict(object, dataset)` should immediately know which variables are required for prediction, check for their presence, and select only those from `dataset` before proceeding. 
@@ -39,7 +41,7 @@ Other values should be assigned with consensus.
 
  <div id="dplyr-like-back"></div>
 
- * The return value is a tibble with the **same number of rows as the data being predicted**. This implies that `na.action` should not affect the dimensions of the outcome object. The class of the tibble can be overloaded to accommodate specialized methods as long as back data frame functionality is maintained.  [{note}](#dplyr-like)
+ * The return value is a tibble with the **same number of rows as the data being predicted** and in the same order. This implies that `na.action` should not affect the dimensions of the outcome object. The class of the tibble can be overloaded to accommodate specialized methods as long as basic data frame functionality is maintained.  [{note}](#dplyr-like)
  
  * The return tibble can contain extra attributes for values relevant to the prediction (e.g. `level` for intervals) but care should be taken to make sure that these attributes are not destroyed when standard operations are applied to the tibble (e.g. `arrange`, `filter`, etc.). Columns of constant values (e.g. adding `level` as a column) should be avoided. 
  
