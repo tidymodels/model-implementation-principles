@@ -24,7 +24,7 @@
 
 
 
-<meta name="date" content="2018-09-03">
+<meta name="date" content="2018-09-05">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -247,7 +247,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </div>
 <ul>
-<li>For predictions that are not simple scalars, such as distributions or non-rectangular structures, the <code>.pred</code> column should be a list-column <a href="notes.html#list-cols">{note}</a></li>
+<li><p>For predictions that are not simple scalars, such as distributions or non-rectangular structures, the <code>.pred</code> column should be a list-column <a href="notes.html#list-cols">{note}</a></p></li>
+<li><p>In cases where the outcome is being <em>directly</em> predicted, the predictions should be on the same scale as the outcome. The same would apply to associated interval estimates. This is equivalent to <code>type = &quot;response&quot;</code> for generalized linear models and the like.</p></li>
 </ul>
 
 </div>
