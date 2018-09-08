@@ -1,8 +1,10 @@
 # Model Predictions
 
+ * To be consistent with snake_case, `new_data` should be used instead of `newdata`. 
+
 <div id="discuss-back"></div> 
 
-* The function to produce predictions should be a class-specific `predict` method with arguments `object` `newdata`, and possibly `type`. Other arguments, such as `level`, should be standardized. [{note}](#discuss)
+* The function to produce predictions should be a class-specific `predict` method with arguments `object` `new_data`, and possibly `type`. Other arguments, such as `level`, should be standardized. [{note}](#discuss)
 
 * The main predict method can internally defer to separate, unexported functions (`predict_class`, etc). 
 
@@ -24,24 +26,24 @@ Other values should be assigned with consensus.
 
 ## Input Data
 
-* If `newdata` is not supplied, an error should be thrown. 
+* If `new_data` is not supplied, an error should be thrown. It should **not** default to an archived version of the training set contained in the model object. 
 
-* The data requirements for `newdata` should be the same as those for the orginal model fit function. 
+* The data requirements for `new_data` should be the same as those for the orginal model fit function. 
 
-* The model outcome should never be required to be in `newdata`. 
+* The model outcome should never be required to be in `new_data`. 
 
-* `newdata` should be tolerant of extra columns. For example, if all variables are in some data frame `dataset`, `predict(object, dataset)` should immediately know which variables are required for prediction, check for their presence, and select only those from `dataset` before proceeding. 
+* `new_data` should be tolerant of extra columns. For example, if all variables are in some data frame `dataset`, `predict(object, dataset)` should immediately know which variables are required for prediction, check for their presence, and select only those from `dataset` before proceeding. 
 
-* The prediction code should work whether `newdata` has multiple rows or a single row. 
+* The prediction code should work whether `new_data` has multiple rows or a single row. 
 
 
 ## Return Values
 
-* By default, `newdata` should not be returned by the prediction function. 
+* By default, `new_data` should not be returned by the prediction function. 
 
  <div id="dplyr-like-back"></div>
 
- * The return value is a tibble with the **same number of rows as the data being predicted** and in the same order. This implies that `na.action` should not affect the dimensions of the outcome object. The class of the tibble can be overloaded to accommodate specialized methods as long as basic data frame functionality is maintained.  [{note}](#dplyr-like)
+ * The return value is a tibble with the **same number of rows as the data being predicted** and in the same order. This implies that `na.action` should not affect the dimensions of the outcome object (i.e., it should be ignored).  [{note}](#binding) The class of the tibble can be overloaded to accommodate specialized methods as long as basic data frame functionality is maintained.  [{note}](#dplyr-like)
  
  * The return tibble can contain extra attributes for values relevant to the prediction (e.g. `level` for intervals) but care should be taken to make sure that these attributes are not destroyed when standard operations are applied to the tibble (e.g. `arrange`, `filter`, etc.). Columns of constant values (e.g. adding `level` as a column) should be avoided. 
  

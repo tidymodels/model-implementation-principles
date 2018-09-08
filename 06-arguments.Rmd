@@ -8,7 +8,7 @@
 
  * `na_rm`: missing data handling. 
 
- * `newdata`: data to be predicted.
+ * `new_data`: data to be predicted.
 
  * `weights`: case weights.
 

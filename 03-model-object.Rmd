@@ -1,0 +1,9 @@
+# The Model Object
+
+* Saving the call is discouraged. If it must be saved, it should be checked for size. In cases where the function is invoked by `do.call("foo", bar)`, the data set may be embedded in the argument list `bar`. 
+
+* Unless explicitly required by the model, the training set should not be embedded in the model object (exceptions being models such as _k_-nearest neighbors). 
+
+<div id="minimal-back"></div>
+
+* Retain the _minimally sufficient_ objects in the model object. [{note}](#minimal)

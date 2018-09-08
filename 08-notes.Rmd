@@ -35,17 +35,20 @@ knitr::include_graphics("console_formatting.png")
 [`r emojifont::emoji('leftwards_arrow_with_hook')`](#messages-back)
 
 
-<div id="decouple"></div>
 
 ***decoupling functions***
+
+<div id="decouple"></div>
 
 For example, for some modeling method, the function `foo` would be the top-level api that users experience and some other function (say `compute_foo_fit`) is used to do the computations. This allows for different interfaces to be used to specify the model that pass common data structures to `compute_foo_fit`. 
 
 [`r emojifont::emoji('leftwards_arrow_with_hook')`](#decouple-back)
 
-<div id="user-appropriate"></div>
+
 
 ***appropriate data structures***
+
+<div id="user-appropriate"></div>
 
 For example:  
 
@@ -56,9 +59,11 @@ For example:
 
 [`r emojifont::emoji('leftwards_arrow_with_hook')`](#user-appropriate-back)
 
-<div id="top-level"></div>
 
 ***top-level design examples***
+
+<div id="top-level"></div>
+
 
 For example: 
 
@@ -68,35 +73,46 @@ For example:
 
 [`r emojifont::emoji('leftwards_arrow_with_hook')`](#top-level-back)
 
-<div id="common-param"></div>
 
 ***avoid common parameter names***
+
+<div id="common-param"></div>
 
 For example, `control` is the type of argument used in many functions so have a function specific argument (e.g. `foo_control`) is advisable in these situations. 
 
 [`r emojifont::emoji('leftwards_arrow_with_hook')`](#common-param-back)
 
-<div id="standardized"></div>
+
+***Checking of `...`***
+
+<div id="dot-check"></div>
+
+The [`conflicted`](https://github.com/hadley/ellipsis) package can be used to solve this issue. 
+
+[`r emojifont::emoji('leftwards_arrow_with_hook')`](#dot-check-back)
+
 
 ***standardize names***
+
+<div id="standardized"></div>
 
 For example, many functions use some variation of `level` for confidence levels (as opposed to `alpha`). The names in Chapter \@ref(standardized-argument-names) are preferable for the specific context.   
 
 [`r emojifont::emoji('leftwards_arrow_with_hook')`](#standardized-back)
 
 
-<div id="discuss"></div>
-
 ***discussing new names***
+
+<div id="discuss"></div>
 
 A good venue for this discussion is [RStudio Community](https://community.rstudio.com/)
 
 [`r emojifont::emoji('leftwards_arrow_with_hook')`](#discuss-back)
 
 
-<div id="calls"></div>
-
 ***avoid computing on `call` objects***
+
+<div id="calls"></div>
 	
 Historically, the call object that results from a model fit was considered a good method to capture details of the existing model fit. This object could be parsed and manipulated for the purpose of continuing or revising the model _between function calls_.
 
@@ -106,17 +122,43 @@ Note that the internals of common modeling functions, such as `lm`, do exactly t
 
 [`r emojifont::emoji('leftwards_arrow_with_hook')`](#calls-back)
 
-<div id="dplyr-like"></div>
+
+***minimal object retention***
+
+<div id="minimal"></div>
+
+
+For example, if summary statistics are computed on the model object, derive them on-the-fly during the execution of the `summary` method. Avoid saving these statistics to the model object unless they are related to ephemeral values generated during the model fit but do not need to be retained afterwards. 
+
+[`r emojifont::emoji('leftwards_arrow_with_hook')`](#minimal-back)
+
+
+***consistent number of rows***
+
+<div id="binding"></div>
+
+This should enable the ability to bind the results with the original data: 
+
+```r
+cbind(data, predict(model, data)) # or
+predict(model, data) %>% bind_cols(data)
+```
+
+[`r emojifont::emoji('leftwards_arrow_with_hook')`](#dplyr-like-back)
+
 
 ***extra tibble classes***
+
+<div id="dplyr-like"></div>
 
 Adding a new class to a tibble object might cause subsequent errors to `dplyr` operations. [This code](https://github.com/tidyverse/googledrive/blob/master/R/dplyr-compat.R) is a good example for how to maintain `dplyr` compatibility. 
 
 [`r emojifont::emoji('leftwards_arrow_with_hook')`](#dplyr-like-back)
 
-<div id="list-cols"></div>
 
 ***list column output***
+
+<div id="list-cols"></div>
    
 Some examples:  
 
@@ -171,3 +213,24 @@ tidyr::unnest(tidy_preds)
 When using a quantile regression, one might make the median the default that is predicted. If multiple percentiles are requested, then `.pred` would be a tibble with a column for the predictions and another for the percentile.  
 
 [`r emojifont::emoji('leftwards_arrow_with_hook')`](#list-cols-back)
+
+
+***where to parallelize?***
+
+<div id="par-long"></div>
+
+For example, if a random forest model is being created the parallelism could simultaneously fit the trees in the ensemble or parallelize the search for optimal splits _within_ each tree. All other things being equal, the former is preferred.
+
+[`r emojifont::emoji('leftwards_arrow_with_hook')`](#par-seed-long)
+
+
+***controlling random numbers in parallel workers***
+
+<div id="par-seed"></div>
+
+One simple approach when parallelism is conducted using R subprocesses (e.g. via `foreach` or `futures`) is to _pre-compute_ seeds and have a seed argument to the function being invoked. The function can immediately set the seed from the argument when it begins execution. 
+
+[`r emojifont::emoji('leftwards_arrow_with_hook')`](#par-seed-back)
+
+
+

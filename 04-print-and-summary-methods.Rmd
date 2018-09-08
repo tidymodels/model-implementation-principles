@@ -6,6 +6,6 @@
     
     * The number of significant digits should be an option and should use the global default. 
     
-    * Printing the call is optional. 
+    * Printing the call is discouraged.  
 
 * `summary` methods are helpful but required. These should create more verbose descriptions of the object. the `print` method for the `summary` object should follow the bullet-pointed remarks above for printing. 

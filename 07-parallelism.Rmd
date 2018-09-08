@@ -1,0 +1,20 @@
+# Parallel Processing
+
+<div id="par-long-back"></div> 
+
+ * IF a model function is not thread-safe, the documentation should clearly state that it cannot be run in parallel. 
+
+ * Parallel processing should always be implmented on the _longest running_ operation. [{note}](#par-long) 
+
+ * Parallel processing must be explictly requested by the user. 
+
+ * Provide an argument to specify the amount (e.g. number of cores if appropriate) and default the function to run sequentially. 
+
+<div id="par-seed-back"></div> 
+
+ * Computations should be easily reproducible, even when run in parallel. Parallelism should not be an excuse for irreproducibility.  [{note}](#par-seed)
+ 
+ * Computational code in other languages (e.g. Cpp, etc.) should pull from R's random number streams so that settin the seed prior to invoking these routines ensures reproducibility. 
+
+
+

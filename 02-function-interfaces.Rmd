@@ -12,6 +12,8 @@ When creating model objects, the computational code that fits the model should b
     
 * Do not require users to create dummy variables from their categorical predictors. Provide a formula and/or recipe interface to your model to do this (see the next item) and other methods should error trap if qualitative data should not be subsequently used. 
 
+* These top-level functions should use proper S3 dispatch (e.g. appropriately invoke to `foo.data.frame`, `foo.formula` and so on).
+
 <div id="user-appropriate-back"></div> 
 
 * Only **user-appropriate data structures** should be accommodated for the user-facing function. The underlying computational code should make appropriate transformations to computationally appropriate formats/encodings.  [{note}](#user-appropriate) 
@@ -26,13 +28,13 @@ When creating model objects, the computational code that fits the model should b
 
 * If your model passes `...` to another modeling function, consider the names of your top-level function arguments to avoid conflicts with the argument names of the underlying function. [{note}](#common-param)
 
-* If possible, check to see if the arguments passed to `...` are real arguments to the function(s) receiving the `...`.  
+<div id="dot-check-back"></div>
+
+* If possible, check to see if the arguments passed to `...` are real arguments to the function(s) receiving the `...`.  [{note}](#dot-check)
 
 <div id="standardized-back"></div>
 
 * Common arguments should use standardized names. [{note}](#standardized)
-
-* If the call object is saved, it should be checked for size. In cases where the function is invoked by `do.call("foo", bar)`, the data set may be embedded in the argument list `bar`. 
 
 
 ## Computational Functions
