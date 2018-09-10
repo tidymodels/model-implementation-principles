@@ -49,6 +49,8 @@ When creating model objects, the computational code that fits the model should b
 
 * Computational code should (almost) always use `X[ , ,drop = FALSE]` when subsetting matrices (and non-tibble data frames) to make sure that the 2D structure is maintained. 
 
+* Use `try` or similar methods to avoid an uncontrolled errors in order to return intelligible errors. 
+
 <div id="calls-back"></div>
 
 * Using the call object for post-estimation activies is discouraged. [{note}](#calls)
