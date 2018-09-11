@@ -61,4 +61,4 @@ Specific cases:
  
    * For predictions that are not simple scalars, such as distributions or non-rectangular structures, the `.pred` column should be a list-column [{note}](#list-cols) 
    
- * In cases where the outcome is being _directly_ predicted, the predictions should be on the same scale as the outcome. The same would apply to associated interval estimates. This is equivalent to `type = "response"` for generalized linear models and the like.
+ * In cases where the outcome is being _directly_ predicted, the predictions should be on the same scale as the outcome. The same would apply to associated interval estimates. This is equivalent to `type = "response"` for generalized linear models and the like. Reasonable exceptions include estimation of the standard error of prediction (perhaps occurring on the link-level/scale of the linear predictors). 
