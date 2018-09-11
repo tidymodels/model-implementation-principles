@@ -2,7 +2,7 @@
 
 <div id="par-long-back"></div> 
 
- * IF a model function is not thread-safe, the documentation should clearly state that it cannot be run in parallel. 
+ * If a model function is not thread-safe, the documentation should clearly state that it cannot be run in parallel. 
 
  * Parallel processing should always be implmented on the _longest running_ operation. [{note}](#par-long) 
 

@@ -1,6 +1,6 @@
 # Print and Summary Methods
 
-* Every class should have a `print` methods that gives a concise description of the object. 
+* Every class should have a `print` method that gives a concise description of the object. 
 
     * The `print` method should invisibly return the original object. 
     
