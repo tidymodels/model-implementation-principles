@@ -1,6 +1,6 @@
 --- 
 title: "Conventions for R Modeling Packages"
-date: "`r Sys.Date()`"
+date: "daft version compiled on `r Sys.Date()`"
 output: bookdown::gitbook
 documentclass: book
 ---

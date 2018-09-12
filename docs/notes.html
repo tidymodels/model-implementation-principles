@@ -24,7 +24,6 @@
 
 
 
-<meta name="date" content="2018-09-12">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -282,16 +281,16 @@ fitg &lt;-<span class="st"> </span><span class="kw">flexsurvreg</span>(<span cla
 <pre class="sourceCode r"><code class="sourceCode r">preds &lt;-<span class="st"> </span><span class="kw">summary</span>(fitg, <span class="dt">newdata =</span> ovarian[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="st">&quot;age&quot;</span>, <span class="dt">drop =</span> <span class="ot">FALSE</span>], <span class="dt">t =</span> <span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>))
 preds</code></pre>
 <pre><code>## age=72.3315 
-##   time       est       lcl       ucl
-## 1  100 0.7988680 0.5182855 0.9608174
-## 2  200 0.4849180 0.1575662 0.7918875
-## 3  300 0.2784226 0.0187192 0.6305694
+##   time       est        lcl       ucl
+## 1  100 0.7988680 0.49041027 0.9668168
+## 2  200 0.4849180 0.15115970 0.8002931
+## 3  300 0.2784226 0.02158386 0.6379634
 ## 
 ## age=74.4932 
-##   time       est          lcl       ucl
-## 1  100 0.7278338 0.3492787773 0.9552408
-## 2  200 0.3856737 0.0436999818 0.7724216
-## 3  300 0.1964611 0.0007026279 0.6083285</code></pre>
+##   time       est         lcl       ucl
+## 1  100 0.7278338 0.372292116 0.9482310
+## 2  200 0.3856737 0.052511077 0.7560315
+## 3  300 0.1964611 0.000923868 0.5897475</code></pre>
 <p>A list of data frames is not very helpful. Better would be a data frame with a list column, where every element is a data frame with the predictions in the tidy format:</p>
 <pre class="sourceCode r"><code class="sourceCode r">tidy_preds</code></pre>
 <pre><code>## # A tibble: 2 x 1
@@ -304,20 +303,20 @@ tidy_preds<span class="op">$</span>.pred[[<span class="dv">1</span>]]</code></pr
 <pre><code>## # A tibble: 3 x 4
 ##   .time .pred .pred_lower .pred_upper
 ##   &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-## 1   100 0.799      0.518        0.961
-## 2   200 0.485      0.158        0.792
-## 3   300 0.278      0.0187       0.631</code></pre>
+## 1   100 0.799      0.490        0.967
+## 2   200 0.485      0.151        0.800
+## 3   300 0.278      0.0216       0.638</code></pre>
 <p>If a single data frame is needed, it is easy to make the conversion:</p>
 <pre class="sourceCode r"><code class="sourceCode r">tidyr<span class="op">::</span><span class="kw">unnest</span>(tidy_preds)</code></pre>
 <pre><code>## # A tibble: 6 x 4
 ##   .time .pred .pred_lower .pred_upper
 ##   &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-## 1   100 0.799    0.518          0.961
-## 2   200 0.485    0.158          0.792
-## 3   300 0.278    0.0187         0.631
-## 4   100 0.728    0.349          0.955
-## 5   200 0.386    0.0437         0.772
-## 6   300 0.196    0.000703       0.608</code></pre>
+## 1   100 0.799    0.490          0.967
+## 2   200 0.485    0.151          0.800
+## 3   300 0.278    0.0216         0.638
+## 4   100 0.728    0.372          0.948
+## 5   200 0.386    0.0525         0.756
+## 6   300 0.196    0.000924       0.590</code></pre>
 <p><strong>percentile predictions</strong></p>
 <p>When using a quantile regression, one might make the median the default that is predicted. If multiple percentiles are requested, then <code>.pred</code> would be a tibble with a column for the predictions and another for the percentile.</p>
 <p><a href="model-predictions.html#list-cols-back">↩️</a></p>
