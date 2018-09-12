@@ -58,15 +58,19 @@ foo <- function(x, ...) {
 }
 
 foo.default <- function(x, ...) {
-   # implementation here
+   stop("No implementation provided for this data type", call. = FALSE)
 }
 
 foo.data.frame <- function(x, ...) {
-   # manipulate and pass on to foo.default()
+   # manipulate and pass on to compute_foo_fit()
 }
 
 foo.formula <- function(formula, ...) {
-   # manipulate and pass on to foo.default()
+   # manipulate and pass on to compute_foo_fit()
+}
+
+compute_foo_fit <- function(x, ...) {
+   # implementation here
 }
 ```
 

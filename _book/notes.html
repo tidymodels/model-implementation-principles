@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Conventions for R Modeling Packages</title>
   <meta name="description" content="Conventions for R Modeling Packages">
-  <meta name="generator" content="bookdown 0.7.11 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.7.18 and GitBook 2.6.7">
 
   <meta property="og:title" content="Conventions for R Modeling Packages" />
   <meta property="og:type" content="book" />
@@ -175,9 +175,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Unless coded otherwise, <code>cat()</code> uses the usual formatting whereas the default formatting for <code>message()</code> is different.</p></li>
 </ul>
 <p>For this code:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(emojifont)
-<span class="kw">message</span>(<span class="st">&quot;Help! I&#39;m trapped in the well!!&quot;</span>)
-<span class="kw">cat</span>(<span class="st">&quot;No, you&#39;re not&quot;</span>, <span class="kw">emoji</span>(<span class="st">&#39;roll_eyes&#39;</span>), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(emojifont)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">message</span>(<span class="st">&quot;Help! I&#39;m trapped in the well!!&quot;</span>)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">cat</span>(<span class="st">&quot;No, you&#39;re not&quot;</span>, <span class="kw">emoji</span>(<span class="st">&#39;roll_eyes&#39;</span>), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</a></code></pre></div>
 <p>the Rstudio IDE output is:</p>
 <p><img src="ide_formatting.png" width="50%" style="display: block; margin: auto;" /></p>
 <p>and basic terminal output is:</p>
@@ -201,16 +201,20 @@ might look like:</p>
 <a class="sourceLine" id="cb2-3" data-line-number="3">}</a>
 <a class="sourceLine" id="cb2-4" data-line-number="4"></a>
 <a class="sourceLine" id="cb2-5" data-line-number="5">foo.default &lt;-<span class="st"> </span><span class="cf">function</span>(x, ...) {</a>
-<a class="sourceLine" id="cb2-6" data-line-number="6">   <span class="co"># implementation here</span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6">   <span class="kw">stop</span>(<span class="st">&quot;No implementation provided for this data type&quot;</span>, <span class="dt">call. =</span> <span class="ot">FALSE</span>)</a>
 <a class="sourceLine" id="cb2-7" data-line-number="7">}</a>
 <a class="sourceLine" id="cb2-8" data-line-number="8"></a>
 <a class="sourceLine" id="cb2-9" data-line-number="9">foo.data.frame &lt;-<span class="st"> </span><span class="cf">function</span>(x, ...) {</a>
-<a class="sourceLine" id="cb2-10" data-line-number="10">   <span class="co"># manipulate and pass on to foo.default()</span></a>
+<a class="sourceLine" id="cb2-10" data-line-number="10">   <span class="co"># manipulate and pass on to compute_foo_fit()</span></a>
 <a class="sourceLine" id="cb2-11" data-line-number="11">}</a>
 <a class="sourceLine" id="cb2-12" data-line-number="12"></a>
 <a class="sourceLine" id="cb2-13" data-line-number="13">foo.formula &lt;-<span class="st"> </span><span class="cf">function</span>(formula, ...) {</a>
-<a class="sourceLine" id="cb2-14" data-line-number="14">   <span class="co"># manipulate and pass on to foo.default()</span></a>
-<a class="sourceLine" id="cb2-15" data-line-number="15">}</a></code></pre></div>
+<a class="sourceLine" id="cb2-14" data-line-number="14">   <span class="co"># manipulate and pass on to compute_foo_fit()</span></a>
+<a class="sourceLine" id="cb2-15" data-line-number="15">}</a>
+<a class="sourceLine" id="cb2-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb2-17" data-line-number="17">compute_foo_fit &lt;-<span class="st"> </span><span class="cf">function</span>(x, ...) {</a>
+<a class="sourceLine" id="cb2-18" data-line-number="18">   <span class="co"># implementation here</span></a>
+<a class="sourceLine" id="cb2-19" data-line-number="19">}</a></code></pre></div>
 <p>Note that <code>foo.formula()</code> is a special case where the first argument, <code>formula</code>,
 does not have to match the generic’s first argument, <code>x</code>. This only applies to
 <code>.formula</code> methods and is documented <a href="https://github.com/wch/r-source/blob/588b4c31ca3eb6dda58587551482473707c03689/src/library/tools/R/QC.R#L2422">here</a>.</p>
@@ -280,13 +284,8 @@ does not have to match the generic’s first argument, <code>x</code>. This only
 
 </div>
 <p>This should enable the ability to bind the results with the original data:</p>
-<<<<<<< HEAD
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">cbind</span>(data, <span class="kw">predict</span>(model, data)) <span class="co"># or</span></a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw">predict</span>(model, data) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">bind_cols</span>(data)</a></code></pre></div>
-=======
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cbind</span>(data, <span class="kw">predict</span>(model, data)) <span class="co"># or</span>
-<span class="kw">predict</span>(model, data) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">bind_cols</span>(data)</code></pre>
->>>>>>> 08d3afd3f80e6a29713dd311eb576f871349633e
 <p><a href="model-predictions.html#dplyr-like-back">↩️</a></p>
 <p><strong><em>extra tibble classes</em></strong></p>
 <div id="dplyr-like">
@@ -305,7 +304,6 @@ does not have to match the generic’s first argument, <code>x</code>. This only
 <p>When a <code>predict</code> method produces values over multiple tuning parameter values (e.g. <code>glmnet</code>), the list column elements have rows for every tuning parameter value combination that is being changed (e.g. <code>lambda</code> in <code>glmnet</code>).</p>
 <p><strong>survivor probability predictions</strong></p>
 <p>In time to event models, where survivor probabilities are produced for values of <code>time</code>, the return tibble has a column for <code>.time</code>. Other column names should conform to the standards here (e.g. <code>.pred_lower</code> if intervals are also returned). As an example from <code>?flexsurv::flexsurvreg</code>:</p>
-<<<<<<< HEAD
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">library</span>(flexsurv)</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw">data</span>(ovarian)</a>
 <a class="sourceLine" id="cb4-3" data-line-number="3">fitg &lt;-<span class="st"> </span><span class="kw">flexsurvreg</span>(<span class="dt">formula =</span> <span class="kw">Surv</span>(futime, fustat) <span class="op">~</span><span class="st"> </span>age, <span class="dt">data =</span> ovarian, <span class="dt">dist =</span> <span class="st">&quot;gengamma&quot;</span>)</a></code></pre></div>
@@ -314,84 +312,41 @@ does not have to match the generic’s first argument, <code>x</code>. This only
 <a class="sourceLine" id="cb5-2" data-line-number="2">preds</a></code></pre></div>
 <pre><code>## age=72.3315 
 ##   time       est        lcl       ucl
-## 1  100 0.7988680 0.49293246 0.9689892
-## 2  200 0.4849180 0.14609696 0.7983363
-## 3  300 0.2784226 0.01470346 0.6477660
+## 1  100 0.7988680 0.49675919 0.9579419
+## 2  200 0.4849180 0.14967385 0.7838250
+## 3  300 0.2784226 0.01793975 0.6377804
 ## 
 ## age=74.4932 
-##   time       est        lcl       ucl
-## 1  100 0.7278338 0.38743334 0.9469167
-## 2  200 0.3856737 0.05693463 0.7587396
-## 3  300 0.1964611 0.00130243 0.6053150</code></pre>
+##   time       est         lcl       ucl
+## 1  100 0.7278338 0.365072389 0.9511645
+## 2  200 0.3856737 0.042992106 0.7817416
+## 3  300 0.1964611 0.001117546 0.6231732</code></pre>
 <p>A list of data frames is not very helpful. Better would be a data frame with a list column, where every element is a data frame with the predictions in the tidy format:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">tidy_preds</a></code></pre></div>
-=======
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(flexsurv)
-<span class="kw">data</span>(ovarian)
-fitg &lt;-<span class="st"> </span><span class="kw">flexsurvreg</span>(<span class="dt">formula =</span> <span class="kw">Surv</span>(futime, fustat) <span class="op">~</span><span class="st"> </span>age, <span class="dt">data =</span> ovarian, <span class="dt">dist =</span> <span class="st">&quot;gengamma&quot;</span>)</code></pre>
-<p>For each new sample, this model can make probabilistic predictions at a number of user-specified time points.</p>
-<pre class="sourceCode r"><code class="sourceCode r">preds &lt;-<span class="st"> </span><span class="kw">summary</span>(fitg, <span class="dt">newdata =</span> ovarian[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="st">&quot;age&quot;</span>, <span class="dt">drop =</span> <span class="ot">FALSE</span>], <span class="dt">t =</span> <span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>))
-preds</code></pre>
-<pre><code>## age=72.3315 
-##   time       est        lcl       ucl
-## 1  100 0.7988680 0.50968378 0.9588537
-## 2  200 0.4849180 0.14705269 0.7937572
-## 3  300 0.2784226 0.01999083 0.6364537
-## 
-## age=74.4932 
-##   time       est          lcl       ucl
-## 1  100 0.7278338 0.3593415852 0.9451496
-## 2  200 0.3856737 0.0412891807 0.7579847
-## 3  300 0.1964611 0.0001922846 0.6101450</code></pre>
-<p>A list of data frames is not very helpful. Better would be a data frame with a list column, were every element is a data frame with the predictions in the tidy format:</p>
-<pre class="sourceCode r"><code class="sourceCode r">tidy_preds</code></pre>
->>>>>>> 08d3afd3f80e6a29713dd311eb576f871349633e
 <pre><code>## # A tibble: 2 x 1
 ##   .pred           
 ##   &lt;list&gt;          
 ## 1 &lt;tibble [3 × 4]&gt;
 ## 2 &lt;tibble [3 × 4]&gt;</code></pre>
-<<<<<<< HEAD
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co"># predictions on the first subject at 3 time points</span></a>
 <a class="sourceLine" id="cb9-2" data-line-number="2">tidy_preds<span class="op">$</span>.pred[[<span class="dv">1</span>]]</a></code></pre></div>
 <pre><code>## # A tibble: 3 x 4
 ##   .time .pred .pred_lower .pred_upper
 ##   &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-## 1   100 0.799      0.493        0.969
-## 2   200 0.485      0.146        0.798
-## 3   300 0.278      0.0147       0.648</code></pre>
+## 1   100 0.799      0.497        0.958
+## 2   200 0.485      0.150        0.784
+## 3   300 0.278      0.0179       0.638</code></pre>
 <p>If a single data frame is needed, it is easy to make the conversion:</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">tidyr<span class="op">::</span><span class="kw">unnest</span>(tidy_preds)</a></code></pre></div>
 <pre><code>## # A tibble: 6 x 4
 ##   .time .pred .pred_lower .pred_upper
 ##   &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-## 1   100 0.799     0.493         0.969
-## 2   200 0.485     0.146         0.798
-## 3   300 0.278     0.0147        0.648
-## 4   100 0.728     0.387         0.947
-## 5   200 0.386     0.0569        0.759
-## 6   300 0.196     0.00130       0.605</code></pre>
-=======
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># predictions on the first subject at 3 time points</span>
-tidy_preds<span class="op">$</span>.pred[[<span class="dv">1</span>]]</code></pre>
-<pre><code>## # A tibble: 3 x 4
-##   .time .pred .pred_lower .pred_upper
-##   &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-## 1   100 0.799      0.510        0.959
-## 2   200 0.485      0.147        0.794
-## 3   300 0.278      0.0200       0.636</code></pre>
-<p>If a single data frame is needed, it is easy to make the conversion:</p>
-<pre class="sourceCode r"><code class="sourceCode r">tidyr<span class="op">::</span><span class="kw">unnest</span>(tidy_preds)</code></pre>
-<pre><code>## # A tibble: 6 x 4
-##   .time .pred .pred_lower .pred_upper
-##   &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-## 1   100 0.799    0.510          0.959
-## 2   200 0.485    0.147          0.794
-## 3   300 0.278    0.0200         0.636
-## 4   100 0.728    0.359          0.945
-## 5   200 0.386    0.0413         0.758
-## 6   300 0.196    0.000192       0.610</code></pre>
->>>>>>> 08d3afd3f80e6a29713dd311eb576f871349633e
+## 1   100 0.799     0.497         0.958
+## 2   200 0.485     0.150         0.784
+## 3   300 0.278     0.0179        0.638
+## 4   100 0.728     0.365         0.951
+## 5   200 0.386     0.0430        0.782
+## 6   300 0.196     0.00112       0.623</code></pre>
 <p><strong>percentile predictions</strong></p>
 <p>When using a quantile regression, one might make the median the default that is predicted. If multiple percentiles are requested, then <code>.pred</code> would be a tibble with a column for the predictions and another for the percentile.</p>
 <p><a href="model-predictions.html#list-cols-back">↩️</a></p>
