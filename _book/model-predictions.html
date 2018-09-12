@@ -172,7 +172,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </div>
 <ul>
-<li><p>The function to produce predictions should be a class-specific <code>predict</code> method with arguments <code>object</code>, <code>new_data</code>, and possibly <code>type</code>. Other arguments, such as <code>level</code>, should be standardized. <a href="#discuss">{note}</a></p></li>
+<li><p>The function to produce predictions should be a class-specific <code>predict</code> method with arguments <code>object</code>, <code>new_data</code>, and possibly <code>type</code>. Other arguments, such as <code>level</code>, should be standardized. <a href="notes.html#discuss">{note}</a></p></li>
 <li><p>The main predict method can internally defer to separate, unexported functions (<code>predict_class</code>, etc).</p></li>
 <li><p><code>type</code> should also come from a set of pre-defined values such as</p></li>
 </ul>
@@ -238,7 +238,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </div>
 <ul>
-<li><p>The return value is a tibble with the <strong>same number of rows as the data being predicted</strong> and in the same order. This implies that <code>na.action</code> should not affect the dimensions of the outcome object (i.e., it should be ignored). <a href="#binding">{note}</a> The class of the tibble can be overloaded to accommodate specialized methods as long as basic data frame functionality is maintained. <a href="#dplyr-like">{note}</a></p></li>
+<li><p>The return value is a tibble with the <strong>same number of rows as the data being predicted</strong> and in the same order. This implies that <code>na.action</code> should not affect the dimensions of the outcome object (i.e., it should be ignored). <a href="notes.html#binding">{note}</a> The class of the tibble can be overloaded to accommodate specialized methods as long as basic data frame functionality is maintained. <a href="notes.html#dplyr-like">{note}</a></p></li>
 <li><p>The return tibble can contain extra attributes for values relevant to the prediction (e.g. <code>level</code> for intervals) but care should be taken to make sure that these attributes are not destroyed when standard operations are applied to the tibble (e.g. <code>arrange</code>, <code>filter</code>, etc.). Columns of constant values (e.g. adding <code>level</code> as a column) should be avoided.</p></li>
 </ul>
 <p>Specific cases:</p>
@@ -252,11 +252,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </div>
 <ul>
-<<<<<<< HEAD
-<li><p>For predictions that are not simple scalars, such as distributions or non-rectangular structures, the <code>.pred</code> column should be a list-column <a href="#list-cols">{note}</a></p></li>
-=======
 <li><p>For predictions that are not simple scalars, such as distributions or non-rectangular structures, the <code>.pred</code> column should be a list-column <a href="notes.html#list-cols">{note}</a></p></li>
->>>>>>> 08d3afd3f80e6a29713dd311eb576f871349633e
 <li><p>In cases where the outcome is being <em>directly</em> predicted, the predictions should be on the same scale as the outcome. The same would apply to associated interval estimates. This is equivalent to <code>type = &quot;response&quot;</code> for generalized linear models and the like. Reasonable exceptions include estimation of the standard error of prediction (perhaps occurring on the link-level/scale of the linear predictors).</p></li>
 </ul>
 

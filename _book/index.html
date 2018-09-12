@@ -230,6 +230,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Note that many use different values of <code>type</code> to obtain the same output and one does not use the standard S3 <code>predict</code> method for the function. Also notice that two models require an extra parameter to make predictions and despite these parameters signifying the same idea (the ensemble size), different parameter names are used. There are myriad examples of inconsistencies in function design, return values, and other aspects of modeling functions.</p>
 <p>The goal of this document is to define a specification for creating functions and packages for <em>new modeling packages</em>. These are opinionated specifications but are meant to reflect reasonable positions for standards based on prior experience. A number of these guidelines are specific to the tidyverse (e.g. “Function names should use snake_case instead of camelCase.”). However, the majority are driven by common sense and good design principles (e.g. “All functions must be reproducible from run-to-run.”).</p>
 <p>The chapters in this document contain recommendations for different aspects of modeling functions. The items within are meant to be succinct and concise. In many cases, further details can be found in links to the Notes chapter. Examples and implementation details can be found there.</p>
+<p>Once these guidelines have been finalized, a set of GitHub repositories will be created to serve as templates that new package builders can use.</p>
 
 </div>
             </section>

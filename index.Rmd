@@ -42,3 +42,5 @@ The goal of this document is to define a specification for creating functions an
 
 The chapters in this document contain recommendations for different aspects of modeling functions. The items within are meant to be succinct and concise. In many cases, further details can be found in links to the Notes chapter. Examples and implementation details can be found there. 
 
+Once these guidelines have been finalized, a set of GitHub repositories will be created to serve as templates that new package builders can use. 
+
