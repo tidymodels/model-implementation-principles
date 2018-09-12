@@ -45,6 +45,36 @@ For example, for some modeling method, the function `foo` would be the top-level
 [`r emojifont::emoji('leftwards_arrow_with_hook')`](#decouple-back)
 
 
+***generic functions***
+
+<div id="generic-functions"></div>
+
+For example, for a top-level modeling function, `foo()`, a method specification
+might look like:
+
+```r
+foo <- function(x, ...) {
+   UseMethod("foo")
+}
+
+foo.default <- function(x, ...) {
+   # implementation here
+}
+
+foo.data.frame <- function(x, ...) {
+   # manipulate and pass on to foo.default()
+}
+
+foo.formula <- function(formula, ...) {
+   # manipulate and pass on to foo.default()
+}
+```
+
+Note that `foo.formula()` is a special case where the first argument, `formula`,
+does not have to match the generic's first argument, `x`. This only applies to
+`.formula` methods and is documented [here](https://github.com/wch/r-source/blob/588b4c31ca3eb6dda58587551482473707c03689/src/library/tools/R/QC.R#L2422).
+
+[`r emojifont::emoji('leftwards_arrow_with_hook')`](#generic-functions-back)
 
 ***appropriate data structures***
 

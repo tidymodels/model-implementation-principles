@@ -24,7 +24,7 @@
 
 
 
-<meta name="date" content="2018-09-08">
+<meta name="date" content="2018-09-12">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -49,41 +49,69 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 </head>
@@ -147,9 +175,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><p>Unless coded otherwise, <code>cat()</code> uses the usual formatting whereas the default formatting for <code>message()</code> is different.</p></li>
 </ul>
 <p>For this code:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(emojifont)
-<span class="kw">message</span>(<span class="st">&quot;Help! I&#39;m trapped in the well!!&quot;</span>)
-<span class="kw">cat</span>(<span class="st">&quot;No, you&#39;re not&quot;</span>, <span class="kw">emoji</span>(<span class="st">&#39;roll_eyes&#39;</span>), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(emojifont)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">message</span>(<span class="st">&quot;Help! I&#39;m trapped in the well!!&quot;</span>)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">cat</span>(<span class="st">&quot;No, you&#39;re not&quot;</span>, <span class="kw">emoji</span>(<span class="st">&#39;roll_eyes&#39;</span>), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</a></code></pre></div>
 <p>the Rstudio IDE output is:</p>
 <p><img src="ide_formatting.png" width="50%" style="display: block; margin: auto;" /></p>
 <p>and basic terminal output is:</p>
@@ -162,6 +190,31 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <p>For example, for some modeling method, the function <code>foo</code> would be the top-level api that users experience and some other function (say <code>compute_foo_fit</code>) is used to do the computations. This allows for different interfaces to be used to specify the model that pass common data structures to <code>compute_foo_fit</code>.</p>
 <p><a href="function-interfaces.html#decouple-back">↩️</a></p>
+<p><strong><em>generic functions</em></strong></p>
+<div id="generic-functions">
+
+</div>
+<p>For example, for a top-level modeling function, <code>foo()</code>, a method specification
+might look like:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">foo &lt;-<span class="st"> </span><span class="cf">function</span>(x, ...) {</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">   <span class="kw">UseMethod</span>(<span class="st">&quot;foo&quot;</span>)</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">}</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">foo.default &lt;-<span class="st"> </span><span class="cf">function</span>(x, ...) {</a>
+<a class="sourceLine" id="cb2-6" data-line-number="6">   <span class="co"># implementation here</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7">}</a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9">foo.data.frame &lt;-<span class="st"> </span><span class="cf">function</span>(x, ...) {</a>
+<a class="sourceLine" id="cb2-10" data-line-number="10">   <span class="co"># manipulate and pass on to foo.default()</span></a>
+<a class="sourceLine" id="cb2-11" data-line-number="11">}</a>
+<a class="sourceLine" id="cb2-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb2-13" data-line-number="13">foo.formula &lt;-<span class="st"> </span><span class="cf">function</span>(formula, ...) {</a>
+<a class="sourceLine" id="cb2-14" data-line-number="14">   <span class="co"># manipulate and pass on to foo.default()</span></a>
+<a class="sourceLine" id="cb2-15" data-line-number="15">}</a></code></pre></div>
+<p>Note that <code>foo.formula()</code> is a special case where the first argument, <code>formula</code>,
+does not have to match the generic’s first argument, <code>x</code>. This only applies to
+<code>.formula</code> methods and is documented <a href="https://github.com/wch/r-source/blob/588b4c31ca3eb6dda58587551482473707c03689/src/library/tools/R/QC.R#L2422">here</a>.</p>
+<p><a href="function-interfaces.html#generic-functions-back">↩️</a></p>
 <p><strong><em>appropriate data structures</em></strong></p>
 <div id="user-appropriate">
 
@@ -227,8 +280,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 </div>
 <p>This should enable the ability to bind the results with the original data:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cbind</span>(data, <span class="kw">predict</span>(model, data)) <span class="co"># or</span>
-<span class="kw">predict</span>(model, data) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">bind_cols</span>(data)</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">cbind</span>(data, <span class="kw">predict</span>(model, data)) <span class="co"># or</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw">predict</span>(model, data) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">bind_cols</span>(data)</a></code></pre></div>
 <p><a href="model-predictions.html#dplyr-like-back">↩️</a></p>
 <p><strong><em>extra tibble classes</em></strong></p>
 <div id="dplyr-like">
@@ -247,49 +300,49 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>When a <code>predict</code> method produces values over multiple tuning parameter values (e.g. <code>glmnet</code>), the list column elements have rows for every tuning parameter value combination that is being changed (e.g. <code>lambda</code> in <code>glmnet</code>).</p>
 <p><strong>survivor probability predictions</strong></p>
 <p>In time to event models, where survivor probabilities are produced for values of <code>time</code>, the return tibble has a column for <code>.time</code>. Other column names should conform to the standards here (e.g. <code>.pred_lower</code> if intervals are also returned). As an example from <code>?flexsurv::flexsurvreg</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(flexsurv)
-<span class="kw">data</span>(ovarian)
-fitg &lt;-<span class="st"> </span><span class="kw">flexsurvreg</span>(<span class="dt">formula =</span> <span class="kw">Surv</span>(futime, fustat) <span class="op">~</span><span class="st"> </span>age, <span class="dt">data =</span> ovarian, <span class="dt">dist =</span> <span class="st">&quot;gengamma&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">library</span>(flexsurv)</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw">data</span>(ovarian)</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">fitg &lt;-<span class="st"> </span><span class="kw">flexsurvreg</span>(<span class="dt">formula =</span> <span class="kw">Surv</span>(futime, fustat) <span class="op">~</span><span class="st"> </span>age, <span class="dt">data =</span> ovarian, <span class="dt">dist =</span> <span class="st">&quot;gengamma&quot;</span>)</a></code></pre></div>
 <p>For each new sample, this model can make probabilistic predictions at a number of user-specified time points.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">preds &lt;-<span class="st"> </span><span class="kw">summary</span>(fitg, <span class="dt">newdata =</span> ovarian[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="st">&quot;age&quot;</span>, <span class="dt">drop =</span> <span class="ot">FALSE</span>], <span class="dt">t =</span> <span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>))
-preds</code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">preds &lt;-<span class="st"> </span><span class="kw">summary</span>(fitg, <span class="dt">newdata =</span> ovarian[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="st">&quot;age&quot;</span>, <span class="dt">drop =</span> <span class="ot">FALSE</span>], <span class="dt">t =</span> <span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>))</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">preds</a></code></pre></div>
 <pre><code>## age=72.3315 
 ##   time       est        lcl       ucl
-## 1  100 0.7988680 0.49518711 0.9599779
-## 2  200 0.4849180 0.13677080 0.7868285
-## 3  300 0.2784226 0.01479761 0.6450629
+## 1  100 0.7988680 0.51441343 0.9629327
+## 2  200 0.4849180 0.15098589 0.7974896
+## 3  300 0.2784226 0.01628854 0.6417490
 ## 
 ## age=74.4932 
-##   time       est         lcl       ucl
-## 1  100 0.7278338 0.371239936 0.9560520
-## 2  200 0.3856737 0.051559789 0.7692748
-## 3  300 0.1964611 0.001297624 0.6151684</code></pre>
+##   time       est          lcl       ucl
+## 1  100 0.7278338 0.3650388014 0.9526583
+## 2  200 0.3856737 0.0374202564 0.7654372
+## 3  300 0.1964611 0.0001582552 0.5994666</code></pre>
 <p>A list of data frames is not very helpful. Better would be a data frame with a list column, were every element is a data frame with the predictions in the tidy format:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tidy_preds</code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">tidy_preds</a></code></pre></div>
 <pre><code>## # A tibble: 2 x 1
 ##   .pred           
 ##   &lt;list&gt;          
 ## 1 &lt;tibble [3 × 4]&gt;
 ## 2 &lt;tibble [3 × 4]&gt;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># predictions on the first subject at 3 time points</span>
-tidy_preds<span class="op">$</span>.pred[[<span class="dv">1</span>]]</code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co"># predictions on the first subject at 3 time points</span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">tidy_preds<span class="op">$</span>.pred[[<span class="dv">1</span>]]</a></code></pre></div>
 <pre><code>## # A tibble: 3 x 4
 ##   .time .pred .pred_lower .pred_upper
 ##   &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-## 1   100 0.799      0.495        0.960
-## 2   200 0.485      0.137        0.787
-## 3   300 0.278      0.0148       0.645</code></pre>
+## 1   100 0.799      0.514        0.963
+## 2   200 0.485      0.151        0.797
+## 3   300 0.278      0.0163       0.642</code></pre>
 <p>If a single data frame is needed, it is easy to make the conversion:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tidyr<span class="op">::</span><span class="kw">unnest</span>(tidy_preds)</code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">tidyr<span class="op">::</span><span class="kw">unnest</span>(tidy_preds)</a></code></pre></div>
 <pre><code>## # A tibble: 6 x 4
 ##   .time .pred .pred_lower .pred_upper
 ##   &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-## 1   100 0.799     0.495         0.960
-## 2   200 0.485     0.137         0.787
-## 3   300 0.278     0.0148        0.645
-## 4   100 0.728     0.371         0.956
-## 5   200 0.386     0.0516        0.769
-## 6   300 0.196     0.00130       0.615</code></pre>
+## 1   100 0.799    0.514          0.963
+## 2   200 0.485    0.151          0.797
+## 3   300 0.278    0.0163         0.642
+## 4   100 0.728    0.365          0.953
+## 5   200 0.386    0.0374         0.765
+## 6   300 0.196    0.000158       0.599</code></pre>
 <p><strong>percentile predictions</strong></p>
 <p>When using a quantile regression, one might make the median the default that is predicted. If multiple percentiles are requested, then <code>.pred</code> would be a tibble with a column for the predictions and another for the percentile.</p>
 <p><a href="model-predictions.html#list-cols-back">↩️</a></p>
