@@ -4,7 +4,8 @@ We distinguish between "top-level"/"user-facing" api's and "low-level"/"computat
 
 <div id="decouple-back"></div> 
 
-When creating model objects, the computational code that fits the model should be **decoupled** from the interface code to specify the model. [{note}](#decouple) 
+When creating model objects, the computational code that fits the model should be **decoupled** from the interface code to specify the model. This allows for different interfaces to be used to specify the model that then pass common data structures on to
+the computational code. [{note}](#decouple) 
 
 ## User-Facing Functions
 
