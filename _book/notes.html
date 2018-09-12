@@ -308,16 +308,16 @@ does not have to match the generic’s first argument, <code>x</code>. This only
 <a class="sourceLine" id="cb5-2" data-line-number="2">preds</a></code></pre></div>
 <pre><code>## age=72.3315 
 ##   time       est        lcl       ucl
-## 1  100 0.7988680 0.51441343 0.9629327
-## 2  200 0.4849180 0.15098589 0.7974896
-## 3  300 0.2784226 0.01628854 0.6417490
+## 1  100 0.7988680 0.49293246 0.9689892
+## 2  200 0.4849180 0.14609696 0.7983363
+## 3  300 0.2784226 0.01470346 0.6477660
 ## 
 ## age=74.4932 
-##   time       est          lcl       ucl
-## 1  100 0.7278338 0.3650388014 0.9526583
-## 2  200 0.3856737 0.0374202564 0.7654372
-## 3  300 0.1964611 0.0001582552 0.5994666</code></pre>
-<p>A list of data frames is not very helpful. Better would be a data frame with a list column, were every element is a data frame with the predictions in the tidy format:</p>
+##   time       est        lcl       ucl
+## 1  100 0.7278338 0.38743334 0.9469167
+## 2  200 0.3856737 0.05693463 0.7587396
+## 3  300 0.1964611 0.00130243 0.6053150</code></pre>
+<p>A list of data frames is not very helpful. Better would be a data frame with a list column, where every element is a data frame with the predictions in the tidy format:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">tidy_preds</a></code></pre></div>
 <pre><code>## # A tibble: 2 x 1
 ##   .pred           
@@ -329,20 +329,20 @@ does not have to match the generic’s first argument, <code>x</code>. This only
 <pre><code>## # A tibble: 3 x 4
 ##   .time .pred .pred_lower .pred_upper
 ##   &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-## 1   100 0.799      0.514        0.963
-## 2   200 0.485      0.151        0.797
-## 3   300 0.278      0.0163       0.642</code></pre>
+## 1   100 0.799      0.493        0.969
+## 2   200 0.485      0.146        0.798
+## 3   300 0.278      0.0147       0.648</code></pre>
 <p>If a single data frame is needed, it is easy to make the conversion:</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">tidyr<span class="op">::</span><span class="kw">unnest</span>(tidy_preds)</a></code></pre></div>
 <pre><code>## # A tibble: 6 x 4
 ##   .time .pred .pred_lower .pred_upper
 ##   &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-## 1   100 0.799    0.514          0.963
-## 2   200 0.485    0.151          0.797
-## 3   300 0.278    0.0163         0.642
-## 4   100 0.728    0.365          0.953
-## 5   200 0.386    0.0374         0.765
-## 6   300 0.196    0.000158       0.599</code></pre>
+## 1   100 0.799     0.493         0.969
+## 2   200 0.485     0.146         0.798
+## 3   300 0.278     0.0147        0.648
+## 4   100 0.728     0.387         0.947
+## 5   200 0.386     0.0569        0.759
+## 6   300 0.196     0.00130       0.605</code></pre>
 <p><strong>percentile predictions</strong></p>
 <p>When using a quantile regression, one might make the median the default that is predicted. If multiple percentiles are requested, then <code>.pred</code> would be a tibble with a column for the predictions and another for the percentile.</p>
 <p><a href="model-predictions.html#list-cols-back">↩️</a></p>
