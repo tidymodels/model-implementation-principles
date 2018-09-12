@@ -24,7 +24,7 @@
 
 
 
-<meta name="date" content="2018-09-08">
+<meta name="date" content="2018-09-12">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -48,43 +48,6 @@
 
 
 
-<style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-</style>
 
 </head>
 
@@ -144,7 +107,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 </div>
 <ul>
-<li><p>The function to produce predictions should be a class-specific <code>predict</code> method with arguments <code>object</code> <code>new_data</code>, and possibly <code>type</code>. Other arguments, such as <code>level</code>, should be standardized. <a href="notes.html#discuss">{note}</a></p></li>
+<li><p>The function to produce predictions should be a class-specific <code>predict</code> method with arguments <code>object</code>, <code>new_data</code>, and possibly <code>type</code>. Other arguments, such as <code>level</code>, should be standardized. <a href="#discuss">{note}</a></p></li>
 <li><p>The main predict method can internally defer to separate, unexported functions (<code>predict_class</code>, etc).</p></li>
 <li><p><code>type</code> should also come from a set of pre-defined values such as</p></li>
 </ul>
@@ -210,22 +173,22 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 </div>
 <ul>
-<li><p>The return value is a tibble with the <strong>same number of rows as the data being predicted</strong> and in the same order. This implies that <code>na.action</code> should not affect the dimensions of the outcome object (i.e., it should be ignored). <a href="notes.html#binding">{note}</a> The class of the tibble can be overloaded to accommodate specialized methods as long as basic data frame functionality is maintained. <a href="notes.html#dplyr-like">{note}</a></p></li>
+<li><p>The return value is a tibble with the <strong>same number of rows as the data being predicted</strong> and in the same order. This implies that <code>na.action</code> should not affect the dimensions of the outcome object (i.e., it should be ignored). <a href="#binding">{note}</a> The class of the tibble can be overloaded to accommodate specialized methods as long as basic data frame functionality is maintained. <a href="#dplyr-like">{note}</a></p></li>
 <li><p>The return tibble can contain extra attributes for values relevant to the prediction (e.g. <code>level</code> for intervals) but care should be taken to make sure that these attributes are not destroyed when standard operations are applied to the tibble (e.g. <code>arrange</code>, <code>filter</code>, etc.). Columns of constant values (e.g. adding <code>level</code> as a column) should be avoided.</p></li>
 </ul>
 <p>Specific cases:</p>
 <ul>
 <li><p>For univariate, numeric point estimates, the column should be named <code>.pred</code>. For multivariate numeric predictions (excluding probabilities), the columns should be named <code>.pred_{outcome name}</code>.</p></li>
 <li><p>Class predictions should be factors with the same levels as the original outcome and named <code>.pred_class</code>.</p></li>
-<li><p>For class probability predictions, the columns should be named the same as the factor levels, e.g., <code>.pred_{level}</code>.</p></li>
+<li><p>For class probability predictions, the columns should be named the same as the factor levels, e.g., <code>.pred_{level}</code>, and there should be as many columns as factor levels.</p></li>
 <li><p>If interval estimates are produced (e.g. prediction/confidence/credible), the column names should be <code>.pred_lower</code> and <code>.pred_upper</code>. If a standard error is produced, it should be named <code>.std_error</code>.</p></li>
 </ul>
 <div id="list-cols-back">
 
 </div>
 <ul>
-<li><p>For predictions that are not simple scalars, such as distributions or non-rectangular structures, the <code>.pred</code> column should be a list-column <a href="notes.html#list-cols">{note}</a></p></li>
-<li><p>In cases where the outcome is being <em>directly</em> predicted, the predictions should be on the same scale as the outcome. The same would apply to associated interval estimates. This is equivalent to <code>type = &quot;response&quot;</code> for generalized linear models and the like.</p></li>
+<li><p>For predictions that are not simple scalars, such as distributions or non-rectangular structures, the <code>.pred</code> column should be a list-column <a href="#list-cols">{note}</a></p></li>
+<li><p>In cases where the outcome is being <em>directly</em> predicted, the predictions should be on the same scale as the outcome. The same would apply to associated interval estimates. This is equivalent to <code>type = &quot;response&quot;</code> for generalized linear models and the like. Reasonable exceptions include estimation of the standard error of prediction (perhaps occurring on the link-level/scale of the linear predictors).</p></li>
 </ul>
 
 </div>
