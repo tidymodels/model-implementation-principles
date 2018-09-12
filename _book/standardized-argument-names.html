@@ -165,21 +165,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="standardized-argument-names" class="section level1">
 <h1><span class="header-section-number">Chapter 7</span> Standardized Argument Names</h1>
-<p><strong>Dot usage</strong>: If there is a possability of arugment name conflicts between the function and any arguments passed down through <code>...</code>, it is strongly suggested that the argument names be prefixed with a dot (e.g. <code>.data</code>, <code>.x</code>, etc.)</p>
+<p><strong>Dot usage</strong>: If there is a possibility of argument name conflicts between the function and any arguments passed down through <code>...</code>, it is strongly suggested that the argument names be prefixed with a dot (e.g. <code>.data</code>, <code>.x</code>, etc.)</p>
 <div id="data-arguments" class="section level2">
 <h2><span class="header-section-number">7.1</span> Data Arguments</h2>
 <ul>
 <li><p><code>na_rm</code>: missing data handling.</p></li>
 <li><p><code>new_data</code>: data to be predicted.</p></li>
 <li><p><code>weights</code>: case weights.</p></li>
+<li><p>For <code>.data.frame</code> methods:</p>
+<ul>
 <li><p><code>x</code>: predictors or generic data objects.</p></li>
 <li><p><code>y</code>: outcome data.</p></li>
+</ul></li>
+<li><p>For <code>.formula</code> methods:</p>
+<ul>
+<li><p><code>formula</code>: a <code>y ~ x</code> formula specifying the outcome and predictors.</p></li>
+<li><p><code>data</code>: the data.frame to pull formula variables from.</p></li>
+</ul></li>
 </ul>
 </div>
 <div id="numerical-arguments" class="section level2">
 <h2><span class="header-section-number">7.2</span> Numerical Arguments</h2>
 <ul>
-<li><code>times</code>: the number of bootstraps, simulations, or other replications</li>
+<li><code>times</code>: the number of bootstraps, simulations, or other replications.</li>
 </ul>
 </div>
 <div id="statistical-quantities" class="section level2">
@@ -218,7 +226,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p><code>surv_dist</code>: the statistical distribution of the data in a survival analysis model.</p></li>
 <li><p><code>tree_depth</code>: The maximum depth of the tree (i.e. number of splits).</p></li>
 <li><p><code>trees</code>: The number of trees contained in a random forest or boosted ensemble. In the latter case, this is equal to the number of boosting iterations.</p></li>
-<li><p><code>weight_func</code>: The type of kernel function that weights the distances between samples (e.g. in a K-near neighbors model).</p></li>
+<li><p><code>weight_func</code>: The type of kernel function that weights the distances between samples (e.g. in a K-nearest neighbors model).</p></li>
 </ul>
 
 </div>

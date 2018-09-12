@@ -4,7 +4,7 @@
 
 <div id="discuss-back"></div> 
 
-* The function to produce predictions should be a class-specific `predict` method with arguments `object` `new_data`, and possibly `type`. Other arguments, such as `level`, should be standardized. [{note}](#discuss)
+* The function to produce predictions should be a class-specific `predict` method with arguments `object`, `new_data`, and possibly `type`. Other arguments, such as `level`, should be standardized. [{note}](#discuss)
 
 * The main predict method can internally defer to separate, unexported functions (`predict_class`, etc). 
 
@@ -53,7 +53,7 @@ Specific cases:
       
    * Class predictions should be factors with the same levels as the original outcome and named `.pred_class`. 
    
-   * For class probability predictions, the columns should be named the same as the factor levels, e.g., `.pred_{level}`. 
+   * For class probability predictions, the columns should be named the same as the factor levels, e.g., `.pred_{level}`, and there should be as many columns as factor levels. 
  
    * If interval estimates are produced (e.g. prediction/confidence/credible), the column names should be `.pred_lower` and `.pred_upper`. If a standard error is produced, it should be named `.std_error`. 
  

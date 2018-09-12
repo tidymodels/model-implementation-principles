@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Conventions for R Modeling Packages</title>
   <meta name="description" content="Conventions for R Modeling Packages">
-  <meta name="generator" content="bookdown 0.7.11 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
   <meta property="og:title" content="Conventions for R Modeling Packages" />
   <meta property="og:type" content="book" />
@@ -282,17 +282,17 @@ fitg &lt;-<span class="st"> </span><span class="kw">flexsurvreg</span>(<span cla
 <pre class="sourceCode r"><code class="sourceCode r">preds &lt;-<span class="st"> </span><span class="kw">summary</span>(fitg, <span class="dt">newdata =</span> ovarian[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="st">&quot;age&quot;</span>, <span class="dt">drop =</span> <span class="ot">FALSE</span>], <span class="dt">t =</span> <span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>))
 preds</code></pre>
 <pre><code>## age=72.3315 
-##   time       est        lcl       ucl
-## 1  100 0.7988680 0.50968378 0.9588537
-## 2  200 0.4849180 0.14705269 0.7937572
-## 3  300 0.2784226 0.01999083 0.6364537
+##   time       est         lcl       ucl
+## 1  100 0.7988680 0.465857945 0.9700591
+## 2  200 0.4849180 0.111770840 0.7964784
+## 3  300 0.2784226 0.009193638 0.6526383
 ## 
 ## age=74.4932 
 ##   time       est          lcl       ucl
-## 1  100 0.7278338 0.3593415852 0.9451496
-## 2  200 0.3856737 0.0412891807 0.7579847
-## 3  300 0.1964611 0.0001922846 0.6101450</code></pre>
-<p>A list of data frames is not very helpful. Better would be a data frame with a list column, were every element is a data frame with the predictions in the tidy format:</p>
+## 1  100 0.7278338 0.3317068150 0.9552704
+## 2  200 0.3856737 0.0429370026 0.7658113
+## 3  300 0.1964611 0.0002510003 0.6133556</code></pre>
+<p>A list of data frames is not very helpful. Better would be a data frame with a list column, where every element is a data frame with the predictions in the tidy format:</p>
 <pre class="sourceCode r"><code class="sourceCode r">tidy_preds</code></pre>
 <pre><code>## # A tibble: 2 x 1
 ##   .pred           
@@ -304,20 +304,20 @@ tidy_preds<span class="op">$</span>.pred[[<span class="dv">1</span>]]</code></pr
 <pre><code>## # A tibble: 3 x 4
 ##   .time .pred .pred_lower .pred_upper
 ##   &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-## 1   100 0.799      0.510        0.959
-## 2   200 0.485      0.147        0.794
-## 3   300 0.278      0.0200       0.636</code></pre>
+## 1   100 0.799     0.466         0.970
+## 2   200 0.485     0.112         0.796
+## 3   300 0.278     0.00919       0.653</code></pre>
 <p>If a single data frame is needed, it is easy to make the conversion:</p>
 <pre class="sourceCode r"><code class="sourceCode r">tidyr<span class="op">::</span><span class="kw">unnest</span>(tidy_preds)</code></pre>
 <pre><code>## # A tibble: 6 x 4
 ##   .time .pred .pred_lower .pred_upper
 ##   &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-## 1   100 0.799    0.510          0.959
-## 2   200 0.485    0.147          0.794
-## 3   300 0.278    0.0200         0.636
-## 4   100 0.728    0.359          0.945
-## 5   200 0.386    0.0413         0.758
-## 6   300 0.196    0.000192       0.610</code></pre>
+## 1   100 0.799    0.466          0.970
+## 2   200 0.485    0.112          0.796
+## 3   300 0.278    0.00919        0.653
+## 4   100 0.728    0.332          0.955
+## 5   200 0.386    0.0429         0.766
+## 6   300 0.196    0.000251       0.613</code></pre>
 <p><strong>percentile predictions</strong></p>
 <p>When using a quantile regression, one might make the median the default that is predicted. If multiple percentiles are requested, then <code>.pred</code> would be a tibble with a column for the predictions and another for the percentile.</p>
 <p><a href="model-predictions.html#list-cols-back">↩️</a></p>

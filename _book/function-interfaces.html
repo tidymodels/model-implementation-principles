@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Conventions for R Modeling Packages</title>
   <meta name="description" content="Conventions for R Modeling Packages">
-  <meta name="generator" content="bookdown 0.7.11 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
   <meta property="og:title" content="Conventions for R Modeling Packages" />
   <meta property="og:type" content="book" />
@@ -169,7 +169,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="decouple-back">
 
 </div>
-<p>When creating model objects, the computational code that fits the model should be <strong>decoupled</strong> from the interface code to specify the model. <a href="notes.html#decouple">{note}</a></p>
+<p>When creating model objects, the computational code that fits the model should be <strong>decoupled</strong> from the interface code to specify the model. This allows for different interfaces to be used to specify the model that then pass common data structures on to
+the computational code. <a href="notes.html#decouple">{note}</a></p>
 <div id="user-facing-functions" class="section level2">
 <h2><span class="header-section-number">3.1</span> User-Facing Functions</h2>
 <ul>
