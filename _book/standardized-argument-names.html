@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Conventions for R Modeling Packages</title>
   <meta name="description" content="Conventions for R Modeling Packages">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.7.11 and GitBook 2.6.7">
 
   <meta property="og:title" content="Conventions for R Modeling Packages" />
   <meta property="og:type" content="book" />
@@ -221,7 +221,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p><code>prod_degree</code>: the number of terms to combine into interactions. A value of 1 implies an additive model. Useful for MARS models and some linear models.</p></li>
 <li><p><code>prune</code>: a logical for whether a tree or set of rules should be pruned.</p></li>
 <li><p><code>rbf_sigma</code>: the sigma parameters of a radial basis function.</p></li>
-<li><p><code>regularization</code>: The amount of regularization used. In cases where different types require to be differentiated, the names <code>L1</code> and <code>L2</code> work.</p></li>
+<li><p><code>penalty</code>: The amount of regularization used. In cases where different penalty types require to be differentiated, the names <code>L1</code> and <code>L2</code> are recommended.</p></li>
 <li><p><code>sample_size</code>: the size of the data set used for modeling within an iteration of the modeling algorithm, such as stochastic gradient boosting.</p></li>
 <li><p><code>surv_dist</code>: the statistical distribution of the data in a survival analysis model.</p></li>
 <li><p><code>tree_depth</code>: The maximum depth of the tree (i.e. number of splits).</p></li>
