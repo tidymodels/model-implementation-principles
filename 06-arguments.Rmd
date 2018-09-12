@@ -72,7 +72,7 @@
 
 * `rbf_sigma`: the sigma parameters of a radial basis function. 
 
-* `regularization`: The amount of regularization used. In cases where different types require to be differentiated, the names `L1` and `L2` work.
+* `penalty`: The amount of regularization used. In cases where different penalty types require to be differentiated, the names `L1` and `L2` are recommended.
    
 * `sample_size`: the size of the data set used for modeling within an iteration of the modeling algorithm, such as stochastic gradient boosting.
 
