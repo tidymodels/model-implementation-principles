@@ -4,7 +4,7 @@
 
 <div id="discuss-back"></div> 
 
-* The function to produce predictions should be a class-specific `predict` method with arguments `object` `new_data`, and possibly `type`. Other arguments, such as `level`, should be standardized. [{note}](#discuss)
+* The function to produce predictions should be a class-specific `predict` method with arguments `object`, `new_data`, and possibly `type`. Other arguments, such as `level`, should be standardized. [{note}](#discuss)
 
 * The main predict method can internally defer to separate, unexported functions (`predict_class`, etc). 
 
