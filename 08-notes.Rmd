@@ -232,4 +232,36 @@ One simple approach when parallelism is conducted using R subprocesses (e.g. via
 [`r emojifont::emoji('leftwards_arrow_with_hook')`](#par-seed-back)
 
 
+***predictions shouldn't depend on `new_data`***
+
+<div id="splines-trap"></div>
+
+Sometimes spline expansions or similar terms can behave oddly when packages haven't been fully loaded. For example:
+
+```{r}
+fit <- lm(mpg ~ disp + hp + splines::ns(drat, 2), mtcars)
+
+hp <- head(predict(fit, mtcars))
+ph <- predict(fit, head(mtcars))
+
+all.equal(hp, ph)
+```
+
+Loading the `splines` package fixes this:
+
+```{r}
+library(splines)
+fit <- lm(mpg ~ disp + hp + ns(drat, 2), mtcars)
+
+hp <- head(predict(fit, mtcars))
+ph <- predict(fit, head(mtcars))
+
+all.equal(hp, ph)
+```
+
+A general way to check for errors like this is to check that `predict()` and `head()` commute.
+
+[`r emojifont::emoji('leftwards_arrow_with_hook')`](#splines-tracp-back)
+
+
 

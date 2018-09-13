@@ -39,10 +39,11 @@ Other values should be assigned with consensus.
 
 * The prediction code should work whether `new_data` has multiple rows or a single row. 
 
-* Predictions should not depend on which observations are present in `new_data`. This occasionally happens when using `stats::poly()` and `splines::ns()`.
+<div id="splines-trap-back"></div>
 
-* The prediction code should have a well documented default behavior when novel factor levels appear in the test set for factor predictors, or should throw an informative error.
+* Predictions should not depend on which observations are present in `new_data`. [{note}](#splines-trap).
 
+* When novel factor levels appear in the test set for factor predictors, the default behavior should be to throw an informative error. For models where this is a reasonable way to make predictions on novel factor levels, users need to explicitly specify that they want this behavior, and it's good practice to `message()` for these prediction cases.
 
 ## Return Values
 
@@ -62,7 +63,7 @@ Specific cases:
    
    * For class probability predictions, the columns should be named the same as the factor levels, e.g., `.pred_{level}`, and there should be as many columns as factor levels. 
  
-   * If interval estimates are produced (e.g. prediction/confidence/credible), the column names should be `.pred_lower` and `.pred_upper`. If a standard error is produced, it should be named `.pred_std_error`. 
+   * If interval estimates are produced (e.g. prediction/confidence/credible), the column names should be `.pred_lower` and `.pred_upper`. If a standard error is produced, the column should be named `.std_error`. 
  
  <div id="list-cols-back"></div>
  
