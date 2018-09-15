@@ -1,6 +1,5 @@
 # Standardized Argument Names
 
-
 **Dot usage**: If there is a possibility of argument name conflicts between the function and any arguments passed down through `...`, it is strongly suggested that the argument names be prefixed with a dot (e.g. `.data`, `.x`, etc.)
 
 
