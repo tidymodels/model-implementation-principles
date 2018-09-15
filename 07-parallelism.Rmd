@@ -4,7 +4,7 @@
 
  * If a model function is not thread-safe, the documentation should clearly state that it cannot be run in parallel. 
 
- * Parallel processing should always be implmented on the _longest running_ operation. [{note}](#par-long) 
+ * Parallel processing should always be implemented on the _longest running_ operation. [{note}](#par-long) 
 
  * Parallel processing must be explictly requested by the user. 
 

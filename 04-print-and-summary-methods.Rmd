@@ -8,4 +8,4 @@
     
     * Printing the call is discouraged.  
 
-* `summary` methods are helpful but required. These should create more verbose descriptions of the object. the `print` method for the `summary` object should follow the bullet-pointed remarks above for printing. 
+* `summary` methods are helpful but not required. These should create more verbose descriptions of the object. the `print` method for the `summary` object should follow the bullet-pointed remarks above for printing. 

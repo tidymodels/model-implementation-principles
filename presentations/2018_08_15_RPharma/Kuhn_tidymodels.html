@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Modeling in the Tidyverse</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Max Kuhn (RStudio)" />
+    <link rel="stylesheet" href="mtheme_max.css" type="text/css" />
+    <link rel="stylesheet" href="fonts_mtheme_max.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Modeling in the Tidyverse
+### Max Kuhn (RStudio)
+
+---
+
+
+
+
+# Modeling in R
+
+
+.pull-left[
+.font90[
+* R has always had a rich set of modeling tools that it inherited from S. For example, the formula interface has made it simple to specify potentially complex model structures.   
+
+* _R has cutting edge models_. Many researchers in various domains use R as their primary computing environment and their work often results in R packages.
+
+* _It is easy to port or link to other applications_. R doesn't try to be everything to everyone. If you prefer models implemented in C, C++, `tensorflow`, `keras`, `python`, `stan`, or `Weka`, you can access these applications without leaving R. 
+]
+]
+
+.pull-right[
+However, there is a huge _consistency problem_. For example: 
+* There are two primary methods for specifying what terms are in a model. Not all models have both. 
+* 99% of model functions automatically generate dummy variables. 
+* Sparse matrices can be used (unless the can't).
+* Many package developers don't know much about the language and omit OOP and other core R components.
+
+Two examples follow... 
+]
+
+
+---
+
+# Between-Package Inconsistency
+
+Syntax for computing predicted class probabilities:
+
+|Function      |Package      |Code                                       |
+|:-------------|:------------|:------------------------------------------|
+|`lda`         |`MASS`       |`predict(obj)`                             |
+|`glm`         |`stats`      |`predict(obj, type = "response")`          |
+|`gbm`         |`gbm`        |`predict(obj, type = "response", n.trees)` |
+|`mda`         |`mda`        |`predict(obj, type = "posterior")`         |
+|`rpart`       |`rpart`      |`predict(obj, type = "prob")`              |
+|`Weka`        |`RWeka`      |`predict(obj, type = "probability")`       |
+|`logitboost`  |`LogitBoost` |`predict(obj, type = "raw", nIter)`        |
+|`pamr.train`  |`pamr`       |`pamr.predict(obj, type = "posterior")`    |
+
+---
+
+# Within-Package Inconsistency: `glmnet` Predictions
+
+
+ 
+The `glmnet` model can be used to fit regularized generalized linear models with a mixture of L&lt;sub&gt;1&lt;/sub&gt; and L&lt;sub&gt;2&lt;/sub&gt; penalties. 
+
+We'll look at what happens when we get predictions for a regression model (i.e. numeric _Y_) as well as classification models where _Y_ has two or three categorical values. 
+
+The models shown below contain solutions for three regularization values ( `\(\lambda\)` ). 
+
+The predict method gives the results for all three at once (👍). 
+
+
+---
+
+# Numeric `glmnet` Predictions
+
+Predicting a numeric outcome for two new data points:
+
+
+
+```r
+new_x
+```
+
+```
+##             x1     x2     x3     x4
+## sample_1 1.649 -0.483 -0.294 -0.815
+## sample_2 0.656 -0.420  0.880  0.109
+```
+
+```r
+predict(reg_mod, newx = new_x)
+```
+
+```
+##            s0   s1 s2
+## sample_1 9.95 9.95 10
+## sample_2 9.95 9.95 10
+```
+
+A matrix result and we will assume that the `\(\lambda\)` values are in the same order as what we gave to the model fit function.
+
+
+---
+
+# `glmnet` Class Predictions
+
+Predicting an outcome with two classes:
+
+
+```r
+predict(two_class_mod, newx = new_x, type = "class")
+```
+
+```
+##          s0  s1  s2 
+## sample_1 "a" "b" "b"
+## sample_2 "a" "b" "b"
+```
+
+Not factors! That's different from what is required for the `y` argument. From `?glmnet`:
+
+&gt; For `family="binomial"` [`y`] should be either a factor with two levels, or a two-column matrix of counts or proportions
+
+
+I'm guessing that this is because they want to keep the result a matrix (to be consistent). 
+
+
+---
+
+# `glmnet` Class Probabilities (Two Classes)
+
+
+```r
+predict(two_class_mod, newx = new_x, type = "response")
+```
+
+```
+##           s0  s1    s2
+## sample_1 0.5 0.5 0.506
+## sample_2 0.5 0.5 0.526
+```
+
+Okay, we get a matrix of the probability for the _second_ level of the outcome factor. 
+
+To make this fit into most code, we can manually calculate the other probability. No biggie!
+
+
+---
+
+# `glmnet` Class Probabilities (Three Classes)
+
+.pull-left[
+
+
+```r
+predict(three_class_mod, newx = new_x, 
+        type = "response")
+```
+
+```
+## , , s0
+## 
+##              a     b     c
+## sample_1 0.333 0.333 0.333
+## sample_2 0.333 0.333 0.333
+## 
+## , , s1
+## 
+##              a     b     c
+## sample_1 0.333 0.333 0.333
+## sample_2 0.333 0.333 0.333
+## 
+## , , s2
+## 
+##              a     b     c
+## sample_1 0.373 0.244 0.383
+## sample_2 0.327 0.339 0.334
+```
+
+]
+.pull-right[
+
+
+😳
+
+No more matrix results. 3D array and we get all of the probabilities back this time. 
+
+Maybe a structure like this would work better:
+
+
+```
+## # A tibble: 6 x 4
+##       a     b     c lambda
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+## 1 0.333 0.333 0.333   1   
+## 2 0.333 0.333 0.333   1   
+## 3 0.333 0.333 0.333   0.1 
+## 4 0.333 0.333 0.333   0.1 
+## 5 0.373 0.244 0.383   0.01
+## 6 0.327 0.339 0.334   0.01
+```
+
+]
+
+
+
+---
+
+# What We Need
+
+Unless you are doing a simple one-off data analysis, the lack of consistency between, and sometimes within, R packages can be very frustrating. 
+
+If we could agree on a set of common conventions for interfaces, return values, and other components, everyone's life would be easier. 
+
+Once we agree on conventions, **two challenges** are: 
+
+ * As of 8/2018, there are over 12K R packages on CRAN. How do we "harmonize" these without breaking everything? 
+ 
+ * How can we guide new R users (or people unfamiliar with R) in making good choices in their modeling packages?
+ 
+These prospective and retrospective problems will be addressed in a minute. 
+
+
+---
+
+# The Tidyverse
+
+.pull-left[
+
+The [tidyverse](http://www.tidyverse.org/) is an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures. 
+
+
+The principles of the tidyverse: 
+
+1. Reuse existing data structures.
+1. Compose simple functions with the pipe.
+1. Embrace functional programming.
+1. Design for humans.
+
+This results in more specific conventions around interfaces, function naming, etc. For example: 
+
+
+
+]
+.pull-right[
+
+
+```
+## [1] "glue_col"      "glue_collapse"
+## [3] "glue_data"     "glue_data_col"
+## [5] "glue_data_sql" "glue_sql"
+```
+
+
+There is also the notion of [tidy data](http://vita.had.co.nz/papers/tidy-data.pdf): 
+
+1. Each variable forms a column.
+1. Each observation forms a row.
+1. Each type of observational unit forms a table.
+
+Based on these ideas, we can create modeling packages that have predictable results and are a pleasure to use. 
+
+] 
+
+---
+
+# Tidymodels 
+
+`tidymodels` is a collection of modeling packages that live in the tidyverse and are designed in the same way. 
+
+My goals for tidymodels are:
+
+1. Encourage empirical validation and good methodology.
+
+1. Smooth out diverse interfaces.
+
+1. Build highly reusable infrastructure.
+
+1. Enable a wider variety of methodologies.
+
+The `tidymodels` packages address the *retrospective* and *prospective* issues. We are also developing a set of principles and templates to make *prospective* (new R packages) easy to create. 
+
+
+---
+
+# Current Modeling Packages 
+
+.font80[
+
+* [`broom`](https://broom.tidyverse.org/) takes the messy output of built-in functions in R, such as `lm`, `nls`, or `t.test`, and turns them into tidy data frames.
+
+* [`dials`](https://tidymodels.github.io/dials) has tools for creating and validating tuning parameter values. 
+
+* [`infer`](http://infer.netlify.com/) is a modern approach to statistical inference.
+
+* [`recipes`](https://tidymodels.github.io/recipes/) is a general data preprocessor with a modern interface. It can create model matrices that incorporate feature engineering, imputation, and other tools.
+
+* [`rsample`](https://tidymodels.github.io/rsample/) has infrastructure for _resampling_ data so that models can be assessed and empirically validated. 
+
+* [`tidyposterior`](https://tidymodels.github.io/tidyposterior/) can be used to compare models using resampling and Bayesian analysis.
+
+* [`tidytext`](https://github.com/juliasilge/tidytext) contains tidy tools for quantitative text analysis, including basic text summarization, sentiment analysis, and text modeling.
+
+* [`yardstick`](https://tidymodels.github.io/yardstick/) contains tools for evaluating models (e.g. accuracy, RMSE, etc.)
+
+More on the way... [blog post](https://www.tidyverse.org/articles/2018/08/tidymodels-0-0-1/). 
+]
+
+
+---
+
+# Loading the Meta-Package 
+
+.code80[
+
+```r
+library(tidymodels)
+```
+
+```
+## ── Attaching packages ───────────────────────────────────────────────────── tidymodels 0.0.1 ──
+```
+
+```
+## ✔ ggplot2   3.0.0     ✔ recipes   0.1.3
+## ✔ tibble    1.4.2     ✔ broom     0.5.0
+## ✔ purrr     0.2.5     ✔ yardstick 0.0.1
+## ✔ dplyr     0.7.6     ✔ infer     0.3.1
+## ✔ rsample   0.0.2
+```
+
+```
+## ── Conflicts ──────────────────────────────────────────────────────── tidymodels_conflicts() ──
+## ✖ purrr::accumulate()      masks foreach::accumulate()
+## ✖ dplyr::collapse()        masks glue::collapse()
+## ✖ Biobase::combine()       masks BiocGenerics::combine(), dplyr::combine()
+## ✖ rsample::fill()          masks tidyr::fill()
+## ✖ dplyr::filter()          masks stats::filter()
+## ✖ dplyr::lag()             masks stats::lag()
+## ✖ BiocGenerics::Position() masks ggplot2::Position(), base::Position()
+## ✖ recipes::step()          masks stats::step()
+## ✖ purrr::when()            masks foreach::when()
+```
+]
+
+---
+
+# `broom` Example
+
+Model fit from `?lm`
+
+
+```r
+summary(lm.D9)$coefficients
+```
+
+```
+##             Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)    5.032      0.220   22.85 9.55e-15
+## groupTrt      -0.371      0.311   -1.19 2.49e-01
+```
+
+```r
+broom::tidy(lm.D9)
+```
+
+```
+## # A tibble: 2 x 5
+##   term        estimate std.error statistic  p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 (Intercept)    5.03      0.220     22.9  9.55e-15
+## 2 groupTrt      -0.371     0.311     -1.19 2.49e- 1
+```
+
+Find the differences...
+
+
+---
+
+# Evaluating Hypotheses via `infer`
+
+
+
+.pull-left[
+.code60[
+
+```r
+library(caret)
+data(BloodBrain)
+
+dat &lt;-
+  data.frame(
+    mol_weight = bbbDescr$mw, 
+    log_ratio = logBBB
+  )
+  
+set.seed(3555)
+perms &lt;-
+  dat %&gt;%
+  specify(log_ratio ~ mol_weight) %&gt;%
+  hypothesize(null = "independence") %&gt;%
+  generate(reps = 5000, type = "permute") %&gt;%
+  calculate(stat = "correlation", method = "spearman")
+
+observed &lt;- 
+  dat %&gt;%
+  specify(log_ratio ~ mol_weight) %&gt;%
+  calculate(stat = "correlation", method = "spearman")  
+
+perms %&gt;% get_pvalue(obs_stat = observed, direction = "two_sided")
+```
+
+```
+## # A tibble: 1 x 1
+##   p_value
+##     &lt;dbl&gt;
+## 1  0.0854
+```
+]
+
+
+]
+.pull-right[
+
+.code60[
+
+```r
+perms %&gt;%
+  visualize(obs_stat = observed, direction = "two_sided")
+```
+
+&lt;img src="Kuhn_tidymodels_files/figure-html/infer-res-1.svg" width="672" style="display: block; margin: auto;" /&gt;
+]
+
+]
+
+
+---
+
+# Recipes for Preprocessing Data
+
+.pull-left[
+`recipes` provides a `dplyr`-like utility for 
+
+ * Defining roles of variables in a model (e.g. outcome, predictor, etc). 
+ * One or more _steps_ are specified that do various types of operations, such as centering, imputation, feature extraction, term specification, re-encodings, etc. 
+
+
+Using a recipe is a stage-wise process:
+
+
+```
+        recipe()              {define}
+           ⬇️                    ⬇️ 
+        prep()                {estimate}
+           ⬇️                    ⬇️ 
+     bake()/juice()           {apply}
+```
+]
+.pull-right[
+
+```r
+bbb_data &lt;- bbbDescr %&gt;% mutate(log_ratio = logBBB)
+
+rec &lt;- recipe(log_ratio ~ ., data = bbb_data) %&gt;%
+  step_nzv(all_predictors()) %&gt;%
+  step_corr(all_predictors(), threshold = 0.75) %&gt;%
+  step_YeoJohnson(all_predictors()) %&gt;% 
+  step_interact(~ nbasic:rotatablebonds) %&gt;% 
+  step_center(all_predictors()) %&gt;% 
+  step_scale(all_predictors()) %&gt;% 
+  step_pca(all_predictors(), num = 3)
+
+rec &lt;- prep(rec, training = bbb_data)
+
+bake(rec, bbb_data %&gt;% slice(1:3))
+```
+
+```
+## # A tibble: 3 x 4
+##   log_ratio   PC1   PC2   PC3
+##       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1      1.08  2.67 -7.88 -1.58
+## 2     -0.4  -4.14 -2.15 -2.09
+## 3      0.22  1.08  1.86  1.91
+```
+]
+
+
+
+---
+
+# Comparing Models Using Resampling and Bayes
+
+.pull-left[
+`tidyposter` and `rsample` can be used to make comparisons between and within types of models. 
+
+A model is resampled and it's performance metrics (e.g. `\(R^2\)`, ROC AUC, etc.) can be used as the _outcome_ in a Bayesian meta-model. From this, posteriors for the differences can be computed. 
+
+Let's say that I have these two models:
+
+.code70[
+
+```r
+coxph(Surv(time, status) ~ ph.ecog + age + sex, data = lung)
+coxph(Surv(time, status) ~ ph.ecog + age,       data = lung)
+```
+]
+]
+.pull-right[
+
+I can compare them using a standard hierarchical model comparison or a simple Wald-type test. On this case, the Wald p-value is 0.00099. That doesn't tell me much about the _effect size_. 
+
+Suppose I look at the change in the standard **concordance statistic** between the two models? What is the distribution of the _change in concordance_ when I remove `sex`?  
+
+Cross-validation can be used to compute this difference on out-of-sample data and a Bayesian model can be used to compute the posterior for the difference. 
+]
+
+
+---
+
+# Results
+
+.pull-left[
+
+.code70[
+
+```
+## #  10-fold cross-validation repeated 10 times using stratification 
+## # A tibble: 100 x 5
+##    id       id2    full_model without_sex diff          
+##  * &lt;chr&gt;    &lt;chr&gt;       &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;         
+##  1 Repeat01 Fold01      0.701       0.687 worse  by 0.01
+##  2 Repeat01 Fold02      0.570       0.554 worse  by 0.02
+##  3 Repeat01 Fold03      0.731       0.702 worse  by 0.03
+##  4 Repeat01 Fold04      0.599       0.550 worse  by 0.05
+##  5 Repeat01 Fold05      0.594       0.528 worse  by 0.07
+##  6 Repeat01 Fold06      0.742       0.663 worse  by 0.08
+##  7 Repeat01 Fold07      0.525       0.514 worse  by 0.01
+##  8 Repeat01 Fold08      0.714       0.674 worse  by 0.04
+##  9 Repeat01 Fold09      0.491       0.549 better by 0.06
+## 10 Repeat01 Fold10      0.764       0.692 worse  by 0.07
+## # ... with 90 more rows
+```
+]
+
+]
+.pull-right[
+
+&lt;img src="Kuhn_tidymodels_files/figure-html/tp-plot-1.svg" width="672" style="display: block; margin: auto;" /&gt;
+
+A positive difference would imply that `sex` is important in explaining the outcome. 
+]
+
+
+---
+
+# Principles of Modeling Packages
+
+.font90[
+We are in the process of developing a set of _guidelines_ for making good modeling packages. For example:
+
+ * Separate the interface that the **modeler** uses from the code to do the computations. They serve two very different purposes. 
+
+ * Have multiple interfaces (e.g. formula, x/y, etc). 
+
+ * The _user-facing interface_ should use the most appropriate data structures for the data (as opposed to the computations). For example, factor outcomes versus 0/1 indicators and data frames versus matrices. 
+
+ * `type = "prob"` for class probabilities 😄. 
+
+ * Use S3 methods.  
+
+ * The `predict` method should give standardized, predictable results. 
+
+Rather than try to make methodologists into software developers, we will provide GitHub repositories with template packages that can be used to meet these guidelines (along with documentation and examples on _why_). 
+
+]
+
+---
+
+# Next Steps
+.font90[
+
+* Hash out the principles of modeling functions. Let me know if you'd like to contribute. 
+
+* Packages on the horizon:
+
+   * [`parsnip`](https://topepo.github.io/parsnip): a unified interface to models. This should significantly reduce the amount of syntactical minutia that you'll need to memorize by having one standardized model function across different packages and by harmonizing the parameter names across models. 
+
+   * [`embed`](https://topepo.github.io/embed): an add-on package for `recipes`. This can be used to efficiently encode high-cardinality categorical predictors using supervised methods such as likelihood encodings and entity embeddings.  
+
+   * A pipeline(ish) structure that can contain specifications for a model, recipe, feature filter, and post-processing. This will easily enable a _data analysis process_.  
+   
+   * A model tuning package with grid search, Bayesian optimization, and other search algorithms.  
+   
+   * A calibration package for post-processing regression and classification predictions as well as implementing equivocal zones.  
+
+]
+
+---
+layout: false
+class: inverse, middle, center
+
+# Thanks!
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLanguage": "R",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

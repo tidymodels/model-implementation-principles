@@ -1,7 +1,6 @@
 # Standardized Argument Names
 
-
-**Dot usage**: If there is a possability of argument name conflicts between the function and any arguments passed down through `...`, it is strongly suggested that the argument names be prefixed with a dot (e.g. `.data`, `.x`, etc.)
+**Dot usage**: If there is a possibility of argument name conflicts between the function and any arguments passed down through `...`, it is strongly suggested that the argument names be prefixed with a dot (e.g. `.data`, `.x`, etc.)
 
 
 ## Data Arguments
@@ -12,14 +11,21 @@
 
  * `weights`: case weights.
 
- * `x`: predictors or generic data objects. 
+ * For `.data.frame` methods:
+
+    * `x`: predictors or generic data objects. 
  
- * `y`: outcome data.
+    * `y`: outcome data.
  
+ * For `.formula` methods:
+ 
+    * `formula`: a `y ~ x` formula specifying the outcome and predictors.
+    
+    * `data`: the data.frame to pull formula variables from.
 
 ## Numerical Arguments
 
- * `times`: the number of bootstraps, simulations, or other replications
+ * `times`: the number of bootstraps, simulations, or other replications.
  
 ## Statistical Quantities 
 
@@ -72,7 +78,7 @@
 
 * `rbf_sigma`: the sigma parameters of a radial basis function. 
 
-* `regularization`: The amount of regularization used. In cases where different types require to be differentiated, the names `L1` and `L2` work.
+* `penalty`: The amount of regularization used. In cases where different penalty types require to be differentiated, the names `L1` and `L2` are recommended.
    
 * `sample_size`: the size of the data set used for modeling within an iteration of the modeling algorithm, such as stochastic gradient boosting.
 
@@ -82,7 +88,7 @@
    
 * `trees`: The number of trees contained in a random forest or boosted  ensemble. In the latter case, this is equal to the number of boosting iterations.  
   
-* `weight_func`: The type of kernel function that weights the distances between samples (e.g. in a K-near neighbors model).   
+* `weight_func`: The type of kernel function that weights the distances between samples (e.g. in a K-nearest neighbors model).   
  
  
 

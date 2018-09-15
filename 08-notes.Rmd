@@ -45,7 +45,6 @@ For example, for some modeling method, the function `foo` would be the top-level
 [`r emojifont::emoji('leftwards_arrow_with_hook')`](#decouple-back)
 
 
-
 ***appropriate data structures***
 
 <div id="user-appropriate"></div>
@@ -187,7 +186,7 @@ preds <- summary(fitg, newdata = ovarian[1:2, "age", drop = FALSE], t = c(100, 2
 preds
 ```
 
-A list of data frames is not very helpful. Better would be a data frame with a list column, were every element is a data frame with the predictions in the tidy format:
+A list of data frames is not very helpful. Better would be a data frame with a list column, where every element is a data frame with the predictions in the tidy format:
 
 ```{r flexsurv-tidy-calc, include = FALSE}
 preds <- lapply(preds, setNames, c(".time", ".pred", ".pred_lower", ".pred_upper"))
@@ -231,6 +230,38 @@ For example, if a random forest model is being created the parallelism could sim
 One simple approach when parallelism is conducted using R subprocesses (e.g. via `foreach` or `futures`) is to _pre-compute_ seeds and have a seed argument to the function being invoked. The function can immediately set the seed from the argument when it begins execution. 
 
 [`r emojifont::emoji('leftwards_arrow_with_hook')`](#par-seed-back)
+
+
+***predictions shouldn't depend on `new_data`***
+
+<div id="splines-trap"></div>
+
+Sometimes spline expansions or similar terms can behave oddly when packages haven't been fully loaded. For example:
+
+```{r}
+fit <- lm(mpg ~ disp + hp + splines::ns(drat, 2), mtcars)
+
+hp <- head(predict(fit, mtcars))
+ph <- predict(fit, head(mtcars))
+
+all.equal(hp, ph)
+```
+
+Loading the `splines` package fixes this:
+
+```{r}
+library(splines)
+fit <- lm(mpg ~ disp + hp + ns(drat, 2), mtcars)
+
+hp <- head(predict(fit, mtcars))
+ph <- predict(fit, head(mtcars))
+
+all.equal(hp, ph)
+```
+
+A general way to check for errors like this is to check that `predict()` and `head()` commute.
+
+[`r emojifont::emoji('leftwards_arrow_with_hook')`](#splines-tracp-back)
 
 
 

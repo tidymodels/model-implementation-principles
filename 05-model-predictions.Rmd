@@ -4,7 +4,7 @@
 
 <div id="discuss-back"></div> 
 
-* The function to produce predictions should be a class-specific `predict` method with arguments `object` `new_data`, and possibly `type`. Other arguments, such as `level`, should be standardized. [{note}](#discuss)
+* The function to produce predictions should be a class-specific `predict` method with arguments `object`, `new_data`, and possibly `type`. Other arguments, such as `level`, should be standardized. [{note}](#discuss)
 
 * The main predict method can internally defer to separate, unexported functions (`predict_class`, etc). 
 
@@ -21,6 +21,9 @@
 | `raw`        	| direct access to prediction function        	|
 | `param_pred` 	| predictions across tuning parameters        	|
 
+and should be validated using `match.arg()`.
+
+* To determine whether or not to return standard errors for predictions, use a `std_error` argument that takes on `TRUE/FALSE` value. By default, do not report standard error or other measures of uncertainty, as these can be expensive to compute. Clearly document whether any standard errors are for confidence or prediction intervals.
 
 Other values should be assigned with consensus. 
 
@@ -36,6 +39,11 @@ Other values should be assigned with consensus.
 
 * The prediction code should work whether `new_data` has multiple rows or a single row. 
 
+<div id="splines-trap-back"></div>
+
+* Predictions should not depend on which observations are present in `new_data`. [{note}](#splines-trap).
+
+* When novel factor levels appear in the test set for factor predictors, the default behavior should be to throw an informative error. For models where this is a reasonable way to make predictions on novel factor levels, users need to explicitly specify that they want this behavior, and it's good practice to `message()` for these prediction cases.
 
 ## Return Values
 
@@ -43,7 +51,7 @@ Other values should be assigned with consensus.
 
  <div id="dplyr-like-back"></div>
 
- * The return value is a tibble with the **same number of rows as the data being predicted** and in the same order. This implies that `na.action` should not affect the dimensions of the outcome object (i.e., it should be ignored).  [{note}](#binding) The class of the tibble can be overloaded to accommodate specialized methods as long as basic data frame functionality is maintained.  [{note}](#dplyr-like)
+ * The return value is a tibble with the **same number of rows as the data being predicted** and in the same order. This implies that `na.action` should not affect the dimensions of the outcome object (i.e., it should be ignored).  [{note}](#binding) The class of the tibble can be overloaded to accommodate specialized methods as long as basic data frame functionality is maintained.  [{note}](#dplyr-like). For observations with missing data such that a prediction cannot be generated, we recommend returning `NA`.
  
  * The return tibble can contain extra attributes for values relevant to the prediction (e.g. `level` for intervals) but care should be taken to make sure that these attributes are not destroyed when standard operations are applied to the tibble (e.g. `arrange`, `filter`, etc.). Columns of constant values (e.g. adding `level` as a column) should be avoided. 
  
@@ -53,9 +61,9 @@ Specific cases:
       
    * Class predictions should be factors with the same levels as the original outcome and named `.pred_class`. 
    
-   * For class probability predictions, the columns should be named the same as the factor levels, e.g., `.pred_{level}`. 
+   * For class probability predictions, the columns should be named the same as the factor levels, e.g., `.pred_{level}`, and there should be as many columns as factor levels. 
  
-   * If interval estimates are produced (e.g. prediction/confidence/credible), the column names should be `.pred_lower` and `.pred_upper`. If a standard error is produced, it should be named `.std_error`. 
+   * If interval estimates are produced (e.g. prediction/confidence/credible), the column names should be `.pred_lower` and `.pred_upper`. If a standard error is produced, the column should be named `.std_error`. 
  
  <div id="list-cols-back"></div>
  
