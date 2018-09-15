@@ -282,15 +282,15 @@ fitg &lt;-<span class="st"> </span><span class="kw">flexsurvreg</span>(<span cla
 preds</code></pre>
 <pre><code>## age=72.3315 
 ##   time       est        lcl       ucl
-## 1  100 0.7988680 0.49041027 0.9668168
-## 2  200 0.4849180 0.15115970 0.8002931
-## 3  300 0.2784226 0.02158386 0.6379634
+## 1  100 0.7988680 0.49687521 0.9599880
+## 2  200 0.4849180 0.13567502 0.7952071
+## 3  300 0.2784226 0.02610516 0.6402210
 ## 
 ## age=74.4932 
 ##   time       est         lcl       ucl
-## 1  100 0.7278338 0.372292116 0.9482310
-## 2  200 0.3856737 0.052511077 0.7560315
-## 3  300 0.1964611 0.000923868 0.5897475</code></pre>
+## 1  100 0.7278338 0.370927844 0.9351591
+## 2  200 0.3856737 0.050992138 0.7276700
+## 3  300 0.1964611 0.002097565 0.5869867</code></pre>
 <p>A list of data frames is not very helpful. Better would be a data frame with a list column, where every element is a data frame with the predictions in the tidy format:</p>
 <pre class="sourceCode r"><code class="sourceCode r">tidy_preds</code></pre>
 <pre><code>## # A tibble: 2 x 1
@@ -303,20 +303,20 @@ tidy_preds<span class="op">$</span>.pred[[<span class="dv">1</span>]]</code></pr
 <pre><code>## # A tibble: 3 x 4
 ##   .time .pred .pred_lower .pred_upper
 ##   &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-## 1   100 0.799      0.490        0.967
-## 2   200 0.485      0.151        0.800
-## 3   300 0.278      0.0216       0.638</code></pre>
+## 1   100 0.799      0.497        0.960
+## 2   200 0.485      0.136        0.795
+## 3   300 0.278      0.0261       0.640</code></pre>
 <p>If a single data frame is needed, it is easy to make the conversion:</p>
 <pre class="sourceCode r"><code class="sourceCode r">tidyr<span class="op">::</span><span class="kw">unnest</span>(tidy_preds)</code></pre>
 <pre><code>## # A tibble: 6 x 4
 ##   .time .pred .pred_lower .pred_upper
 ##   &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-## 1   100 0.799    0.490          0.967
-## 2   200 0.485    0.151          0.800
-## 3   300 0.278    0.0216         0.638
-## 4   100 0.728    0.372          0.948
-## 5   200 0.386    0.0525         0.756
-## 6   300 0.196    0.000924       0.590</code></pre>
+## 1   100 0.799     0.497         0.960
+## 2   200 0.485     0.136         0.795
+## 3   300 0.278     0.0261        0.640
+## 4   100 0.728     0.371         0.935
+## 5   200 0.386     0.0510        0.728
+## 6   300 0.196     0.00210       0.587</code></pre>
 <p><strong>percentile predictions</strong></p>
 <p>When using a quantile regression, one might make the median the default that is predicted. If multiple percentiles are requested, then <code>.pred</code> would be a tibble with a column for the predictions and another for the percentile.</p>
 <p><a href="model-predictions.html#list-cols-back">↩️</a></p>
@@ -332,6 +332,29 @@ tidy_preds<span class="op">$</span>.pred[[<span class="dv">1</span>]]</code></pr
 </div>
 <p>One simple approach when parallelism is conducted using R subprocesses (e.g. via <code>foreach</code> or <code>futures</code>) is to <em>pre-compute</em> seeds and have a seed argument to the function being invoked. The function can immediately set the seed from the argument when it begins execution.</p>
 <p><a href="parallel-processing.html#par-seed-back">↩️</a></p>
+<p><strong><em>predictions shouldn’t depend on <code>new_data</code></em></strong></p>
+<div id="splines-trap">
+
+</div>
+<p>Sometimes spline expansions or similar terms can behave oddly when packages haven’t been fully loaded. For example:</p>
+<pre class="sourceCode r"><code class="sourceCode r">fit &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>disp <span class="op">+</span><span class="st"> </span>hp <span class="op">+</span><span class="st"> </span>splines<span class="op">::</span><span class="kw">ns</span>(drat, <span class="dv">2</span>), mtcars)
+
+hp &lt;-<span class="st"> </span><span class="kw">head</span>(<span class="kw">predict</span>(fit, mtcars))
+ph &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, <span class="kw">head</span>(mtcars))
+
+<span class="kw">all.equal</span>(hp, ph)</code></pre>
+<pre><code>## [1] &quot;Mean relative difference: 0.1161239&quot;</code></pre>
+<p>Loading the <code>splines</code> package fixes this:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(splines)
+fit &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>disp <span class="op">+</span><span class="st"> </span>hp <span class="op">+</span><span class="st"> </span><span class="kw">ns</span>(drat, <span class="dv">2</span>), mtcars)
+
+hp &lt;-<span class="st"> </span><span class="kw">head</span>(<span class="kw">predict</span>(fit, mtcars))
+ph &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, <span class="kw">head</span>(mtcars))
+
+<span class="kw">all.equal</span>(hp, ph)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<p>A general way to check for errors like this is to check that <code>predict()</code> and <code>head()</code> commute.</p>
+<p><a href="#splines-tracp-back">↩️</a></p>
 
 </div>
             </section>
@@ -370,8 +393,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": null,
-"text": null
+"link": "https://github.com/tidymodels/model-implementation-principles/edit/master/08-notes.Rmd",
+"text": "Edit"
 },
 "download": null,
 "toc": {
