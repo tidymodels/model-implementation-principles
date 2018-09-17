@@ -256,7 +256,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>For univariate, numeric point estimates, the column should be named <code>.pred</code>. For multivariate numeric predictions (excluding probabilities), the columns should be named <code>.pred_{outcome name}</code>.</p></li>
 <li><p>Class predictions should be factors with the same levels as the original outcome and named <code>.pred_class</code>.</p></li>
 <li><p>For class probability predictions, the columns should be named the same as the factor levels, e.g., <code>.pred_{level}</code>, and there should be as many columns as factor levels.</p></li>
-<li><p>If interval estimates are produced (e.g. prediction/confidence/credible), the column names should be <code>.pred_lower</code> and <code>.pred_upper</code>. If a standard error is produced, the column should be named <code>.std_error</code>.</p></li>
+<li><p>If interval estimates are produced (e.g. prediction/confidence/credible), the column names should be <code>.pred_lower</code> and <code>.pred_upper</code>. If a standard error is produced, the column should be named <code>.std_error</code>. If intervals are produced for class probabilities, the levels should be included (e.g., <code>.pred_lower_{level}</code>),</p></li>
 </ul>
 <div id="list-cols-back">
 

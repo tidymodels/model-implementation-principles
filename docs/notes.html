@@ -282,15 +282,15 @@ fitg &lt;-<span class="st"> </span><span class="kw">flexsurvreg</span>(<span cla
 preds</code></pre>
 <pre><code>## age=72.3315 
 ##   time       est        lcl       ucl
-## 1  100 0.7988680 0.49687521 0.9599880
-## 2  200 0.4849180 0.13567502 0.7952071
-## 3  300 0.2784226 0.02610516 0.6402210
+## 1  100 0.7988680 0.52266436 0.9677567
+## 2  200 0.4849180 0.15797255 0.7944638
+## 3  300 0.2784226 0.02415729 0.6347977
 ## 
 ## age=74.4932 
-##   time       est         lcl       ucl
-## 1  100 0.7278338 0.370927844 0.9351591
-## 2  200 0.3856737 0.050992138 0.7276700
-## 3  300 0.1964611 0.002097565 0.5869867</code></pre>
+##   time       est          lcl       ucl
+## 1  100 0.7278338 3.251586e-01 0.9518592
+## 2  200 0.3856737 2.898502e-02 0.7630699
+## 3  300 0.1964611 6.702788e-05 0.6120092</code></pre>
 <p>A list of data frames is not very helpful. Better would be a data frame with a list column, where every element is a data frame with the predictions in the tidy format:</p>
 <pre class="sourceCode r"><code class="sourceCode r">tidy_preds</code></pre>
 <pre><code>## # A tibble: 2 x 1
@@ -303,20 +303,20 @@ tidy_preds<span class="op">$</span>.pred[[<span class="dv">1</span>]]</code></pr
 <pre><code>## # A tibble: 3 x 4
 ##   .time .pred .pred_lower .pred_upper
 ##   &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-## 1   100 0.799      0.497        0.960
-## 2   200 0.485      0.136        0.795
-## 3   300 0.278      0.0261       0.640</code></pre>
+## 1   100 0.799      0.523        0.968
+## 2   200 0.485      0.158        0.794
+## 3   300 0.278      0.0242       0.635</code></pre>
 <p>If a single data frame is needed, it is easy to make the conversion:</p>
 <pre class="sourceCode r"><code class="sourceCode r">tidyr<span class="op">::</span><span class="kw">unnest</span>(tidy_preds)</code></pre>
 <pre><code>## # A tibble: 6 x 4
 ##   .time .pred .pred_lower .pred_upper
 ##   &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-## 1   100 0.799     0.497         0.960
-## 2   200 0.485     0.136         0.795
-## 3   300 0.278     0.0261        0.640
-## 4   100 0.728     0.371         0.935
-## 5   200 0.386     0.0510        0.728
-## 6   300 0.196     0.00210       0.587</code></pre>
+## 1   100 0.799   0.523           0.968
+## 2   200 0.485   0.158           0.794
+## 3   300 0.278   0.0242          0.635
+## 4   100 0.728   0.325           0.952
+## 5   200 0.386   0.0290          0.763
+## 6   300 0.196   0.0000670       0.612</code></pre>
 <p><strong>percentile predictions</strong></p>
 <p>When using a quantile regression, one might make the median the default that is predicted. If multiple percentiles are requested, then <code>.pred</code> would be a tibble with a column for the predictions and another for the percentile.</p>
 <p><a href="model-predictions.html#list-cols-back">↩️</a></p>
