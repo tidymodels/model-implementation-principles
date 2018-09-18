@@ -7,3 +7,8 @@
 <div id="minimal-back"></div>
 
 * Retain the _minimally sufficient_ objects in the model object. [{note}](#minimal)
+
+<div id="subclasses-back"></div>
+
+
+* When providing a convenience interface that allows fitting more than one type of model, the resulting model objects should have different classes for each type of model. [{note}](#subclasses)

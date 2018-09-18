@@ -261,7 +261,13 @@ all.equal(hp, ph)
 
 A general way to check for errors like this is to check that `predict()` and `head()` commute.
 
-[`r emojifont::emoji('leftwards_arrow_with_hook')`](#splines-tracp-back)
+[`r emojifont::emoji('leftwards_arrow_with_hook')`](#splines-trap-back)
+
+***models should have meaningful classes***
+
+This makes it easier to provide methods that might be meaningfully defined for only some models accessible via the convenience interface. For example, consider generalized linear models. It makes sense to define hard class predictions for logistic regression, but not linear regression. It is easiest to define prediction methods specific to linear and logistic regression if each is represented by an R object with different classes.
+
+[`r emojifont::emoji('leftwards_arrow_with_hook')`](#subclasses-back)
 
 
 
