@@ -20,6 +20,7 @@
 | `pred_int`   	| prediction intervals                        	|
 | `raw`        	| direct access to prediction function        	|
 | `param_pred` 	| predictions across tuning parameters        	|
+| `quantile`    | quantile predictions                          |
 
 and should be validated using `match.arg()`.
 
