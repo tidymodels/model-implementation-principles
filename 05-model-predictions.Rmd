@@ -64,7 +64,7 @@ Specific cases:
    
    * For class probability predictions, the columns should be named the same as the factor levels, e.g., `.pred_{level}`, and there should be as many columns as factor levels. 
  
-   * If interval estimates are produced (e.g. prediction/confidence/credible), the column names should be `.pred_lower` and `.pred_upper`. If a standard error is produced, the column should be named `.std_error`. 
+   * If interval estimates are produced (e.g. prediction/confidence/credible), the column names should be `.pred_lower` and `.pred_upper`. If a standard error is produced, the column should be named `.std_error`. If intervals are produced for class probabilities, the levels should be included (e.g., `.pred_lower_{level}`),
  
  <div id="list-cols-back"></div>
  

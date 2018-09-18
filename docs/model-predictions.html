@@ -217,6 +217,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 </tbody>
 </table>
+<p>and should be validated using <code>match.arg()</code>.</p>
+<ul>
+<li>To determine whether or not to return standard errors for predictions, use a <code>std_error</code> argument that takes on <code>TRUE/FALSE</code> value. By default, do not report standard error or other measures of uncertainty, as these can be expensive to compute. Clearly document whether any standard errors are for confidence or prediction intervals.</li>
+</ul>
 <p>Other values should be assigned with consensus.</p>
 <div id="input-data" class="section level2">
 <h2><span class="header-section-number">6.1</span> Input Data</h2>
@@ -226,6 +230,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>The model outcome should never be required to be in <code>new_data</code>.</p></li>
 <li><p><code>new_data</code> should be tolerant of extra columns. For example, if all variables are in some data frame <code>dataset</code>, <code>predict(object, dataset)</code> should immediately know which variables are required for prediction, check for their presence, and select only those from <code>dataset</code> before proceeding.</p></li>
 <li><p>The prediction code should work whether <code>new_data</code> has multiple rows or a single row.</p></li>
+</ul>
+<div id="splines-trap-back">
+
+</div>
+<ul>
+<li><p>Predictions should not depend on which observations are present in <code>new_data</code>. <a href="notes.html#splines-trap">{note}</a>.</p></li>
+<li><p>When novel factor levels appear in the test set for factor predictors, the default behavior should be to throw an informative error. For models where this is a reasonable way to make predictions on novel factor levels, users need to explicitly specify that they want this behavior, and it’s good practice to <code>message()</code> for these prediction cases.</p></li>
 </ul>
 </div>
 <div id="return-values" class="section level2">
@@ -237,7 +248,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </div>
 <ul>
-<li><p>The return value is a tibble with the <strong>same number of rows as the data being predicted</strong> and in the same order. This implies that <code>na.action</code> should not affect the dimensions of the outcome object (i.e., it should be ignored). <a href="notes.html#binding">{note}</a> The class of the tibble can be overloaded to accommodate specialized methods as long as basic data frame functionality is maintained. <a href="notes.html#dplyr-like">{note}</a></p></li>
+<li><p>The return value is a tibble with the <strong>same number of rows as the data being predicted</strong> and in the same order. This implies that <code>na.action</code> should not affect the dimensions of the outcome object (i.e., it should be ignored). <a href="notes.html#binding">{note}</a> The class of the tibble can be overloaded to accommodate specialized methods as long as basic data frame functionality is maintained. <a href="notes.html#dplyr-like">{note}</a>. For observations with missing data such that a prediction cannot be generated, we recommend returning <code>NA</code>.</p></li>
 <li><p>The return tibble can contain extra attributes for values relevant to the prediction (e.g. <code>level</code> for intervals) but care should be taken to make sure that these attributes are not destroyed when standard operations are applied to the tibble (e.g. <code>arrange</code>, <code>filter</code>, etc.). Columns of constant values (e.g. adding <code>level</code> as a column) should be avoided.</p></li>
 </ul>
 <p>Specific cases:</p>
@@ -245,7 +256,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>For univariate, numeric point estimates, the column should be named <code>.pred</code>. For multivariate numeric predictions (excluding probabilities), the columns should be named <code>.pred_{outcome name}</code>.</p></li>
 <li><p>Class predictions should be factors with the same levels as the original outcome and named <code>.pred_class</code>.</p></li>
 <li><p>For class probability predictions, the columns should be named the same as the factor levels, e.g., <code>.pred_{level}</code>, and there should be as many columns as factor levels.</p></li>
-<li><p>If interval estimates are produced (e.g. prediction/confidence/credible), the column names should be <code>.pred_lower</code> and <code>.pred_upper</code>. If a standard error is produced, it should be named <code>.std_error</code>.</p></li>
+<li><p>If interval estimates are produced (e.g. prediction/confidence/credible), the column names should be <code>.pred_lower</code> and <code>.pred_upper</code>. If a standard error is produced, the column should be named <code>.std_error</code>. If intervals are produced for class probabilities, the levels should be included (e.g., <code>.pred_lower_{level}</code>),</p></li>
 </ul>
 <div id="list-cols-back">
 
@@ -293,8 +304,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": null,
-"text": null
+"link": "https://github.com/tidymodels/model-implementation-principles/edit/master/05-model-predictions.Rmd",
+"text": "Edit"
 },
 "download": null,
 "toc": {
