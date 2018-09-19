@@ -207,9 +207,9 @@ If a single data frame is needed, it is easy to make the conversion:
 tidyr::unnest(tidy_preds)
 ```
 
-**percentile predictions** 
+**quantile predictions** 
 
-When using a quantile regression, one might make the median the default that is predicted. If multiple percentiles are requested, then `.pred` would be a tibble with a column for the predictions and another for the percentile.  
+When using a quantile regression, one might make the median the default that is predicted. If multiple percentiles are requested, then `.pred` would be a tibble with a column for the predictions and another for the quantile (named `.quantile`).   
 
 [`r emojifont::emoji('leftwards_arrow_with_hook')`](#list-cols-back)
 
