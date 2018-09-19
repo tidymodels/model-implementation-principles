@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Conventions for R Modeling Packages</title>
+  <meta name="description" content="Conventions for R Modeling Packages">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Conventions for R Modeling Packages" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Conventions for R Modeling Packages" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="print-and-summary-methods.html">
+<link rel="next" href="standardized-argument-names.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="general-conventions.html"><a href="general-conventions.html"><i class="fa fa-check"></i><b>2</b> General Conventions</a></li>
+<li class="chapter" data-level="3" data-path="function-interfaces.html"><a href="function-interfaces.html"><i class="fa fa-check"></i><b>3</b> Function Interfaces</a><ul>
+<li class="chapter" data-level="3.1" data-path="function-interfaces.html"><a href="function-interfaces.html#user-facing-functions"><i class="fa fa-check"></i><b>3.1</b> User-Facing Functions</a></li>
+<li class="chapter" data-level="3.2" data-path="function-interfaces.html"><a href="function-interfaces.html#computational-functions"><i class="fa fa-check"></i><b>3.2</b> Computational Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="the-model-object.html"><a href="the-model-object.html"><i class="fa fa-check"></i><b>4</b> The Model Object</a></li>
+<li class="chapter" data-level="5" data-path="print-and-summary-methods.html"><a href="print-and-summary-methods.html"><i class="fa fa-check"></i><b>5</b> Print and Summary Methods</a></li>
+<li class="chapter" data-level="6" data-path="model-predictions.html"><a href="model-predictions.html"><i class="fa fa-check"></i><b>6</b> Model Predictions</a><ul>
+<li class="chapter" data-level="6.1" data-path="model-predictions.html"><a href="model-predictions.html#input-data"><i class="fa fa-check"></i><b>6.1</b> Input Data</a></li>
+<li class="chapter" data-level="6.2" data-path="model-predictions.html"><a href="model-predictions.html#return-values"><i class="fa fa-check"></i><b>6.2</b> Return Values</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html"><i class="fa fa-check"></i><b>7</b> Standardized Argument Names</a><ul>
+<li class="chapter" data-level="7.1" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#data-arguments"><i class="fa fa-check"></i><b>7.1</b> Data Arguments</a></li>
+<li class="chapter" data-level="7.2" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#numerical-arguments"><i class="fa fa-check"></i><b>7.2</b> Numerical Arguments</a></li>
+<li class="chapter" data-level="7.3" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#statistical-quantities"><i class="fa fa-check"></i><b>7.3</b> Statistical Quantities</a></li>
+<li class="chapter" data-level="7.4" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#tuning-parameters"><i class="fa fa-check"></i><b>7.4</b> Tuning Parameters</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="parallel-processing.html"><a href="parallel-processing.html"><i class="fa fa-check"></i><b>8</b> Parallel Processing</a></li>
+<li class="chapter" data-level="9" data-path="notes.html"><a href="notes.html"><i class="fa fa-check"></i><b>9</b> Notes</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Conventions for R Modeling Packages</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="model-predictions" class="section level1">
+<h1><span class="header-section-number">Chapter 6</span> Model Predictions</h1>
+<ul>
+<li>To be consistent with snake_case, <code>new_data</code> should be used instead of <code>newdata</code>.</li>
+</ul>
+<div id="discuss-back">
+
+</div>
+<ul>
+<li><p>The function to produce predictions should be a class-specific <code>predict</code> method with arguments <code>object</code>, <code>new_data</code>, and possibly <code>type</code>. Other arguments, such as <code>level</code>, should be standardized. <a href="#discuss">{note}</a></p></li>
+<li><p>The main predict method can internally defer to separate, unexported functions (<code>predict_class</code>, etc).</p></li>
+<li><p><code>type</code> should also come from a set of pre-defined values such as</p></li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>type</th>
+<th>application</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>response</code></td>
+<td>numeric predictions</td>
+</tr>
+<tr class="even">
+<td><code>class</code></td>
+<td>hard class predictions</td>
+</tr>
+<tr class="odd">
+<td><code>prob</code></td>
+<td>class probabilities, survivor probabilities</td>
+</tr>
+<tr class="even">
+<td><code>link</code></td>
+<td><code>glm</code> linear predictor</td>
+</tr>
+<tr class="odd">
+<td><code>conf_int</code></td>
+<td>confidence intervals</td>
+</tr>
+<tr class="even">
+<td><code>pred_int</code></td>
+<td>prediction intervals</td>
+</tr>
+<tr class="odd">
+<td><code>raw</code></td>
+<td>direct access to prediction function</td>
+</tr>
+<tr class="even">
+<td><code>param_pred</code></td>
+<td>predictions across tuning parameters</td>
+</tr>
+</tbody>
+</table>
+<p>and should be validated using <code>match.arg()</code>.</p>
+<ul>
+<li>To determine whether or not to return standard errors for predictions, use a <code>std_error</code> argument that takes on <code>TRUE/FALSE</code> value. By default, do not report standard error or other measures of uncertainty, as these can be expensive to compute. Clearly document whether any standard errors are for confidence or prediction intervals.</li>
+</ul>
+<p>Other values should be assigned with consensus.</p>
+<div id="input-data" class="section level2">
+<h2><span class="header-section-number">6.1</span> Input Data</h2>
+<ul>
+<li><p>If <code>new_data</code> is not supplied, an error should be thrown. It should <strong>not</strong> default to an archived version of the training set contained in the model object.</p></li>
+<li><p>The data requirements for <code>new_data</code> should be the same as those for the orginal model fit function.</p></li>
+<li><p>The model outcome should never be required to be in <code>new_data</code>.</p></li>
+<li><p><code>new_data</code> should be tolerant of extra columns. For example, if all variables are in some data frame <code>dataset</code>, <code>predict(object, dataset)</code> should immediately know which variables are required for prediction, check for their presence, and select only those from <code>dataset</code> before proceeding.</p></li>
+<li><p>The prediction code should work whether <code>new_data</code> has multiple rows or a single row.</p></li>
+</ul>
+<div id="splines-trap-back">
+
+</div>
+<ul>
+<li><p>Predictions should not depend on which observations are present in <code>new_data</code>. <a href="#splines-trap">{note}</a>.</p></li>
+<li><p>When novel factor levels appear in the test set for factor predictors, the default behavior should be to throw an informative error. For models where this is a reasonable way to make predictions on novel factor levels, users need to explicitly specify that they want this behavior, and it’s good practice to <code>message()</code> for these prediction cases.</p></li>
+</ul>
+</div>
+<div id="return-values" class="section level2">
+<h2><span class="header-section-number">6.2</span> Return Values</h2>
+<ul>
+<li>By default, <code>new_data</code> should not be returned by the prediction function.</li>
+</ul>
+<div id="dplyr-like-back">
+
+</div>
+<ul>
+<li><p>The return value is a tibble with the <strong>same number of rows as the data being predicted</strong> and in the same order. This implies that <code>na.action</code> should not affect the dimensions of the outcome object (i.e., it should be ignored). <a href="#binding">{note}</a> The class of the tibble can be overloaded to accommodate specialized methods as long as basic data frame functionality is maintained. <a href="#dplyr-like">{note}</a>. For observations with missing data such that a prediction cannot be generated, we recommend returning <code>NA</code>.</p></li>
+<li><p>The return tibble can contain extra attributes for values relevant to the prediction (e.g. <code>level</code> for intervals) but care should be taken to make sure that these attributes are not destroyed when standard operations are applied to the tibble (e.g. <code>arrange</code>, <code>filter</code>, etc.). Columns of constant values (e.g. adding <code>level</code> as a column) should be avoided.</p></li>
+</ul>
+<p>Specific cases:</p>
+<ul>
+<li><p>For univariate, numeric point estimates, the column should be named <code>.pred</code>. For multivariate numeric predictions (excluding probabilities), the columns should be named <code>.pred_{outcome name}</code>.</p></li>
+<li><p>Class predictions should be factors with the same levels as the original outcome and named <code>.pred_class</code>.</p></li>
+<li><p>For class probability predictions, the columns should be named the same as the factor levels, e.g., <code>.pred_{level}</code>, and there should be as many columns as factor levels.</p></li>
+<li><p>If interval estimates are produced (e.g. prediction/confidence/credible), the column names should be <code>.pred_lower</code> and <code>.pred_upper</code>. If a standard error is produced, the column should be named <code>.std_error</code>.</p></li>
+</ul>
+<div id="list-cols-back">
+
+</div>
+<ul>
+<li><p>For predictions that are not simple scalars, such as distributions or non-rectangular structures, the <code>.pred</code> column should be a list-column <a href="#list-cols">{note}</a></p></li>
+<li><p>In cases where the outcome is being <em>directly</em> predicted, the predictions should be on the same scale as the outcome. The same would apply to associated interval estimates. This is equivalent to <code>type = &quot;response&quot;</code> for generalized linear models and the like. Reasonable exceptions include estimation of the standard error of prediction (perhaps occurring on the link-level/scale of the linear predictors).</p></li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="print-and-summary-methods.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="standardized-argument-names.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
