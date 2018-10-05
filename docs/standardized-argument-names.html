@@ -142,6 +142,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.2" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#numerical-arguments"><i class="fa fa-check"></i><b>7.2</b> Numerical Arguments</a></li>
 <li class="chapter" data-level="7.3" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#statistical-quantities"><i class="fa fa-check"></i><b>7.3</b> Statistical Quantities</a></li>
 <li class="chapter" data-level="7.4" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#tuning-parameters"><i class="fa fa-check"></i><b>7.4</b> Tuning Parameters</a></li>
+<li class="chapter" data-level="7.5" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#others"><i class="fa fa-check"></i><b>7.5</b> Others</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="parallel-processing.html"><a href="parallel-processing.html"><i class="fa fa-check"></i><b>8</b> Parallel Processing</a></li>
 <li class="chapter" data-level="9" data-path="notes.html"><a href="notes.html"><i class="fa fa-check"></i><b>9</b> Notes</a></li>
@@ -165,6 +166,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="standardized-argument-names" class="section level1">
 <h1><span class="header-section-number">Chapter 7</span> Standardized Argument Names</h1>
 <p><strong>Dot usage</strong>: If there is a possibility of argument name conflicts between the function and any arguments passed down through <code>...</code>, it is strongly suggested that the argument names be prefixed with a dot (e.g. <code>.data</code>, <code>.x</code>, etc.)</p>
+<p>Also, try to use</p>
 <div id="data-arguments" class="section level2">
 <h2><span class="header-section-number">7.1</span> Data Arguments</h2>
 <ul>
@@ -226,6 +228,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p><code>tree_depth</code>: The maximum depth of the tree (i.e. number of splits).</p></li>
 <li><p><code>trees</code>: The number of trees contained in a random forest or boosted ensemble. In the latter case, this is equal to the number of boosting iterations.</p></li>
 <li><p><code>weight_func</code>: The type of kernel function that weights the distances between samples (e.g. in a K-nearest neighbors model).</p></li>
+</ul>
+</div>
+<div id="others" class="section level2">
+<h2><span class="header-section-number">7.5</span> Others</h2>
+<ul>
+<li><code>fn</code> and <code>fns</code> when a single or multiple functions are passed as arguments (respectively).</li>
 </ul>
 
 </div>

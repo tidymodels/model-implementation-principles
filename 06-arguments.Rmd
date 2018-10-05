@@ -2,6 +2,8 @@
 
 **Dot usage**: If there is a possibility of argument name conflicts between the function and any arguments passed down through `...`, it is strongly suggested that the argument names be prefixed with a dot (e.g. `.data`, `.x`, etc.)
 
+Also, try to use 
+
 
 ## Data Arguments
 
@@ -90,6 +92,8 @@
   
 * `weight_func`: The type of kernel function that weights the distances between samples (e.g. in a K-nearest neighbors model).   
  
- 
+## Others
+
+* `fn` and `fns` when a single or multiple functions are passed as arguments (respectively). 
 
  

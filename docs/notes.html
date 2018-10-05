@@ -142,6 +142,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.2" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#numerical-arguments"><i class="fa fa-check"></i><b>7.2</b> Numerical Arguments</a></li>
 <li class="chapter" data-level="7.3" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#statistical-quantities"><i class="fa fa-check"></i><b>7.3</b> Statistical Quantities</a></li>
 <li class="chapter" data-level="7.4" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#tuning-parameters"><i class="fa fa-check"></i><b>7.4</b> Tuning Parameters</a></li>
+<li class="chapter" data-level="7.5" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#others"><i class="fa fa-check"></i><b>7.5</b> Others</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="parallel-processing.html"><a href="parallel-processing.html"><i class="fa fa-check"></i><b>8</b> Parallel Processing</a></li>
 <li class="chapter" data-level="9" data-path="notes.html"><a href="notes.html"><i class="fa fa-check"></i><b>9</b> Notes</a></li>
@@ -282,15 +283,15 @@ fitg &lt;-<span class="st"> </span><span class="kw">flexsurvreg</span>(<span cla
 preds</code></pre>
 <pre><code>## age=72.3315 
 ##   time       est        lcl       ucl
-## 1  100 0.7988680 0.50763782 0.9616608
-## 2  200 0.4849180 0.15262674 0.7974224
-## 3  300 0.2784226 0.01085842 0.6339068
+## 1  100 0.7988680 0.50046782 0.9642677
+## 2  200 0.4849180 0.13149184 0.7875501
+## 3  300 0.2784226 0.01593605 0.6260914
 ## 
 ## age=74.4932 
 ##   time       est          lcl       ucl
-## 1  100 0.7278338 0.3542957950 0.9566236
-## 2  200 0.3856737 0.0376968025 0.7834169
-## 3  300 0.1964611 0.0003223981 0.6197816</code></pre>
+## 1  100 0.7278338 0.3660616820 0.9485038
+## 2  200 0.3856737 0.0477798761 0.7449363
+## 3  300 0.1964611 0.0006376409 0.5946420</code></pre>
 <p>A list of data frames is not very helpful. Better would be a data frame with a list column, where every element is a data frame with the predictions in the tidy format:</p>
 <pre class="sourceCode r"><code class="sourceCode r">tidy_preds</code></pre>
 <pre><code>## # A tibble: 2 x 1
@@ -303,20 +304,20 @@ tidy_preds<span class="op">$</span>.pred[[<span class="dv">1</span>]]</code></pr
 <pre><code>## # A tibble: 3 x 4
 ##   .time .pred .pred_lower .pred_upper
 ##   &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-## 1   100 0.799      0.508        0.962
-## 2   200 0.485      0.153        0.797
-## 3   300 0.278      0.0109       0.634</code></pre>
+## 1   100 0.799      0.500        0.964
+## 2   200 0.485      0.131        0.788
+## 3   300 0.278      0.0159       0.626</code></pre>
 <p>If a single data frame is needed, it is easy to make the conversion:</p>
 <pre class="sourceCode r"><code class="sourceCode r">tidyr<span class="op">::</span><span class="kw">unnest</span>(tidy_preds)</code></pre>
 <pre><code>## # A tibble: 6 x 4
 ##   .time .pred .pred_lower .pred_upper
 ##   &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-## 1   100 0.799    0.508          0.962
-## 2   200 0.485    0.153          0.797
-## 3   300 0.278    0.0109         0.634
-## 4   100 0.728    0.354          0.957
-## 5   200 0.386    0.0377         0.783
-## 6   300 0.196    0.000322       0.620</code></pre>
+## 1   100 0.799    0.500          0.964
+## 2   200 0.485    0.131          0.788
+## 3   300 0.278    0.0159         0.626
+## 4   100 0.728    0.366          0.949
+## 5   200 0.386    0.0478         0.745
+## 6   300 0.196    0.000638       0.595</code></pre>
 <p><strong>quantile predictions</strong></p>
 <p>When using a quantile regression, one might make the median the default that is predicted. If multiple percentiles are requested, then <code>.pred</code> would be a tibble with a column for the predictions and another for the quantile (named <code>.quantile</code>).</p>
 <p><a href="model-predictions.html#list-cols-back">↩️</a></p>
@@ -354,7 +355,10 @@ ph &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, <span clas
 <span class="kw">all.equal</span>(hp, ph)</code></pre>
 <pre><code>## [1] TRUE</code></pre>
 <p>A general way to check for errors like this is to check that <code>predict()</code> and <code>head()</code> commute.</p>
-<p><a href="#splines-tracp-back">↩️</a></p>
+<p><a href="model-predictions.html#splines-trap-back">↩️</a></p>
+<p><strong><em>models should have meaningful classes</em></strong></p>
+<p>This makes it easier to provide methods that might be meaningfully defined for only some models accessible via the convenience interface. For example, consider generalized linear models. It makes sense to define hard class predictions for logistic regression, but not linear regression. It is easiest to define prediction methods specific to linear and logistic regression if each is represented by an R object with different classes.</p>
+<p><a href="the-model-object.html#subclasses-back">↩️</a></p>
 
 </div>
             </section>
