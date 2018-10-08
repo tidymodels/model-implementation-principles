@@ -138,11 +138,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.2" data-path="model-predictions.html"><a href="model-predictions.html#return-values"><i class="fa fa-check"></i><b>6.2</b> Return Values</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html"><i class="fa fa-check"></i><b>7</b> Standardized Argument Names</a><ul>
-<li class="chapter" data-level="7.1" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#data-arguments"><i class="fa fa-check"></i><b>7.1</b> Data Arguments</a></li>
-<li class="chapter" data-level="7.2" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#numerical-arguments"><i class="fa fa-check"></i><b>7.2</b> Numerical Arguments</a></li>
-<li class="chapter" data-level="7.3" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#statistical-quantities"><i class="fa fa-check"></i><b>7.3</b> Statistical Quantities</a></li>
-<li class="chapter" data-level="7.4" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#tuning-parameters"><i class="fa fa-check"></i><b>7.4</b> Tuning Parameters</a></li>
-<li class="chapter" data-level="7.5" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#others"><i class="fa fa-check"></i><b>7.5</b> Others</a></li>
+<li class="chapter" data-level="7.1" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#dot-usage"><i class="fa fa-check"></i><b>7.1</b> Dot Usage</a></li>
+<li class="chapter" data-level="7.2" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#data-arguments"><i class="fa fa-check"></i><b>7.2</b> Data Arguments</a></li>
+<li class="chapter" data-level="7.3" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#numerical-arguments"><i class="fa fa-check"></i><b>7.3</b> Numerical Arguments</a></li>
+<li class="chapter" data-level="7.4" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#statistical-quantities"><i class="fa fa-check"></i><b>7.4</b> Statistical Quantities</a></li>
+<li class="chapter" data-level="7.5" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#tuning-parameters"><i class="fa fa-check"></i><b>7.5</b> Tuning Parameters</a></li>
+<li class="chapter" data-level="7.6" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#others"><i class="fa fa-check"></i><b>7.6</b> Others</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="parallel-processing.html"><a href="parallel-processing.html"><i class="fa fa-check"></i><b>8</b> Parallel Processing</a></li>
 <li class="chapter" data-level="9" data-path="notes.html"><a href="notes.html"><i class="fa fa-check"></i><b>9</b> Notes</a></li>
@@ -282,16 +283,16 @@ fitg &lt;-<span class="st"> </span><span class="kw">flexsurvreg</span>(<span cla
 <pre class="sourceCode r"><code class="sourceCode r">preds &lt;-<span class="st"> </span><span class="kw">summary</span>(fitg, <span class="dt">newdata =</span> ovarian[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="st">&quot;age&quot;</span>, <span class="dt">drop =</span> <span class="ot">FALSE</span>], <span class="dt">t =</span> <span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>))
 preds</code></pre>
 <pre><code>## age=72.3315 
-##   time       est        lcl       ucl
-## 1  100 0.7988680 0.50046782 0.9642677
-## 2  200 0.4849180 0.13149184 0.7875501
-## 3  300 0.2784226 0.01593605 0.6260914
+##   time       est         lcl       ucl
+## 1  100 0.7988680 0.479832512 0.9675873
+## 2  200 0.4849180 0.125790170 0.8082932
+## 3  300 0.2784226 0.009853161 0.6524250
 ## 
 ## age=74.4932 
-##   time       est          lcl       ucl
-## 1  100 0.7278338 0.3660616820 0.9485038
-## 2  200 0.3856737 0.0477798761 0.7449363
-## 3  300 0.1964611 0.0006376409 0.5946420</code></pre>
+##   time       est         lcl       ucl
+## 1  100 0.7278338 0.361380834 0.9586474
+## 2  200 0.3856737 0.038296700 0.7647696
+## 3  300 0.1964611 0.000871075 0.6213846</code></pre>
 <p>A list of data frames is not very helpful. Better would be a data frame with a list column, where every element is a data frame with the predictions in the tidy format:</p>
 <pre class="sourceCode r"><code class="sourceCode r">tidy_preds</code></pre>
 <pre><code>## # A tibble: 2 x 1
@@ -304,20 +305,20 @@ tidy_preds<span class="op">$</span>.pred[[<span class="dv">1</span>]]</code></pr
 <pre><code>## # A tibble: 3 x 4
 ##   .time .pred .pred_lower .pred_upper
 ##   &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-## 1   100 0.799      0.500        0.964
-## 2   200 0.485      0.131        0.788
-## 3   300 0.278      0.0159       0.626</code></pre>
+## 1   100 0.799     0.480         0.968
+## 2   200 0.485     0.126         0.808
+## 3   300 0.278     0.00985       0.652</code></pre>
 <p>If a single data frame is needed, it is easy to make the conversion:</p>
 <pre class="sourceCode r"><code class="sourceCode r">tidyr<span class="op">::</span><span class="kw">unnest</span>(tidy_preds)</code></pre>
 <pre><code>## # A tibble: 6 x 4
 ##   .time .pred .pred_lower .pred_upper
 ##   &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-## 1   100 0.799    0.500          0.964
-## 2   200 0.485    0.131          0.788
-## 3   300 0.278    0.0159         0.626
-## 4   100 0.728    0.366          0.949
-## 5   200 0.386    0.0478         0.745
-## 6   300 0.196    0.000638       0.595</code></pre>
+## 1   100 0.799    0.480          0.968
+## 2   200 0.485    0.126          0.808
+## 3   300 0.278    0.00985        0.652
+## 4   100 0.728    0.361          0.959
+## 5   200 0.386    0.0383         0.765
+## 6   300 0.196    0.000871       0.621</code></pre>
 <p><strong>quantile predictions</strong></p>
 <p>When using a quantile regression, one might make the median the default that is predicted. If multiple percentiles are requested, then <code>.pred</code> would be a tibble with a column for the predictions and another for the quantile (named <code>.quantile</code>).</p>
 <p><a href="model-predictions.html#list-cols-back">↩️</a></p>

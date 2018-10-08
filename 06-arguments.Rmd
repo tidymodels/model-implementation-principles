@@ -1,8 +1,10 @@
 # Standardized Argument Names
 
-**Dot usage**: If there is a possibility of argument name conflicts between the function and any arguments passed down through `...`, it is strongly suggested that the argument names be prefixed with a dot (e.g. `.data`, `.x`, etc.)
+## Dot Usage
 
-Also, try to use 
+ * If there is a possibility of argument name conflicts between the function and any arguments passed down through `...`, it is strongly suggested that the argument names to the main function be prefixed with a dot (e.g. `.data`, `.x`, etc.)
+
+ * When defining the order of arguments in a function, try to keep the `...` as far to the left as possible to coerce users to explicitly name all arguments to the right of `...`. 
 
 
 ## Data Arguments

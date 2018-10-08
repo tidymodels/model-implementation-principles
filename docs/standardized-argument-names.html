@@ -138,11 +138,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.2" data-path="model-predictions.html"><a href="model-predictions.html#return-values"><i class="fa fa-check"></i><b>6.2</b> Return Values</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html"><i class="fa fa-check"></i><b>7</b> Standardized Argument Names</a><ul>
-<li class="chapter" data-level="7.1" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#data-arguments"><i class="fa fa-check"></i><b>7.1</b> Data Arguments</a></li>
-<li class="chapter" data-level="7.2" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#numerical-arguments"><i class="fa fa-check"></i><b>7.2</b> Numerical Arguments</a></li>
-<li class="chapter" data-level="7.3" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#statistical-quantities"><i class="fa fa-check"></i><b>7.3</b> Statistical Quantities</a></li>
-<li class="chapter" data-level="7.4" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#tuning-parameters"><i class="fa fa-check"></i><b>7.4</b> Tuning Parameters</a></li>
-<li class="chapter" data-level="7.5" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#others"><i class="fa fa-check"></i><b>7.5</b> Others</a></li>
+<li class="chapter" data-level="7.1" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#dot-usage"><i class="fa fa-check"></i><b>7.1</b> Dot Usage</a></li>
+<li class="chapter" data-level="7.2" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#data-arguments"><i class="fa fa-check"></i><b>7.2</b> Data Arguments</a></li>
+<li class="chapter" data-level="7.3" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#numerical-arguments"><i class="fa fa-check"></i><b>7.3</b> Numerical Arguments</a></li>
+<li class="chapter" data-level="7.4" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#statistical-quantities"><i class="fa fa-check"></i><b>7.4</b> Statistical Quantities</a></li>
+<li class="chapter" data-level="7.5" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#tuning-parameters"><i class="fa fa-check"></i><b>7.5</b> Tuning Parameters</a></li>
+<li class="chapter" data-level="7.6" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#others"><i class="fa fa-check"></i><b>7.6</b> Others</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="parallel-processing.html"><a href="parallel-processing.html"><i class="fa fa-check"></i><b>8</b> Parallel Processing</a></li>
 <li class="chapter" data-level="9" data-path="notes.html"><a href="notes.html"><i class="fa fa-check"></i><b>9</b> Notes</a></li>
@@ -165,10 +166,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="standardized-argument-names" class="section level1">
 <h1><span class="header-section-number">Chapter 7</span> Standardized Argument Names</h1>
-<p><strong>Dot usage</strong>: If there is a possibility of argument name conflicts between the function and any arguments passed down through <code>...</code>, it is strongly suggested that the argument names be prefixed with a dot (e.g. <code>.data</code>, <code>.x</code>, etc.)</p>
-<p>Also, try to use</p>
+<div id="dot-usage" class="section level2">
+<h2><span class="header-section-number">7.1</span> Dot Usage</h2>
+<ul>
+<li><p>If there is a possibility of argument name conflicts between the function and any arguments passed down through <code>...</code>, it is strongly suggested that the argument names to the main function be prefixed with a dot (e.g. <code>.data</code>, <code>.x</code>, etc.)</p></li>
+<li><p>When defining the order of arguments in a function, try to keep the <code>...</code> as far to the left as possible to coerce users to explicitly name all arguments to the right of <code>...</code>.</p></li>
+</ul>
+</div>
 <div id="data-arguments" class="section level2">
-<h2><span class="header-section-number">7.1</span> Data Arguments</h2>
+<h2><span class="header-section-number">7.2</span> Data Arguments</h2>
 <ul>
 <li><p><code>na_rm</code>: missing data handling.</p></li>
 <li><p><code>new_data</code>: data to be predicted.</p></li>
@@ -186,13 +192,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 </div>
 <div id="numerical-arguments" class="section level2">
-<h2><span class="header-section-number">7.2</span> Numerical Arguments</h2>
+<h2><span class="header-section-number">7.3</span> Numerical Arguments</h2>
 <ul>
 <li><code>times</code>: the number of bootstraps, simulations, or other replications.</li>
 </ul>
 </div>
 <div id="statistical-quantities" class="section level2">
-<h2><span class="header-section-number">7.3</span> Statistical Quantities</h2>
+<h2><span class="header-section-number">7.4</span> Statistical Quantities</h2>
 <ul>
 <li><p><code>direction</code>: the type of hypothesis test alternative.</p></li>
 <li><p><code>level</code>: interval levels (e.g., confidence, credible, prediction, and so on).</p></li>
@@ -200,7 +206,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 </div>
 <div id="tuning-parameters" class="section level2">
-<h2><span class="header-section-number">7.4</span> Tuning Parameters</h2>
+<h2><span class="header-section-number">7.5</span> Tuning Parameters</h2>
 <ul>
 <li><p><code>activation</code>: the type of activation function between network layers.</p></li>
 <li><p><code>cost</code>: a cost value for SVM models.</p></li>
@@ -231,7 +237,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 </div>
 <div id="others" class="section level2">
-<h2><span class="header-section-number">7.5</span> Others</h2>
+<h2><span class="header-section-number">7.6</span> Others</h2>
 <ul>
 <li><code>fn</code> and <code>fns</code> when a single or multiple functions are passed as arguments (respectively).</li>
 </ul>
