@@ -1,5 +1,9 @@
 # The Model Object
 
+* If you create a custom model object, it should have a constructor, helper and validator [as outlined in Advanced R](https://adv-r.hadley.nz/s3.html#outline-9).
+
+* *Never* set the class of your model object using `class()`. Either use the constructor or the validator. Classes that do not have constructors and validators are not sufficiently robust to build off of.
+
 * Saving the call is discouraged. If it must be saved, it should be checked for size. In cases where the function is invoked by `do.call("foo", bar)`, the data set may be embedded in the argument list `bar`. 
 
 * Unless explicitly required by the model, the training set should not be embedded in the model object (exceptions being models such as _k_-nearest neighbors). 
