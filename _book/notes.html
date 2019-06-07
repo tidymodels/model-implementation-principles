@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Conventions for R Modeling Packages</title>
-  <meta name="description" content="Conventions for R Modeling Packages">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 9 Notes | Conventions for R Modeling Packages</title>
+  <meta name="description" content="Chapter 9 Notes | Conventions for R Modeling Packages" />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Conventions for R Modeling Packages" />
+  <meta property="og:title" content="Chapter 9 Notes | Conventions for R Modeling Packages" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Conventions for R Modeling Packages" />
+  <meta name="twitter:title" content="Chapter 9 Notes | Conventions for R Modeling Packages" />
   
   
   
@@ -25,15 +24,16 @@
 
 
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="parallel-processing.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -48,41 +48,67 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 </head>
@@ -110,10 +136,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6.2" data-path="model-predictions.html"><a href="model-predictions.html#return-values"><i class="fa fa-check"></i><b>6.2</b> Return Values</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html"><i class="fa fa-check"></i><b>7</b> Standardized Argument Names</a><ul>
-<li class="chapter" data-level="7.1" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#data-arguments"><i class="fa fa-check"></i><b>7.1</b> Data Arguments</a></li>
-<li class="chapter" data-level="7.2" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#numerical-arguments"><i class="fa fa-check"></i><b>7.2</b> Numerical Arguments</a></li>
-<li class="chapter" data-level="7.3" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#statistical-quantities"><i class="fa fa-check"></i><b>7.3</b> Statistical Quantities</a></li>
-<li class="chapter" data-level="7.4" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#tuning-parameters"><i class="fa fa-check"></i><b>7.4</b> Tuning Parameters</a></li>
+<li class="chapter" data-level="7.1" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#dot-usage"><i class="fa fa-check"></i><b>7.1</b> Dot Usage</a></li>
+<li class="chapter" data-level="7.2" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#data-arguments"><i class="fa fa-check"></i><b>7.2</b> Data Arguments</a></li>
+<li class="chapter" data-level="7.3" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#numerical-arguments"><i class="fa fa-check"></i><b>7.3</b> Numerical Arguments</a></li>
+<li class="chapter" data-level="7.4" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#statistical-quantities"><i class="fa fa-check"></i><b>7.4</b> Statistical Quantities</a></li>
+<li class="chapter" data-level="7.5" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#tuning-parameters"><i class="fa fa-check"></i><b>7.5</b> Tuning Parameters</a></li>
+<li class="chapter" data-level="7.6" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#others"><i class="fa fa-check"></i><b>7.6</b> Others</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="parallel-processing.html"><a href="parallel-processing.html"><i class="fa fa-check"></i><b>8</b> Parallel Processing</a></li>
 <li class="chapter" data-level="9" data-path="notes.html"><a href="notes.html"><i class="fa fa-check"></i><b>9</b> Notes</a></li>
@@ -146,9 +174,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><p>Unless coded otherwise, <code>cat()</code> uses the usual formatting whereas the default formatting for <code>message()</code> is different.</p></li>
 </ul>
 <p>For this code:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(emojifont)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(emojifont)
 <span class="kw">message</span>(<span class="st">&quot;Help! I&#39;m trapped in the well!!&quot;</span>)
-<span class="kw">cat</span>(<span class="st">&quot;No, you&#39;re not&quot;</span>, <span class="kw">emoji</span>(<span class="st">&#39;roll_eyes&#39;</span>), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</code></pre></div>
+<span class="kw">cat</span>(<span class="st">&quot;No, you&#39;re not&quot;</span>, <span class="kw">emoji</span>(<span class="st">&#39;roll_eyes&#39;</span>), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</code></pre>
 <p>the Rstudio IDE output is:</p>
 <p><img src="ide_formatting.png" width="50%" style="display: block; margin: auto;" /></p>
 <p>and basic terminal output is:</p>
@@ -160,7 +188,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 </div>
 <p>For example, for some modeling method, the function <code>foo</code> would be the top-level api that users experience and some other function (say <code>compute_foo_fit</code>) is used to do the computations. This allows for different interfaces to be used to specify the model that pass common data structures to <code>compute_foo_fit</code>.</p>
-<p><a href="#decouple-back">↩️</a></p>
+<p><a href="function-interfaces.html#decouple-back">↩️</a></p>
 <p><strong><em>appropriate data structures</em></strong></p>
 <div id="user-appropriate">
 
@@ -172,7 +200,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>For strictly univariate response models, vector input is acceptable for the outcome argument.</li>
 <li>Censored data should follow the <code>survival::Surv</code> convention.</li>
 </ul>
-<p><a href="#user-appropriate-back">↩️</a></p>
+<p><a href="function-interfaces.html#user-appropriate-back">↩️</a></p>
 <p><strong><em>top-level design examples</em></strong></p>
 <div id="top-level">
 
@@ -182,31 +210,31 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><p>Suppose a model can only fit numeric or two-class outcomes and uses maximum likelihood. Instead of providing the user with a <code>distribution</code> option that is either “Gaussian” or “Binomial”, determine this from the type of the data object (numeric or factor) and set internally. This prevents the user from making a mistake that could haven been avoided.</p></li>
 <li><p>If a model parameter is bounded by some aspect of the data, such as the number of rows or columns, coerce bad values to this range (e.g. <code>mtry = min(mtry, ncol(x))</code>) with an accompanying warning when this is critical information.</p></li>
 </ul>
-<p><a href="#top-level-back">↩️</a></p>
+<p><a href="function-interfaces.html#top-level-back">↩️</a></p>
 <p><strong><em>avoid common parameter names</em></strong></p>
 <div id="common-param">
 
 </div>
 <p>For example, <code>control</code> is the type of argument used in many functions so have a function specific argument (e.g. <code>foo_control</code>) is advisable in these situations.</p>
-<p><a href="#common-param-back">↩️</a></p>
+<p><a href="function-interfaces.html#common-param-back">↩️</a></p>
 <p><strong><em>Checking of <code>...</code></em></strong></p>
 <div id="dot-check">
 
 </div>
 <p>The <a href="https://github.com/hadley/ellipsis"><code>conflicted</code></a> package can be used to solve this issue.</p>
-<p><a href="#dot-check-back">↩️</a></p>
+<p><a href="function-interfaces.html#dot-check-back">↩️</a></p>
 <p><strong><em>standardize names</em></strong></p>
 <div id="standardized">
 
 </div>
 <p>For example, many functions use some variation of <code>level</code> for confidence levels (as opposed to <code>alpha</code>). The names in Chapter <a href="standardized-argument-names.html#standardized-argument-names">7</a> are preferable for the specific context.</p>
-<p><a href="#standardized-back">↩️</a></p>
+<p><a href="function-interfaces.html#standardized-back">↩️</a></p>
 <p><strong><em>discussing new names</em></strong></p>
 <div id="discuss">
 
 </div>
 <p>A good venue for this discussion is <a href="https://community.rstudio.com/">RStudio Community</a></p>
-<p><a href="#discuss-back">↩️</a></p>
+<p><a href="model-predictions.html#discuss-back">↩️</a></p>
 <p><strong><em>avoid computing on <code>call</code> objects</em></strong></p>
 <div id="calls">
 
@@ -214,7 +242,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Historically, the call object that results from a model fit was considered a good method to capture details of the existing model fit. This object could be parsed and manipulated for the purpose of continuing or revising the model <em>between function calls</em>.</p>
 <p>This can be problematic because the call object is relative to the environment and the call itself is agnostic to its original environment. If the call is changed and re-evaluated, the current environment may be inappropriate. This could result in errors due to the required objects not being exposed in the current environment.</p>
 <p>Note that the internals of common modeling functions, such as <code>lm</code>, do exactly this. However, these manipulations occur <em>within</em> the function call to that the environment is the same.</p>
-<p><a href="#calls-back">↩️</a></p>
+<p><a href="function-interfaces.html#calls-back">↩️</a></p>
 <p><strong><em>minimal object retention</em></strong></p>
 <div id="minimal">
 
@@ -226,15 +254,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 </div>
 <p>This should enable the ability to bind the results with the original data:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cbind</span>(data, <span class="kw">predict</span>(model, data)) <span class="co"># or</span>
-<span class="kw">predict</span>(model, data) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">bind_cols</span>(data)</code></pre></div>
-<p><a href="#dplyr-like-back">↩️</a></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cbind</span>(data, <span class="kw">predict</span>(model, data)) <span class="co"># or</span>
+<span class="kw">predict</span>(model, data) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">bind_cols</span>(data)</code></pre>
+<p><a href="model-predictions.html#dplyr-like-back">↩️</a></p>
 <p><strong><em>extra tibble classes</em></strong></p>
 <div id="dplyr-like">
 
 </div>
 <p>Adding a new class to a tibble object might cause subsequent errors to <code>dplyr</code> operations. <a href="https://github.com/tidyverse/googledrive/blob/master/R/dplyr-compat.R">This code</a> is a good example for how to maintain <code>dplyr</code> compatibility.</p>
-<p><a href="#dplyr-like-back">↩️</a></p>
+<p><a href="model-predictions.html#dplyr-like-back">↩️</a></p>
 <p><strong><em>list column output</em></strong></p>
 <div id="list-cols">
 
@@ -246,52 +274,52 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>When a <code>predict</code> method produces values over multiple tuning parameter values (e.g. <code>glmnet</code>), the list column elements have rows for every tuning parameter value combination that is being changed (e.g. <code>lambda</code> in <code>glmnet</code>).</p>
 <p><strong>survivor probability predictions</strong></p>
 <p>In time to event models, where survivor probabilities are produced for values of <code>time</code>, the return tibble has a column for <code>.time</code>. Other column names should conform to the standards here (e.g. <code>.pred_lower</code> if intervals are also returned). As an example from <code>?flexsurv::flexsurvreg</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(flexsurv)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(flexsurv)
 <span class="kw">data</span>(ovarian)
-fitg &lt;-<span class="st"> </span><span class="kw">flexsurvreg</span>(<span class="dt">formula =</span> <span class="kw">Surv</span>(futime, fustat) <span class="op">~</span><span class="st"> </span>age, <span class="dt">data =</span> ovarian, <span class="dt">dist =</span> <span class="st">&quot;gengamma&quot;</span>)</code></pre></div>
+fitg &lt;-<span class="st"> </span><span class="kw">flexsurvreg</span>(<span class="dt">formula =</span> <span class="kw">Surv</span>(futime, fustat) <span class="op">~</span><span class="st"> </span>age, <span class="dt">data =</span> ovarian, <span class="dt">dist =</span> <span class="st">&quot;gengamma&quot;</span>)</code></pre>
 <p>For each new sample, this model can make probabilistic predictions at a number of user-specified time points.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">preds &lt;-<span class="st"> </span><span class="kw">summary</span>(fitg, <span class="dt">newdata =</span> ovarian[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="st">&quot;age&quot;</span>, <span class="dt">drop =</span> <span class="ot">FALSE</span>], <span class="dt">t =</span> <span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>))
-preds</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">preds &lt;-<span class="st"> </span><span class="kw">summary</span>(fitg, <span class="dt">newdata =</span> ovarian[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="st">&quot;age&quot;</span>, <span class="dt">drop =</span> <span class="ot">FALSE</span>], <span class="dt">t =</span> <span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>))
+preds</code></pre>
 <pre><code>## age=72.3315 
 ##   time       est        lcl       ucl
-## 1  100 0.7988680 0.48929313 0.9610596
-## 2  200 0.4849180 0.15489297 0.8014199
-## 3  300 0.2784226 0.01190062 0.6477734
+## 1  100 0.7988680 0.52719607 0.9715739
+## 2  200 0.4849180 0.15974350 0.7938252
+## 3  300 0.2784226 0.02322953 0.6507278
 ## 
 ## age=74.4932 
 ##   time       est          lcl       ucl
-## 1  100 0.7278338 0.3565361519 0.9544021
-## 2  200 0.3856737 0.0378911976 0.7715884
-## 3  300 0.1964611 0.0001597431 0.6186316</code></pre>
+## 1  100 0.7278338 0.3909293007 0.9317722
+## 2  200 0.3856737 0.0557391586 0.7418013
+## 3  300 0.1964611 0.0003566251 0.5959404</code></pre>
 <p>A list of data frames is not very helpful. Better would be a data frame with a list column, where every element is a data frame with the predictions in the tidy format:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tidy_preds</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">tidy_preds</code></pre>
 <pre><code>## # A tibble: 2 x 1
 ##   .pred           
 ##   &lt;list&gt;          
-## 1 &lt;tibble [3 x 4]&gt;
-## 2 &lt;tibble [3 x 4]&gt;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># predictions on the first subject at 3 time points</span>
-tidy_preds<span class="op">$</span>.pred[[<span class="dv">1</span>]]</code></pre></div>
+## 1 &lt;tibble [3 × 4]&gt;
+## 2 &lt;tibble [3 × 4]&gt;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># predictions on the first subject at 3 time points</span>
+tidy_preds<span class="op">$</span>.pred[[<span class="dv">1</span>]]</code></pre>
 <pre><code>## # A tibble: 3 x 4
 ##   .time .pred .pred_lower .pred_upper
 ##   &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-## 1   100 0.799      0.489        0.961
-## 2   200 0.485      0.155        0.801
-## 3   300 0.278      0.0119       0.648</code></pre>
+## 1   100 0.799      0.527        0.972
+## 2   200 0.485      0.160        0.794
+## 3   300 0.278      0.0232       0.651</code></pre>
 <p>If a single data frame is needed, it is easy to make the conversion:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tidyr<span class="op">::</span><span class="kw">unnest</span>(tidy_preds)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">tidyr<span class="op">::</span><span class="kw">unnest</span>(tidy_preds)</code></pre>
 <pre><code>## # A tibble: 6 x 4
 ##   .time .pred .pred_lower .pred_upper
 ##   &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-## 1   100 0.799    0.489          0.961
-## 2   200 0.485    0.155          0.801
-## 3   300 0.278    0.0119         0.648
-## 4   100 0.728    0.357          0.954
-## 5   200 0.386    0.0379         0.772
-## 6   300 0.196    0.000160       0.619</code></pre>
-<p><strong>percentile predictions</strong></p>
-<p>When using a quantile regression, one might make the median the default that is predicted. If multiple percentiles are requested, then <code>.pred</code> would be a tibble with a column for the predictions and another for the percentile.</p>
-<p><a href="#list-cols-back">↩️</a></p>
+## 1   100 0.799    0.527          0.972
+## 2   200 0.485    0.160          0.794
+## 3   300 0.278    0.0232         0.651
+## 4   100 0.728    0.391          0.932
+## 5   200 0.386    0.0557         0.742
+## 6   300 0.196    0.000357       0.596</code></pre>
+<p><strong>quantile predictions</strong></p>
+<p>When using a quantile regression, one might make the median the default that is predicted. If multiple percentiles are requested, then <code>.pred</code> would be a tibble with a column for the predictions and another for the quantile (named <code>.quantile</code>).</p>
+<p><a href="model-predictions.html#list-cols-back">↩️</a></p>
 <p><strong><em>where to parallelize?</em></strong></p>
 <div id="par-long">
 
@@ -309,24 +337,27 @@ tidy_preds<span class="op">$</span>.pred[[<span class="dv">1</span>]]</code></pr
 
 </div>
 <p>Sometimes spline expansions or similar terms can behave oddly when packages haven’t been fully loaded. For example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>disp <span class="op">+</span><span class="st"> </span>hp <span class="op">+</span><span class="st"> </span>splines<span class="op">::</span><span class="kw">ns</span>(drat, <span class="dv">2</span>), mtcars)
+<pre class="sourceCode r"><code class="sourceCode r">fit &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>disp <span class="op">+</span><span class="st"> </span>hp <span class="op">+</span><span class="st"> </span>splines<span class="op">::</span><span class="kw">ns</span>(drat, <span class="dv">2</span>), mtcars)
 
 hp &lt;-<span class="st"> </span><span class="kw">head</span>(<span class="kw">predict</span>(fit, mtcars))
 ph &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, <span class="kw">head</span>(mtcars))
 
-<span class="kw">all.equal</span>(hp, ph)</code></pre></div>
-<pre><code>## [1] &quot;Mean relative difference: 0.1161239&quot;</code></pre>
+<span class="kw">all.equal</span>(hp, ph)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
 <p>Loading the <code>splines</code> package fixes this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(splines)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(splines)
 fit &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>disp <span class="op">+</span><span class="st"> </span>hp <span class="op">+</span><span class="st"> </span><span class="kw">ns</span>(drat, <span class="dv">2</span>), mtcars)
 
 hp &lt;-<span class="st"> </span><span class="kw">head</span>(<span class="kw">predict</span>(fit, mtcars))
 ph &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, <span class="kw">head</span>(mtcars))
 
-<span class="kw">all.equal</span>(hp, ph)</code></pre></div>
+<span class="kw">all.equal</span>(hp, ph)</code></pre>
 <pre><code>## [1] TRUE</code></pre>
 <p>A general way to check for errors like this is to check that <code>predict()</code> and <code>head()</code> commute.</p>
-<p><a href="#splines-tracp-back">↩️</a></p>
+<p><a href="model-predictions.html#splines-trap-back">↩️</a></p>
+<p><strong><em>models should have meaningful classes</em></strong></p>
+<p>This makes it easier to provide methods that might be meaningfully defined for only some models accessible via the convenience interface. For example, consider generalized linear models. It makes sense to define hard class predictions for logistic regression, but not linear regression. It is easiest to define prediction methods specific to linear and logistic regression if each is represented by an R object with different classes.</p>
+<p><a href="the-model-object.html#subclasses-back">↩️</a></p>
 
 </div>
             </section>
@@ -355,7 +386,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -365,6 +396,10 @@ gitbook.start({
 "size": 2
 },
 "edit": {
+"link": "https://github.com/tidymodels/model-implementation-principles/edit/master/08-notes.Rmd",
+"text": "Edit"
+},
+"history": {
 "link": null,
 "text": null
 },
