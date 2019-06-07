@@ -2,6 +2,12 @@
 
 <div id="messages"></div>
 
+```{r, include=FALSE}
+# 
+set.seed(12345)
+```
+
+
 ***writing output***
 
 To write messages, `cat()` or `message()` can be used. Their differences:
