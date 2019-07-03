@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Conventions for R Modeling Packages</title>
-  <meta name="description" content="Conventions for R Modeling Packages">
-  <meta name="generator" content="bookdown 0.7.11 and GitBook 2.6.7">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 9 Notes | Conventions for R Modeling Packages</title>
+  <meta name="description" content="Chapter 9 Notes | Conventions for R Modeling Packages" />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Conventions for R Modeling Packages" />
+  <meta property="og:title" content="Chapter 9 Notes | Conventions for R Modeling Packages" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Conventions for R Modeling Packages" />
+  <meta name="twitter:title" content="Chapter 9 Notes | Conventions for R Modeling Packages" />
   
   
   
@@ -25,15 +24,16 @@
 
 
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="parallel-processing.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -50,7 +50,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -63,13 +63,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
   { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -283,21 +281,21 @@ fitg &lt;-<span class="st"> </span><span class="kw">flexsurvreg</span>(<span cla
 <pre class="sourceCode r"><code class="sourceCode r">preds &lt;-<span class="st"> </span><span class="kw">summary</span>(fitg, <span class="dt">newdata =</span> ovarian[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="st">&quot;age&quot;</span>, <span class="dt">drop =</span> <span class="ot">FALSE</span>], <span class="dt">t =</span> <span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>))
 preds</code></pre>
 <pre><code>## age=72.3315 
-##   time       est         lcl       ucl
-## 1  100 0.7988680 0.479832512 0.9675873
-## 2  200 0.4849180 0.125790170 0.8082932
-## 3  300 0.2784226 0.009853161 0.6524250
+##   time       est        lcl       ucl
+## 1  100 0.7988680 0.51091386 0.9648924
+## 2  200 0.4849180 0.15909221 0.7913010
+## 3  300 0.2784226 0.02375807 0.6402882
 ## 
 ## age=74.4932 
-##   time       est         lcl       ucl
-## 1  100 0.7278338 0.361380834 0.9586474
-## 2  200 0.3856737 0.038296700 0.7647696
-## 3  300 0.1964611 0.000871075 0.6213846</code></pre>
+##   time       est          lcl       ucl
+## 1  100 0.7278338 0.3557049000 0.9594533
+## 2  200 0.3856737 0.0408961893 0.7646142
+## 3  300 0.1964611 0.0003635201 0.6010698</code></pre>
 <p>A list of data frames is not very helpful. Better would be a data frame with a list column, where every element is a data frame with the predictions in the tidy format:</p>
 <pre class="sourceCode r"><code class="sourceCode r">tidy_preds</code></pre>
 <pre><code>## # A tibble: 2 x 1
 ##   .pred           
-##   &lt;list&gt;          
+##   &lt;named list&gt;    
 ## 1 &lt;tibble [3 × 4]&gt;
 ## 2 &lt;tibble [3 × 4]&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># predictions on the first subject at 3 time points</span>
@@ -305,20 +303,22 @@ tidy_preds<span class="op">$</span>.pred[[<span class="dv">1</span>]]</code></pr
 <pre><code>## # A tibble: 3 x 4
 ##   .time .pred .pred_lower .pred_upper
 ##   &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-## 1   100 0.799     0.480         0.968
-## 2   200 0.485     0.126         0.808
-## 3   300 0.278     0.00985       0.652</code></pre>
+## 1   100 0.799      0.511        0.965
+## 2   200 0.485      0.159        0.791
+## 3   300 0.278      0.0238       0.640</code></pre>
 <p>If a single data frame is needed, it is easy to make the conversion:</p>
 <pre class="sourceCode r"><code class="sourceCode r">tidyr<span class="op">::</span><span class="kw">unnest</span>(tidy_preds)</code></pre>
+<pre><code>## Warning: `cols` is now required.
+## Please use `cols = c(.pred)`</code></pre>
 <pre><code>## # A tibble: 6 x 4
 ##   .time .pred .pred_lower .pred_upper
 ##   &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-## 1   100 0.799    0.480          0.968
-## 2   200 0.485    0.126          0.808
-## 3   300 0.278    0.00985        0.652
-## 4   100 0.728    0.361          0.959
-## 5   200 0.386    0.0383         0.765
-## 6   300 0.196    0.000871       0.621</code></pre>
+## 1   100 0.799    0.511          0.965
+## 2   200 0.485    0.159          0.791
+## 3   300 0.278    0.0238         0.640
+## 4   100 0.728    0.356          0.959
+## 5   200 0.386    0.0409         0.765
+## 6   300 0.196    0.000364       0.601</code></pre>
 <p><strong>quantile predictions</strong></p>
 <p>When using a quantile regression, one might make the median the default that is predicted. If multiple percentiles are requested, then <code>.pred</code> would be a tibble with a column for the predictions and another for the quantile (named <code>.quantile</code>).</p>
 <p><a href="model-predictions.html#list-cols-back">↩️</a></p>
@@ -345,7 +345,7 @@ hp &lt;-<span class="st"> </span><span class="kw">head</span>(<span class="kw">p
 ph &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, <span class="kw">head</span>(mtcars))
 
 <span class="kw">all.equal</span>(hp, ph)</code></pre>
-<pre><code>## [1] &quot;Mean relative difference: 0.1161239&quot;</code></pre>
+<pre><code>## [1] TRUE</code></pre>
 <p>Loading the <code>splines</code> package fixes this:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(splines)
 fit &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>disp <span class="op">+</span><span class="st"> </span>hp <span class="op">+</span><span class="st"> </span><span class="kw">ns</span>(drat, <span class="dv">2</span>), mtcars)
@@ -388,7 +388,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -400,6 +400,10 @@ gitbook.start({
 "edit": {
 "link": "https://github.com/tidymodels/model-implementation-principles/edit/master/08-notes.Rmd",
 "text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
 },
 "download": null,
 "toc": {
