@@ -6,7 +6,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 9 Notes | Conventions for R Modeling Packages</title>
   <meta name="description" content="Chapter 9 Notes | Conventions for R Modeling Packages" />
+
   <meta name="generator" content="bookdown 0.11.1 and GitBook 2.6.7" />
+
 
   <meta property="og:title" content="Chapter 9 Notes | Conventions for R Modeling Packages" />
   <meta property="og:type" content="book" />
@@ -308,6 +310,8 @@ tidy_preds<span class="op">$</span>.pred[[<span class="dv">1</span>]]</code></pr
 ## 3   300 0.278      0.0238       0.640</code></pre>
 <p>If a single data frame is needed, it is easy to make the conversion:</p>
 <pre class="sourceCode r"><code class="sourceCode r">tidyr<span class="op">::</span><span class="kw">unnest</span>(tidy_preds)</code></pre>
+<pre><code>## Warning: `cols` is now required.
+## Please use `cols = c(.pred)`</code></pre>
 <pre><code>## # A tibble: 6 x 4
 ##   .time .pred .pred_lower .pred_upper
 ##   &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
