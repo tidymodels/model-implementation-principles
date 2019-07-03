@@ -6,7 +6,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Conventions for R Modeling Packages</title>
   <meta name="description" content="Conventions for R Modeling Packages" />
-  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+
+  <meta name="generator" content="bookdown 0.11.1 and GitBook 2.6.7" />
+
 
   <meta property="og:title" content="Conventions for R Modeling Packages" />
   <meta property="og:type" content="book" />
@@ -174,7 +176,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>basic infrastructure for creating design matrices (<code>model.matrix</code>), computing statistical probabilities (<code>logLik</code>), and commom analyses (<code>anova</code>, <code>p.adjust</code>, etc.)</p></li>
 <li><p>existing OOP classes like <code>predict</code>, <code>update</code>, etc.</p></li>
 </ul>
-<p>Despite a <a href="https://developer.r-project.org/model-fitting-functions.html">note</a> written by an R core member in 2003, these conventions have never been formally required for packages and this has led to a a significant amount of between- and within-package heterogeneity. For example, the table below shows myriad methods for obtaining class probability estimates for a set of modeling functions:</p>
+<p>Despite a <a href="https://developer.r-project.org/model-fitting-functions.html">note</a> written by an R core member in 2003, these conventions have never been formally required for packages and this has led to a significant amount of between- and within-package heterogeneity. For example, the table below shows myriad methods for obtaining class probability estimates for a set of modeling functions:</p>
 <table>
 <thead>
 <tr class="header">

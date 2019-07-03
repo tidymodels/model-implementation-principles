@@ -6,7 +6,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 9 Notes | Conventions for R Modeling Packages</title>
   <meta name="description" content="Chapter 9 Notes | Conventions for R Modeling Packages" />
-  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+
+  <meta name="generator" content="bookdown 0.11.1 and GitBook 2.6.7" />
+
 
   <meta property="og:title" content="Chapter 9 Notes | Conventions for R Modeling Packages" />
   <meta property="og:type" content="book" />
@@ -241,7 +243,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Historically, the call object that results from a model fit was considered a good method to capture details of the existing model fit. This object could be parsed and manipulated for the purpose of continuing or revising the model <em>between function calls</em>.</p>
 <p>This can be problematic because the call object is relative to the environment and the call itself is agnostic to its original environment. If the call is changed and re-evaluated, the current environment may be inappropriate. This could result in errors due to the required objects not being exposed in the current environment.</p>
-<p>Note that the internals of common modeling functions, such as <code>lm</code>, do exactly this. However, these manipulations occur <em>within</em> the function call to that the environment is the same.</p>
+<p>Note that the internals of common modeling functions, such as <code>lm</code>, do exactly this. However, these manipulations occur <em>within</em> the function call so that the environment is the same.</p>
 <p><a href="function-interfaces.html#calls-back">↩️</a></p>
 <p><strong><em>minimal object retention</em></strong></p>
 <div id="minimal">
