@@ -14,7 +14,7 @@
 
  * Computations should be easily reproducible, even when run in parallel. Parallelism should not be an excuse for irreproducibility.  [{note}](#par-seed)
  
- * Computational code in other languages (e.g. Cpp, etc.) should pull from R's random number streams so that settin the seed prior to invoking these routines ensures reproducibility. 
+ * Computational code in other languages (e.g. Cpp, etc.) should pull from R's random number streams so that setting the seed prior to invoking these routines ensures reproducibility.
 
 
 

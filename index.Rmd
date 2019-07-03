@@ -22,7 +22,7 @@ The S language has had unofficial conventions for modeling function, such as:
 
  * existing OOP classes like `predict`, `update`, etc. 
 
-Despite a [note](https://developer.r-project.org/model-fitting-functions.html) written by an R core member in 2003, these conventions have never been formally required for packages and this has led to a a significant amount of between- and within-package heterogeneity. For example, the table below shows myriad methods for obtaining class probability estimates for a set of modeling functions:
+Despite a [note](https://developer.r-project.org/model-fitting-functions.html) written by an R core member in 2003, these conventions have never been formally required for packages and this has led to a significant amount of between- and within-package heterogeneity. For example, the table below shows myriad methods for obtaining class probability estimates for a set of modeling functions:
 
 |Function      |Package      |Code                                       |
 |:-------------|:------------|:------------------------------------------|

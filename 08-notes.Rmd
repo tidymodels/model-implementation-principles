@@ -123,7 +123,7 @@ Historically, the call object that results from a model fit was considered a goo
 
 This can be problematic because the call object is relative to the environment and the call itself is agnostic to its original environment. If the call is changed and re-evaluated, the current environment may be inappropriate. This could result in errors due to the required objects not being exposed in the current environment.  
 
-Note that the internals of common modeling functions, such as `lm`, do exactly this. However, these manipulations occur _within_ the function call to that the environment is the same.  
+Note that the internals of common modeling functions, such as `lm`, do exactly this. However, these manipulations occur _within_ the function call so that the environment is the same.
 
 [`r emojifont::emoji('leftwards_arrow_with_hook')`](#calls-back)
 
