@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 3 Function Interfaces | Conventions for R Modeling Packages</title>
   <meta name="description" content="Chapter 3 Function Interfaces | Conventions for R Modeling Packages" />
-  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.11.1 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 3 Function Interfaces | Conventions for R Modeling Packages" />
   <meta property="og:type" content="book" />
@@ -217,7 +217,7 @@ the computational code. <a href="notes.html#decouple">{note}</a></p>
 <li><p>When possible, do not reimplement computations that have been done well elsewhere (tidy or not). For example, kernel methods should use the infrastructure in <code>kernlab</code>, exponential family distribution computations should use those in <code>?family</code> etc.</p></li>
 <li><p>For modeling packages that use random numbers, setting the seed in R should control how random numbers are generated internally. At worst, a random number seed for non-R code (e.g. C, Java) should be an argument to the main modeling function.</p></li>
 <li><p>Computational code should (almost) always use <code>X[ , ,drop = FALSE]</code> when subsetting matrices (and non-tibble data frames) to make sure that the 2D structure is maintained.</p></li>
-<li><p>Use <code>try</code> or similar methods to avoid an uncontrolled errors in order to return intelligible errors.</p></li>
+<li><p>Use <code>try</code> or similar methods to avoid uncontrolled errors in order to return intelligible errors.</p></li>
 </ul>
 <div id="calls-back">
 
