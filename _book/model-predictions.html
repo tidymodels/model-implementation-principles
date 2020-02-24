@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 6 Model Predictions | Conventions for R Modeling Packages</title>
-  <meta name="description" content="Chapter 6 Model Predictions | Conventions for R Modeling Packages" />
-  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+  <title>6 Model Predictions | Conventions for R Modeling Packages</title>
+  <meta name="description" content="6 Model Predictions | Conventions for R Modeling Packages" />
+  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 6 Model Predictions | Conventions for R Modeling Packages" />
+  <meta property="og:title" content="6 Model Predictions | Conventions for R Modeling Packages" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 6 Model Predictions | Conventions for R Modeling Packages" />
+  <meta name="twitter:title" content="6 Model Predictions | Conventions for R Modeling Packages" />
   
   
   
@@ -29,8 +29,9 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="print-and-summary-methods.html">
-<link rel="next" href="standardized-argument-names.html">
+<link rel="prev" href="print-and-summary-methods.html"/>
+<link rel="next" href="standardized-argument-names.html"/>
+<script src="libs/header-attrs-2.1/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -38,6 +39,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -48,26 +52,26 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -76,9 +80,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -125,17 +129,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul class="summary">
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
 <li class="chapter" data-level="2" data-path="general-conventions.html"><a href="general-conventions.html"><i class="fa fa-check"></i><b>2</b> General Conventions</a></li>
-<li class="chapter" data-level="3" data-path="function-interfaces.html"><a href="function-interfaces.html"><i class="fa fa-check"></i><b>3</b> Function Interfaces</a><ul>
+<li class="chapter" data-level="3" data-path="function-interfaces.html"><a href="function-interfaces.html"><i class="fa fa-check"></i><b>3</b> Function Interfaces</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="function-interfaces.html"><a href="function-interfaces.html#user-facing-functions"><i class="fa fa-check"></i><b>3.1</b> User-Facing Functions</a></li>
 <li class="chapter" data-level="3.2" data-path="function-interfaces.html"><a href="function-interfaces.html#computational-functions"><i class="fa fa-check"></i><b>3.2</b> Computational Functions</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="the-model-object.html"><a href="the-model-object.html"><i class="fa fa-check"></i><b>4</b> The Model Object</a></li>
 <li class="chapter" data-level="5" data-path="print-and-summary-methods.html"><a href="print-and-summary-methods.html"><i class="fa fa-check"></i><b>5</b> Print and Summary Methods</a></li>
-<li class="chapter" data-level="6" data-path="model-predictions.html"><a href="model-predictions.html"><i class="fa fa-check"></i><b>6</b> Model Predictions</a><ul>
+<li class="chapter" data-level="6" data-path="model-predictions.html"><a href="model-predictions.html"><i class="fa fa-check"></i><b>6</b> Model Predictions</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="model-predictions.html"><a href="model-predictions.html#input-data"><i class="fa fa-check"></i><b>6.1</b> Input Data</a></li>
 <li class="chapter" data-level="6.2" data-path="model-predictions.html"><a href="model-predictions.html#return-values"><i class="fa fa-check"></i><b>6.2</b> Return Values</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html"><i class="fa fa-check"></i><b>7</b> Standardized Argument Names</a><ul>
+<li class="chapter" data-level="7" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html"><i class="fa fa-check"></i><b>7</b> Standardized Argument Names</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#dot-usage"><i class="fa fa-check"></i><b>7.1</b> Dot Usage</a></li>
 <li class="chapter" data-level="7.2" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#data-arguments"><i class="fa fa-check"></i><b>7.2</b> Data Arguments</a></li>
 <li class="chapter" data-level="7.3" data-path="standardized-argument-names.html"><a href="standardized-argument-names.html#numerical-arguments"><i class="fa fa-check"></i><b>7.3</b> Numerical Arguments</a></li>
@@ -162,8 +169,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="model-predictions" class="section level1">
-<h1><span class="header-section-number">Chapter 6</span> Model Predictions</h1>
+<div id="model-predictions" class="section level1" number="6">
+<h1 number="6"><span class="header-section-number">6</span> Model Predictions</h1>
 <ul>
 <li>To be consistent with snake_case, <code>new_data</code> should be used instead of <code>newdata</code>.</li>
 </ul>
@@ -193,7 +200,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 <tr class="odd">
 <td><code>prob</code></td>
-<td>class probabilities, survivor probabilities</td>
+<td>class probabilities</td>
 </tr>
 <tr class="even">
 <td><code>link</code></td>
@@ -212,12 +219,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td>direct access to prediction function</td>
 </tr>
 <tr class="even">
-<td><code>param_pred</code></td>
-<td>predictions across tuning parameters</td>
+<td><code>quantile</code></td>
+<td>quantile predictions at percentile <code>q</code></td>
 </tr>
 <tr class="odd">
-<td><code>quantile</code></td>
-<td>quantile predictions</td>
+<td><code>survivor</code></td>
+<td>survival probability at time <code>t</code></td>
+</tr>
+<tr class="even">
+<td><code>harzard</code></td>
+<td>hazard probability at time <code>t</code></td>
 </tr>
 </tbody>
 </table>
@@ -226,8 +237,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>To determine whether or not to return standard errors for predictions, use a <code>std_error</code> argument that takes on <code>TRUE/FALSE</code> value. By default, do not report standard error or other measures of uncertainty, as these can be expensive to compute. Clearly document whether any standard errors are for confidence or prediction intervals.</li>
 </ul>
 <p>Other values should be assigned with consensus.</p>
-<div id="input-data" class="section level2">
-<h2><span class="header-section-number">6.1</span> Input Data</h2>
+<div id="input-data" class="section level2" number="6.1">
+<h2 number="6.1"><span class="header-section-number">6.1</span> Input Data</h2>
 <ul>
 <li><p>If <code>new_data</code> is not supplied, an error should be thrown. It should <strong>not</strong> default to an archived version of the training set contained in the model object.</p></li>
 <li><p>The data requirements for <code>new_data</code> should be the same as those for the orginal model fit function.</p></li>
@@ -243,8 +254,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>When novel factor levels appear in the test set for factor predictors, the default behavior should be to throw an informative error. For models where this is a reasonable way to make predictions on novel factor levels, users need to explicitly specify that they want this behavior, and it’s good practice to <code>message()</code> for these prediction cases.</p></li>
 </ul>
 </div>
-<div id="return-values" class="section level2">
-<h2><span class="header-section-number">6.2</span> Return Values</h2>
+<div id="return-values" class="section level2" number="6.2">
+<h2 number="6.2"><span class="header-section-number">6.2</span> Return Values</h2>
 <ul>
 <li>By default, <code>new_data</code> should not be returned by the prediction function.</li>
 </ul>
@@ -253,7 +264,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <ul>
 <li><p>The return value is a tibble with the <strong>same number of rows as the data being predicted</strong> and in the same order. This implies that <code>na.action</code> should not affect the dimensions of the outcome object (i.e., it should be ignored). <a href="notes.html#binding">{note}</a> The class of the tibble can be overloaded to accommodate specialized methods as long as basic data frame functionality is maintained. <a href="notes.html#dplyr-like">{note}</a>. For observations with missing data such that a prediction cannot be generated, we recommend returning <code>NA</code>.</p></li>
-<li><p>The return tibble can contain extra attributes for values relevant to the prediction (e.g. <code>level</code> for intervals) but care should be taken to make sure that these attributes are not destroyed when standard operations are applied to the tibble (e.g. <code>arrange</code>, <code>filter</code>, etc.). Columns of constant values (e.g. adding <code>level</code> as a column) should be avoided.</p></li>
+<li><p>The return tibble can contain extra attributes for values relevant to the prediction (e.g. <code>level</code> for intervals) but care should be taken to make sure that these attributes are not destroyed when standard operations are applied to the tibble (e.g. <code>arrange</code>, <code>filter</code>, etc.). Columns of constant values (e.g. adding <code>level</code> as a column) should be avoided.</p></li>
 </ul>
 <p>Specific cases:</p>
 <ul>
@@ -267,7 +278,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <ul>
 <li><p>For predictions that are not simple scalars, such as distributions or non-rectangular structures, the <code>.pred</code> column should be a list-column <a href="notes.html#list-cols">{note}</a></p></li>
-<li><p>In cases where the outcome is being <em>directly</em> predicted, the predictions should be on the same scale as the outcome. The same would apply to associated interval estimates. This is equivalent to <code>type = &quot;response&quot;</code> for generalized linear models and the like. Reasonable exceptions include estimation of the standard error of prediction (perhaps occurring on the link-level/scale of the linear predictors).</p></li>
+<li><p>For quantile regression, the column should be named <code>.pred</code> and the have an associated value called <code>.quantile</code></p></li>
+<li><p>For survival analysis models, predictions of the time variable would be named <code>.pred</code> (as they are simple numeric values). For risk- or probability-based predictions, the return values would be <code>.pred_survivor</code> and <code>.pred_harzard</code> for their respectively probability estimates. These two columns would always be associated with a reference value of <code>.time</code>.</p></li>
+<li><p>In cases where the outcome is being <em>directly</em> predicted, the predictions should be on the same scale as the outcome. The same would apply to associated interval estimates. This is equivalent to <code>type = "response"</code> for generalized linear models and the like. Reasonable exceptions include estimation of the standard error of prediction (perhaps occurring on the link-level/scale of the linear predictors).</p></li>
 </ul>
 
 </div>
@@ -283,11 +296,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -295,12 +310,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -312,6 +326,10 @@ gitbook.start({
 "text": "Edit"
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },

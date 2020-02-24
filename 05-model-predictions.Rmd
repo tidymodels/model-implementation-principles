@@ -14,13 +14,15 @@
 |--------------	|---------------------------------------------	|
 | `numeric`    	| numeric predictions                         	|
 | `class`      	| hard class predictions                      	|
-| `prob`       	| class probabilities, survivor probabilities 	|
+| `prob`       	| class probabilities                         	|
 | `link`       	| `glm` linear predictor                      	|
 | `conf_int`   	| confidence intervals                        	|
 | `pred_int`   	| prediction intervals                        	|
 | `raw`        	| direct access to prediction function        	|
-| `param_pred` 	| predictions across tuning parameters        	|
-| `quantile`      | quantile predictions                          |
+| `quantile`      | quantile predictions at percentile `q`        |
+| `survivor`      | survival probability at time `t`              |
+| `harzard`       | hazard probability at time `t`                |
+
 
 and should be validated using `match.arg()`.
 
@@ -70,4 +72,8 @@ Specific cases:
  
    * For predictions that are not simple scalars, such as distributions or non-rectangular structures, the `.pred` column should be a list-column [{note}](#list-cols) 
    
+   * For quantile regression, the column should be named `.pred` and the have an associated value called `.quantile`
+   
+   * For survival analysis models, predictions of the time variable would be named `.pred` (as they are simple numeric values). For risk- or probability-based predictions, the return values would be `.pred_survivor` and `.pred_harzard` for their respectively probability estimates. These two columns would always be associated with a reference value of `.time`.  
+
  * In cases where the outcome is being _directly_ predicted, the predictions should be on the same scale as the outcome. The same would apply to associated interval estimates. This is equivalent to `type = "response"` for generalized linear models and the like. Reasonable exceptions include estimation of the standard error of prediction (perhaps occurring on the link-level/scale of the linear predictors). 
