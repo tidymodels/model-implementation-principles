@@ -1,4 +1,4 @@
-# Standardized Argument Names
+# Argument Names
 
 ## Dot Usage
 
@@ -6,8 +6,13 @@
 
  * When defining the order of arguments in a function, try to keep the `...` as far to the left as possible to coerce users to explicitly name all arguments to the right of `...`. 
 
+ * Design similar functions using a common prefix so that users can easily [tab complete](https://twitter.com/MilesMcBain/status/1186464948546723840?s=20) in the IDE when searching. [{note}](#tabs) 
+ 
+## Standardization of Arguments
 
-## Data Arguments
+Both within- and between-packages, tidymodels projects standardize on names. Examples follow. 
+
+### Data Arguments
 
  * `na_rm`: missing data handling. 
 
@@ -27,11 +32,11 @@
     
     * `data`: the data.frame to pull formula variables from.
 
-## Numerical Arguments
+### Numerical Arguments
 
  * `times`: the number of bootstraps, simulations, or other replications.
  
-## Statistical Quantities 
+### Statistical Quantities 
 
  * `direction`: the type of hypothesis test alternative. 
  
@@ -40,13 +45,13 @@
  * `link`: link functions for generalized linear models. 
  
 
-## Tuning Parameters
+### Tuning Parameters
 
 * `activation`: the type of activation function between network layers. 
 
 * `cost`: a cost value for SVM models. 
   
-* `Cp`: The cost-complexity parameter in classical CART models. 
+* `cost_complexity`: The cost-complexity parameter in classical CART models. 
 
 * `deg_free`: a parameter for the degrees of freedom. 
 
@@ -94,7 +99,7 @@
   
 * `weight_func`: The type of kernel function that weights the distances between samples (e.g. in a K-nearest neighbors model).   
  
-## Others
+### Others
 
 * `fn` and `fns` when a single or multiple functions are passed as arguments (respectively). 
 

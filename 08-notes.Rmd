@@ -101,10 +101,15 @@ The [`conflicted`](https://github.com/hadley/ellipsis) package can be used to so
 
 <div id="standardized"></div>
 
-For example, many functions use some variation of `level` for confidence levels (as opposed to `alpha`). The names in Chapter \@ref(standardized-argument-names) are preferable for the specific context.   
+For example, many functions use some variation of `level` for confidence levels (as opposed to `alpha`). The names in Chapter \@ref(argument-names) are preferable for the specific context.   
 
 [`r emojifont::emoji('leftwards_arrow_with_hook')`](#standardized-back)
 
+***design function names for tab-complete***
+
+For example, the tune package has `control` arguments for different functions. The function _functions_ that generate the appropriate lists are named with suffixes that indicate where they are used: `control_grid()`, `control_bayes()`, `control_resamples()`, and so on. 
+
+[`r emojifont::emoji('leftwards_arrow_with_hook')`](#argument-names)
 
 ***discussing new names***
 
@@ -275,5 +280,10 @@ This makes it easier to provide methods that might be meaningfully defined for o
 
 [`r emojifont::emoji('leftwards_arrow_with_hook')`](#subclasses-back)
 
+***design function names for tab-complete***
+
+For example, the tune package has `control` arguments for different functions. The function _functions_ that generate the appropriate lists are named with suffixes that indicate where they are used: `control_grid()`, `control_bayes()`, `control_resamples()`, and so on. 
+
+[`r emojifont::emoji('leftwards_arrow_with_hook')`](#argument-names)
 
 
