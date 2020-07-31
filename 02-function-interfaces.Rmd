@@ -9,7 +9,7 @@ the computational code. [{note}](#decouple)
 
 ## User-Facing Functions
 
-* At a minimum, the top-level model function should be a generic with methods for data frames, formulas, and possibly recipes. These methods error trap bad arguments, format/encode the data, them pass it along to the lower-level computational code.
+* At a minimum, the top-level model function should be a generic with methods for data frames, formulas, and possibly recipes. These methods error trap bad arguments, format/encode the data, then pass it along to the lower-level computational code.
     
 * Do not require users to create dummy variables from their categorical predictors. Provide a formula and/or recipe interface to your model to do this (see the next item) and other methods should error trap if qualitative data should not be subsequently used. 
 
