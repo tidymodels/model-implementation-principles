@@ -3,4 +3,4 @@ language:
   ui:
     chapter_name: "Chapter "
 delete_merged_file: true
-edit: https://github.com/tidymodels/model-implementation-principles/edit/master/%s
+edit: https://github.com/tidymodels/model-implementation-principles/edit/main/%s
